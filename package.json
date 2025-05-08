@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev:only": "next dev --turbopack",
+    "open-browser": "npx wait-on tcp:3000 && open http://localhost:3000",
+    "dev": "pnpm run dev:only & pnpm run open-browser",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -20,6 +22,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
-    "@eslint/eslintrc": "^3"
+    "@eslint/eslintrc": "^3",
+    "wait-on": "^7.2.0"
   }
 }
