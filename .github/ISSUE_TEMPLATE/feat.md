@@ -1,10 +1,9 @@
 ---
 name: feat
 about: feat issue template
-title: ''
-labels: "\U0001F4AB feat"
-assignees: ''
-
+title: ""
+labels: "✨ Feature"
+assignees: ""
 ---
 
 ## 기능 명세
