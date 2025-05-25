@@ -5,5 +5,4 @@
   "printWidth": 110,
   "tabWidth": 2,
   "quoteProps": "consistent",
-  "singleAttributePerLine": true
 }
