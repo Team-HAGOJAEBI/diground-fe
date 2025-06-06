@@ -7,5 +7,5 @@
   "quoteProps": "consistent",
   "bracketSpacing": true,
   "bracketSameLine": false,
-  "singleAttributePerLine": false
+  "singleAttributePerLine": true
 }
