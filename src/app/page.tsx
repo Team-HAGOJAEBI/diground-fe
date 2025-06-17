@@ -26,6 +26,14 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
           <li>TEAM HAGOJAEBI, DIGROUND!</li>
+          <li>
+            <a
+              href="/msw"
+              style={{ color: "inherit", textDecoration: "none", cursor: "pointer" }}
+            >
+              msw 테스트
+            </a>
+          </li>
         </ol>
 
         <div className={styles.ctas}>
