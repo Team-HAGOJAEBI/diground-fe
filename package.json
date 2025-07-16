@@ -14,7 +14,14 @@
     "test:coverage": "vitest run --coverage",
     "lint:fix": "eslint \"src/**/*.+(ts|tsx)\" --fix",
     "format": "prettier . --write",
-    "format:check": "prettier . --check"
+    "format:check": "prettier . --check",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix --max-warnings=0",
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "jotai": "^2.12.5",
