@@ -1,87 +1,95 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { FlatCompat } from '@eslint/eslintrc';
-import eslintPluginImport from 'eslint-plugin-import';
-import globals from 'globals';
-import eslintPluginPrettier from 'eslint-plugin-prettier';
-import prettierConfig from 'eslint-config-prettier';
+/* eslint-disable import/no-anonymous-default-export */
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+import { FlatCompat } from "@eslint/eslintrc";
+import js from "@eslint/js";
+import tsParser from "@typescript-eslint/parser";
+import prettier from "eslint-plugin-prettier";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
+const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
   baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all,
 });
 
 export default [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
-
+  ...compat.extends("next", "next/core-web-vitals", "prettier"),
   {
-    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
-    languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
-    },
     plugins: {
-      import: eslintPluginImport,
-      prettier: eslintPluginPrettier,
+      prettier,
     },
     rules: {
-      // ✅ 변수, import 정렬
-      'sort-vars': ['error'],
-      'sort-imports': [
-        'error',
+      "prettier/prettier": "error",
+      "camelcase": "error",
+      "import/prefer-default-export": "off",
+      // react관련 룰 끔
+      "react/jsx-filename-extension": "off",
+      "react/jsx-props-no-spreading": "off",
+      "react/no-unused-prop-types": "off",
+      "react/require-default-props": "off",
+      "react/no-unescaped-entities": "off",
+      "import/extensions": [
+        "error",
+        "ignorePackages",
         {
-          ignoreDeclarationSort: true,
-          ignoreCase: true,
+          ts: "never",
+          tsx: "never",
+          js: "never",
+          jsx: "never",
         },
       ],
-      'import/order': [
-        'error',
-        {
-          'groups': ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-          'newlines-between': 'always',
-          'alphabetize': { order: 'asc', caseInsensitive: true },
-        },
-      ],
-
-      'no-console': ['warn'], // ⚠️ 미사용 console 경고
-
-      // ❌ 사용 안한 변수 금지
-      'no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
-
-      // 🔐 == 대신 ===
-      'eqeqeq': ['error', 'always'],
-
-      // 💬 주석 앞 공백
-      'spaced-comment': [
-        'error',
-        'always',
-        {
-          markers: ['/'],
-          exceptions: ['-'],
-        },
-      ],
-
-      // 📏 문장 사이 줄바꿈
-      'padding-line-between-statements': [
-        'error',
-        { blankLine: 'always', prev: '*', next: 'return' },
-        { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
-        {
-          blankLine: 'any',
-          prev: ['const', 'let', 'var'],
-          next: ['const', 'let', 'var'],
-        },
-      ],
-
-      // ✅ Prettier 규칙도 eslint로 적용됨
-      'prettier/prettier': 'error',
     },
   },
-  prettierConfig,
+  ...compat.extends("plugin:@typescript-eslint/recommended", "prettier").map((config) => ({
+    ...config,
+    files: ["**/*.+(ts|tsx)"],
+  })),
+  {
+    files: ["**/*.+(ts|tsx)"],
+    languageOptions: { parser: tsParser },
+    rules: {
+      // plugin 선언은 이미 compat.extends 안에 포함되어 있으므로,
+      // 여기서는 룰만 덮어씁니다.
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "no-use-before-define": 0,
+      "@typescript-eslint/no-use-before-define": 1,
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-var-requires": "off",
+      "no-use-before-define": [0],
+      "@typescript-eslint/no-use-before-define": [1],
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-var-requires": "off",
+      "no-console": ["error"],
+      "no-unused-vars": ["error", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
+      "eqeqeq": ["error", "always"],
+      "spaced-comment": [
+        "error",
+        "always",
+        {
+          markers: ["/"],
+          exceptions: ["-"],
+        },
+      ],
+      "padding-line-between-statements": [
+        "error",
+        { blankLine: "always", prev: "*", next: "return" },
+        { blankLine: "always", prev: ["const", "let", "var"], next: "*" },
+        {
+          blankLine: "any",
+          prev: ["const", "let", "var"],
+          next: ["const", "let", "var"],
+        },
+      ],
+      "prettier/prettier": [
+        "error",
+        {
+          endOfLine: "auto", // LF/CRLF 문제 해결
+        },
+      ],
+    },
+  },
 ];

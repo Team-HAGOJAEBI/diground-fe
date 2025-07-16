@@ -1,10 +1,7 @@
 {
-  "workbench.colorCustomizations": {
-    "titleBar.activeBackground": "#FDD835",
-    "titleBar.activeForeground": "#000000",
-    "titleBar.inactiveBackground": "#FFF59D",
-    "titleBar.inactiveForeground": "#444444"
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
   },
-  "editor.formatOnSave": true, // 저장 시 포매터 적용
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true // 저장 시 포매터 적용
 }
