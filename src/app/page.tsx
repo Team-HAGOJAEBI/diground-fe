@@ -1,9 +1,12 @@
 "use client";
 
-import "./globals.css";
-import { playlistAtom } from "@/atoms";
-import { useAtom } from "jotai";
+import "../assets/styles/globals.css";
+
 import { useState } from "react";
+
+import { useAtom } from "jotai";
+
+import { playlistAtom } from "@/atoms";
 
 export default function Home() {
   const [text, setText] = useState<string>("");
@@ -12,7 +15,7 @@ export default function Home() {
   return (
     <div>
       <main>
-        <span className="text-gray-50">tailwindcss test</span>
+        <span className="text-gray-50 w-full h-10 bg-yellow-60">tailwindcss test</span>
       </main>
       <footer>
         <input
