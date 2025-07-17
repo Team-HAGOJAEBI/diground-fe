@@ -1,87 +1,92 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { FlatCompat } from '@eslint/eslintrc';
-import eslintPluginImport from 'eslint-plugin-import';
-import globals from 'globals';
-import eslintPluginPrettier from 'eslint-plugin-prettier';
-import prettierConfig from 'eslint-config-prettier';
+import { FlatCompat } from "@eslint/eslintrc";
+import js from "@eslint/js";
+import importPlugin from "eslint-plugin-import";
+import prettier from "eslint-plugin-prettier";
+
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
+const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
   baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all,
 });
 
-export default [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
-
+const config = [
+  ...compat.extends("next", "next/core-web-vitals"),
+  ...compat.extends("prettier"),
+  ...compat.extends("plugin:@typescript-eslint/recommended"),
   {
-    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
-    languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
-    },
     plugins: {
-      import: eslintPluginImport,
-      prettier: eslintPluginPrettier,
+      prettier,
+      importPlugin,
     },
     rules: {
-      // ✅ 변수, import 정렬
-      'sort-vars': ['error'],
-      'sort-imports': [
-        'error',
+      "camelcase": "error", // 변수와 함수명이 모두 카멜케이스
+      "import/prefer-default-export": "off", // 기본 내보내기 사용 금지
+      "@typescript-eslint/explicit-function-return-type": "off", // 함수 반환 타입 명시 금지
+      "@typescript-eslint/explicit-module-boundary-types": "off", // 모듈 경계 타입 명시 금지
+      "no-use-before-define": 0, // 변수 선언 전 사용 금지
+      "@typescript-eslint/no-use-before-define": 1, // 변수 선언 전 사용 금지
+      "@typescript-eslint/no-explicit-any": "off", // any 타입 사용 금지
+      "no-console": ["error"], // console.log 사용 금지
+      "eqeqeq": ["error", "always"], // 일치 연산자 사용 강제
+      "spaced-comment": [
+        "error",
+        "always",
         {
-          ignoreDeclarationSort: true,
-          ignoreCase: true,
+          markers: ["/"],
+          exceptions: ["-"],
         },
-      ],
-      'import/order': [
-        'error',
+      ], // 주석 뒤에 반드시 한 칸 공백
+      "padding-line-between-statements": [
+        "error",
+        { blankLine: "always", prev: "*", next: "return" }, // 모든 return 앞에 빈 줄
+        { blankLine: "always", prev: ["const", "let", "var"], next: "*" }, // const/let/var 뒤엔 항상 빈 줄
         {
-          'groups': ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-          'newlines-between': 'always',
-          'alphabetize': { order: 'asc', caseInsensitive: true },
-        },
+          blankLine: "any",
+          prev: ["const", "let", "var"],
+          next: ["const", "let", "var"],
+        }, // (단, 연속된 선언끼리는 예외)
       ],
-
-      'no-console': ['warn'], // ⚠️ 미사용 console 경고
-
-      // ❌ 사용 안한 변수 금지
-      'no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
-
-      // 🔐 == 대신 ===
-      'eqeqeq': ['error', 'always'],
-
-      // 💬 주석 앞 공백
-      'spaced-comment': [
-        'error',
-        'always',
+      "prettier/prettier": [
+        "error",
         {
-          markers: ['/'],
-          exceptions: ['-'],
-        },
-      ],
-
-      // 📏 문장 사이 줄바꿈
-      'padding-line-between-statements': [
-        'error',
-        { blankLine: 'always', prev: '*', next: 'return' },
-        { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
-        {
-          blankLine: 'any',
-          prev: ['const', 'let', 'var'],
-          next: ['const', 'let', 'var'],
+          endOfLine: "auto", // LF/CRLF 문제 해결
         },
       ],
 
-      // ✅ Prettier 규칙도 eslint로 적용됨
-      'prettier/prettier': 'error',
+      "import/order": [
+        "error",
+        {
+          "newlines-between": "always", // 그룹 간 줄바꿈
+          "groups": ["external", "builtin", "parent", "sibling", "internal", "index", "type"],
+          "pathGroups": [
+            // react는 외부 모듈 중 맨 앞
+            {
+              pattern: "react*",
+              group: "external",
+              position: "before",
+            },
+            // CSS 파일을 'sibling' 그룹으로 재할당
+            {
+              pattern: "*.css",
+              group: "sibling",
+              position: "after",
+            },
+          ],
+          // pathGroups로 재분류한 타입은 기본 분류에서는 또 안 건드리게
+          "pathGroupsExcludedImportTypes": ["react"],
+          "alphabetize": {
+            order: "asc", // 알파벳순 정렬
+            caseInsensitive: true, // 대소문자 구분 X
+          },
+        },
+      ],
     },
   },
-  prettierConfig,
 ];
+
+export default config;

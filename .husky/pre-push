@@ -1,0 +1,7 @@
+>&2 echo "🚀 Fetching upstream develop..."
+git fetch upstream develop
+>&2 echo "✅ fetch done!"
+
+>&2 echo "🚀 Rebasing onto upstream develop..."
+git rebase upstream/develop --autostash
+>&2 echo "✅ rebase done!"

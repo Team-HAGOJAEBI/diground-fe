@@ -9,7 +9,6 @@
   --color-gray-15: #292929;
   --color-gray-20: #363636;
   --color-gray-30: #424242;
-  --color-gray-40: #525252;
   --color-gray-50: #6e6e6e;
   --color-gray-60: #8c8c8c;
   --color-gray-70: #a8a8a8;
@@ -17,20 +16,6 @@
   --color-gray-90: #e6e6e6;
   --color-gray-95: #f2f2f2;
   --color-gray-100: #ffffff;
-
-  /* blue Blue */
-  --color-blue-10: #001642;
-  --color-blue-15: #001e5b;
-  --color-blue-20: #00297a;
-  --color-blue-30: #0235c0;
-  --color-blue-40: #0250d9;
-  --color-blue-50: #066afe;
-  --color-blue-60: #4992fe;
-  --color-blue-65: #5f9ffe;
-  --color-blue-70: #7cb1fe;
-  --color-blue-80: #a8cbff;
-  --color-blue-90: #d6e6ff;
-  --color-blue-95: #edf4ff;
 
   /* Error (Red) */
   --color-red-10: #370101;
@@ -43,30 +28,6 @@
   --color-red-80: #fdb6b6;
   --color-red-90: #fddddd;
   --color-red-95: #fef0f0;
-
-  /* Sky Blue */
-  --color-sky-blue-10: #00273d;
-  --color-sky-blue-20: #003a5c;
-  --color-sky-blue-30: #006199;
-  --color-sky-blue-40: #027dc5;
-  --color-sky-blue-50: #0c98e9;
-  --color-sky-blue-60: #2faff9;
-  --color-sky-blue-70: #6ac6fb;
-  --color-sky-blue-80: #acdefc;
-  --color-sky-blue-90: #ccecff;
-  --color-sky-blue-95: #f1f9fe;
-
-  /* Success (Green) */
-  --color-green-10: #012d21;
-  --color-green-20: #024533;
-  --color-green-30: #036349;
-  --color-green-40: #04815f;
-  --color-green-50: #03a076;
-  --color-green-60: #04be8c;
-  --color-green-70: #26d99d;
-  --color-green-80: #79e7c2;
-  --color-green-90: #aff3dd;
-  --color-green-95: #def9f0;
 
   /* Warning (Yellow) */
   --color-yellow-10: #281202;
