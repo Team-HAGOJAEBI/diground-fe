@@ -1,11 +1,10 @@
-/* eslint-disable import/no-anonymous-default-export */
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
-import tsParser from "@typescript-eslint/parser";
+import importPlugin from "eslint-plugin-import";
 import prettier from "eslint-plugin-prettier";
+
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,57 +14,25 @@ const compat = new FlatCompat({
   allConfig: js.configs.all,
 });
 
-export default [
-  ...compat.extends("next", "next/core-web-vitals", "prettier"),
+const config = [
+  ...compat.extends("next", "next/core-web-vitals"),
+  ...compat.extends("prettier"),
+  ...compat.extends("plugin:@typescript-eslint/recommended"),
   {
     plugins: {
       prettier,
+      importPlugin,
     },
     rules: {
-      "prettier/prettier": "error",
-      "camelcase": "error",
-      "import/prefer-default-export": "off",
-      // react관련 룰 끔
-      "react/jsx-filename-extension": "off",
-      "react/jsx-props-no-spreading": "off",
-      "react/no-unused-prop-types": "off",
-      "react/require-default-props": "off",
-      "react/no-unescaped-entities": "off",
-      "import/extensions": [
-        "error",
-        "ignorePackages",
-        {
-          ts: "never",
-          tsx: "never",
-          js: "never",
-          jsx: "never",
-        },
-      ],
-    },
-  },
-  ...compat.extends("plugin:@typescript-eslint/recommended", "prettier").map((config) => ({
-    ...config,
-    files: ["**/*.+(ts|tsx)"],
-  })),
-  {
-    files: ["**/*.+(ts|tsx)"],
-    languageOptions: { parser: tsParser },
-    rules: {
-      // plugin 선언은 이미 compat.extends 안에 포함되어 있으므로,
-      // 여기서는 룰만 덮어씁니다.
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/explicit-module-boundary-types": "off",
-      "no-use-before-define": 0,
-      "@typescript-eslint/no-use-before-define": 1,
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-var-requires": "off",
-      "no-use-before-define": [0],
-      "@typescript-eslint/no-use-before-define": [1],
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-var-requires": "off",
-      "no-console": ["error"],
-      "no-unused-vars": ["error", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
-      "eqeqeq": ["error", "always"],
+      "camelcase": "error", // 변수와 함수명이 모두 카멜케이스
+      "import/prefer-default-export": "off", // 기본 내보내기 사용 금지
+      "@typescript-eslint/explicit-function-return-type": "off", // 함수 반환 타입 명시 금지
+      "@typescript-eslint/explicit-module-boundary-types": "off", // 모듈 경계 타입 명시 금지
+      "no-use-before-define": 0, // 변수 선언 전 사용 금지
+      "@typescript-eslint/no-use-before-define": 1, // 변수 선언 전 사용 금지
+      "@typescript-eslint/no-explicit-any": "off", // any 타입 사용 금지
+      "no-console": ["error"], // console.log 사용 금지
+      "eqeqeq": ["error", "always"], // 일치 연산자 사용 강제
       "spaced-comment": [
         "error",
         "always",
@@ -73,16 +40,16 @@ export default [
           markers: ["/"],
           exceptions: ["-"],
         },
-      ],
+      ], // 주석 뒤에 반드시 한 칸 공백
       "padding-line-between-statements": [
         "error",
-        { blankLine: "always", prev: "*", next: "return" },
-        { blankLine: "always", prev: ["const", "let", "var"], next: "*" },
+        { blankLine: "always", prev: "*", next: "return" }, // 모든 return 앞에 빈 줄
+        { blankLine: "always", prev: ["const", "let", "var"], next: "*" }, // const/let/var 뒤엔 항상 빈 줄
         {
           blankLine: "any",
           prev: ["const", "let", "var"],
           next: ["const", "let", "var"],
-        },
+        }, // (단, 연속된 선언끼리는 예외)
       ],
       "prettier/prettier": [
         "error",
@@ -90,6 +57,36 @@ export default [
           endOfLine: "auto", // LF/CRLF 문제 해결
         },
       ],
+
+      "import/order": [
+        "error",
+        {
+          "newlines-between": "always", // 그룹 간 줄바꿈
+          "groups": ["external", "builtin", "parent", "sibling", "internal", "index", "type"],
+          "pathGroups": [
+            // react는 외부 모듈 중 맨 앞
+            {
+              pattern: "react*",
+              group: "external",
+              position: "before",
+            },
+            // CSS 파일을 'sibling' 그룹으로 재할당
+            {
+              pattern: "*.css",
+              group: "sibling",
+              position: "after",
+            },
+          ],
+          // pathGroups로 재분류한 타입은 기본 분류에서는 또 안 건드리게
+          "pathGroupsExcludedImportTypes": ["react"],
+          "alphabetize": {
+            order: "asc", // 알파벳순 정렬
+            caseInsensitive: true, // 대소문자 구분 X
+          },
+        },
+      ],
     },
   },
 ];
+
+export default config;

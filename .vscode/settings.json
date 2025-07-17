@@ -1,7 +1,20 @@
 {
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "editor.codeActionsOnSave": {
+    "source.fixAll": "never", // 포맷터와 겹치는 모든 소스 액션 비활성
     "source.fixAll.eslint": "always"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true // 저장 시 포매터 적용
+  "eslint.useFlatConfig": true, // ESLint v8.57+에서는 이 설정으로 Flat Config 사용
+  "eslint.options": {
+    "overrideConfigFile": "./eslint.config.mjs" // Flat config 파일 경로 지정 (필요시)
+  },
+  "eslint.run": "onSave",
+  "eslint.validate": ["javascript", "typescript", "javascriptreact", "typescriptreact"],
+  "eslint.workingDirectories": [{ "mode": "auto" }]
 }
