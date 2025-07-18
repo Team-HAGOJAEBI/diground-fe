@@ -6,6 +6,7 @@ import Footer from "../_common/Footer";
 import Icon from "../_common/icon/Icon";
 import Layout from "../_common/Layout";
 
+import Drawer from "./components/Drawer";
 import Header from "./components/Header";
 import List from "./components/List";
 
@@ -15,6 +16,7 @@ import { DetailList, PlayList, PlayListSample } from "@/mocks/sample/Playlist";
 export default function Page() {
   const [playListInfo, setPlayListInfo] = useState<PlayList>(PlayListSample);
   const [list, setList] = useState<DetailList[]>([]);
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
   const fetchDetailPlayList = async () => {
     try {
@@ -34,7 +36,10 @@ export default function Page() {
 
   return (
     <Layout className="relative">
-      <Header detailInfo={playListInfo} />
+      <Header
+        detailInfo={playListInfo}
+        onOpenDrawer={() => setDrawerOpen(true)}
+      />
       <Icon
         name="prev"
         className="absolute top-[20px] left-[20px] cursor-pointer"
@@ -50,7 +55,7 @@ export default function Page() {
           ))}
         </div>
       </div>
-
+      {drawerOpen && <Drawer onClose={() => setDrawerOpen(false)} />}
       <Footer selectedIndex={0} />
     </Layout>
   );
