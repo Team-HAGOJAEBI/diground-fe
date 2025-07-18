@@ -34,7 +34,7 @@ export default function Footer({ selectedIndex }: FooterProps) {
             <Icon
               name={key as keyof typeof FOOTER_MENU}
               // 📑 추후 기획자에게 문의 해봐야 함. 현재는 클릭 이벤트가 다 존재한다고 생각하고 함.
-              className={`${current === idx ? "text-[#FFE11D]" : "text-[#9F9F9F]"}`}
+              className={`w-[30px] h-[30px] ${current === idx ? "text-[#FFE11D]" : "text-[#9F9F9F]"}`}
             />
             <span className={`${current === idx ? "text-gray-100" : "text-gray-50"} text-[11px]`}>{menu}</span>
           </div>

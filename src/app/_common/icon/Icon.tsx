@@ -1,4 +1,4 @@
-import { home, search, more, create } from "@/assets/icons";
+import { home, search, more, create, prev, tag, heart, heartFilled, share, comment } from "@/assets/icons";
 
 interface IconProps {
   name: string;
@@ -11,21 +11,26 @@ export const ICON_MAP = {
   search,
   more,
   create,
+  prev,
+  tag,
+  heart,
+  heartFilled,
+  share,
+  comment,
 };
 
 export default function Icon({ name, className }: IconProps) {
   const IconComponent = ICON_MAP[name as keyof typeof ICON_MAP];
 
   if (!IconComponent) {
-    // eslint-disable-next-line no-console
     console.error(`아이콘 컴포넌트를 찾을 수 없습니다: ${name}`);
 
     return null;
   }
 
   return (
-    <div className={"w-[30px] h-[30px] flex items-center justify-center"}>
-      <IconComponent className={className} />
+    <div className={`flex items-center justify-center ${className}`}>
+      <IconComponent />
     </div>
   );
 }
