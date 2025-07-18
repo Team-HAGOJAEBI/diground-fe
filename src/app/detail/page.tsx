@@ -45,8 +45,8 @@ export default function Page() {
         className="absolute top-[20px] left-[20px] cursor-pointer"
         // onClick
       />
-      <div className="px-[20px]">
-        <div className="h-[calc(55vh-100px)] overflow-y-auto custom-scrollbar">
+      <div className="p-[20px]">
+        <div className="h-[calc(55vh-120px)] overflow-y-auto custom-scrollbar">
           {list.map((item) => (
             <List
               key={item.id}

@@ -23,7 +23,7 @@ export default function Footer({ selectedIndex }: FooterProps) {
   };
 
   return (
-    <div className="flex h-[97px] w-[inherit] bg-gray-10 py-[8px_32px] px-[20px] border-t border-gray-30 fixed bottom-[0px]">
+    <div className="flex h-[97px] w-[inherit] bg-gray-10 py-[8px_32px] px-[20px] border-t border-gray-30">
       {Object.entries(FOOTER_MENU).map(([key, menu], idx) => {
         return (
           <div
