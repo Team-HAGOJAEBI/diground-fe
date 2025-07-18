@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import Icon from "@/app/_common/icon/Icon";
-import { defaultProfile } from "@/assets/images";
+import { defaultProfile2x } from "@/assets/images";
 import { Comment } from "@/mocks/sample/Comment";
 
 interface CommentProps {
@@ -14,7 +14,7 @@ export default function CommentContainer({ comment }: CommentProps) {
       <div className="flex justify-between items-center mb-[6px]">
         <div className="flex gap-[8px] items-center">
           <Image
-            src={comment.profileURL || defaultProfile}
+            src={comment.profileURL || defaultProfile2x}
             alt="comment profile"
             width={26}
             height={26}

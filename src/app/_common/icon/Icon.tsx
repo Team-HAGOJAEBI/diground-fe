@@ -17,6 +17,7 @@ import {
 interface IconProps {
   name: string;
   className?: string;
+  onClick?: () => void;
 }
 
 // 아이콘 추가될 때마다 여기에 추가해주세요.
@@ -36,7 +37,7 @@ export const ICON_MAP = {
   close,
 };
 
-export default function Icon({ name, className }: IconProps) {
+export default function Icon({ name, className, onClick }: IconProps) {
   const IconComponent = ICON_MAP[name as keyof typeof ICON_MAP];
 
   if (!IconComponent) {
@@ -46,7 +47,10 @@ export default function Icon({ name, className }: IconProps) {
   }
 
   return (
-    <div className={`flex items-center justify-center ${className}`}>
+    <div
+      className={`flex items-center justify-center ${className}`}
+      onClick={onClick}
+    >
       <IconComponent />
     </div>
   );
