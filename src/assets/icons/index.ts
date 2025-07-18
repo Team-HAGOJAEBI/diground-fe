@@ -10,3 +10,6 @@ export { default as heart } from "./ic_heart.svg";
 export { default as heartFilled } from "./ic_heart_filled.svg";
 export { default as share } from "./ic_share.svg";
 export { default as comment } from "./ic_comment.svg";
+export { default as close } from "./ic_close.svg";
+export { default as arrowUp } from "./ic_arrow_up.svg";
+export { default as moreFilled } from "./ic_more_filled.svg";

@@ -1,4 +1,18 @@
-import { home, search, more, create, prev, tag, heart, heartFilled, share, comment } from "@/assets/icons";
+import {
+  home,
+  search,
+  more,
+  moreFilled,
+  create,
+  prev,
+  tag,
+  heart,
+  heartFilled,
+  share,
+  comment,
+  arrowUp,
+  close,
+} from "@/assets/icons";
 
 interface IconProps {
   name: string;
@@ -10,6 +24,7 @@ export const ICON_MAP = {
   home,
   search,
   more,
+  moreFilled,
   create,
   prev,
   tag,
@@ -17,6 +32,8 @@ export const ICON_MAP = {
   heartFilled,
   share,
   comment,
+  arrowUp,
+  close,
 };
 
 export default function Icon({ name, className }: IconProps) {
