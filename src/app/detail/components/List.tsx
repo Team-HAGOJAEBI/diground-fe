@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-import { PlayList } from "@/mocks/sample/Playlist";
+import { DetailList } from "@/mocks/sample/Playlist";
 
 interface ListProps {
-  item: PlayList;
+  item: DetailList;
 }
 
 export default function List({ item }: ListProps) {

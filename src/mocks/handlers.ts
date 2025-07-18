@@ -1,6 +1,6 @@
 import { http, HttpResponse } from "msw";
 
-import { DetailList } from "./sample/Playlist";
+import { DetailList, PlayListSample } from "./sample/Playlist";
 
 import type { NewUser, User } from "./sample/User";
 
@@ -34,6 +34,13 @@ export const handlers = [
     return HttpResponse.json({
       status: 201,
       data: createdUser,
+    });
+  }),
+
+  http.get("/api/getPlayList", () => {
+    return HttpResponse.json({
+      status: 200,
+      data: PlayListSample,
     });
   }),
 

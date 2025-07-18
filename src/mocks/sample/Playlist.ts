@@ -1,12 +1,34 @@
 export type PlayList = {
   id: number;
   title: string;
+  bio: string;
+  tags: string[];
+  coverURL: string;
+  like: { isLiked: boolean; cnt: number };
+  comment: { cnt: number };
+  share: { cnt: number };
+};
+
+export const PlayListSample: PlayList = {
+  id: 150907,
+  title: "데이식스의 노래를 들어보자 데이식스의 노래를 들어보자 데이식스의 노래를 들어보자",
+  bio: `데이식스 노래는 어쩜 질리지가 않아. 데이식스 노래는 어쩜 질리지가 않아.데이식스 노래는 어쩜 질리지가 않아.데이식스 노래는 어쩜 질리지가 않아.데이식스 노래는 어쩜 질리지가 않아.데이식스 노래는 어쩜 질리지가 않아.데이식스 노래는 어쩜 질리지가 않아 데이식스 노래는 어쩜 질리지가 않아.`,
+  tags: ["데이식스", "최고야", "짱이야"],
+  coverURL: "https://via.placeholder.com/150",
+  like: { isLiked: false, cnt: 100 },
+  comment: { cnt: 11 },
+  share: { cnt: 25 },
+};
+
+export type DetailList = {
+  id: number;
+  title: string;
   artist: string;
   time: string;
   image: string;
 };
 
-export const DetailList: PlayList[] = [
+export const DetailList: DetailList[] = [
   {
     id: 1,
     title: "HAPPY",
