@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --*: initial;
+  --color-*: initial;
 
   /* Gray scale */
   --color-gray-5: #121212;
