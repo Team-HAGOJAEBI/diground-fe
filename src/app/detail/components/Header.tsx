@@ -6,9 +6,10 @@ import { PlayList } from "@/mocks/sample/Playlist";
 
 interface HeaderProps {
   detailInfo: PlayList;
+  onOpenDrawer: () => void;
 }
 
-export default function Header({ detailInfo }: HeaderProps) {
+export default function Header({ detailInfo, onOpenDrawer }: HeaderProps) {
   const [like, setLike] = useState<boolean>(false);
 
   const handleToggleLike = () => {
@@ -59,7 +60,10 @@ export default function Header({ detailInfo }: HeaderProps) {
             />
             <span>{detailInfo.like.cnt}</span>
           </div>
-          <div className="flex items-center gap-[2px] cursor-pointer">
+          <div
+            className="flex items-center gap-[2px] cursor-pointer"
+            onClick={onOpenDrawer}
+          >
             <Icon
               name="comment"
               className="w-[24px] h-[24px]"

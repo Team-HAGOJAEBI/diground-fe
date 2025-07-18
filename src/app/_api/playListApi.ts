@@ -11,3 +11,10 @@ export const getDetailPlayList = async () => {
 
   return data;
 };
+
+export const getCommentList = async () => {
+  const response = await fetch("/api/getCommentList");
+  const data = await response.json();
+
+  return data;
+};
