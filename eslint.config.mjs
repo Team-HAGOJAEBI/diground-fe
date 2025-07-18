@@ -31,7 +31,7 @@ const config = [
       "no-use-before-define": 0, // 변수 선언 전 사용 금지
       "@typescript-eslint/no-use-before-define": 1, // 변수 선언 전 사용 금지
       "@typescript-eslint/no-explicit-any": "off", // any 타입 사용 금지
-      "no-console": ["error"], // console.log 사용 금지
+      "no-console": ["error", { allow: ["error"] }], // console.log 사용 금지
       "eqeqeq": ["error", "always"], // 일치 연산자 사용 강제
       "spaced-comment": [
         "error",
