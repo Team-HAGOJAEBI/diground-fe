@@ -1,5 +1,9 @@
 import { http, HttpResponse } from "msw";
-import type { NewUser, User } from "../app/example/page";
+
+import { CommentList } from "./sample/Comment";
+import { DetailList, PlayListSample } from "./sample/Playlist";
+
+import type { NewUser, User } from "./sample/User";
 
 const members: User[] = [
   { id: 1, name: "차현빈", gender: "m" },
@@ -21,15 +25,37 @@ export const handlers = [
   http.post("/api/newuser", async ({ request }) => {
     const newUser = (await request.json()) as NewUser;
     const createdUser = {
-      id: members.length + 1,
       ...newUser,
+      id: members.length + 1,
       createdAt: new Date().toISOString(),
     };
+
     members.push(createdUser);
 
     return HttpResponse.json({
       status: 201,
       data: createdUser,
+    });
+  }),
+
+  http.get("/api/getPlayList", () => {
+    return HttpResponse.json({
+      status: 200,
+      data: PlayListSample,
+    });
+  }),
+
+  http.get("/api/getDetailList", () => {
+    return HttpResponse.json({
+      status: 200,
+      data: DetailList,
+    });
+  }),
+
+  http.get("/api/getCommentList", () => {
+    return HttpResponse.json({
+      status: 200,
+      data: CommentList,
     });
   }),
 ];
