@@ -45,12 +45,12 @@
 @layer base {
   html,
   body {
-    height: 100vw;
-    width: 100vh;
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: var(--color-gray-20);
+    background-color: var(--color-gray-5);
   }
 }
 

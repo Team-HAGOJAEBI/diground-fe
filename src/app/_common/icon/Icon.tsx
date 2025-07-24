@@ -3,6 +3,7 @@ import {
   search,
   more,
   moreFilled,
+  moreDetail,
   create,
   prev,
   tag,
@@ -12,6 +13,7 @@ import {
   comment,
   arrowUp,
   close,
+  digging,
 } from "@/assets/icons";
 
 interface IconProps {
@@ -26,6 +28,7 @@ export const ICON_MAP = {
   search,
   more,
   moreFilled,
+  moreDetail,
   create,
   prev,
   tag,
@@ -35,6 +38,7 @@ export const ICON_MAP = {
   comment,
   arrowUp,
   close,
+  digging,
 };
 
 export default function Icon({ name, className, onClick }: IconProps) {

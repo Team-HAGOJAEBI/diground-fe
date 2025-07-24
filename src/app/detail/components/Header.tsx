@@ -49,33 +49,53 @@ export default function Header({ detailInfo, onOpenDrawer }: HeaderProps) {
             ))}
           </div>
         </div>
-        <div className="w-full flex items-center gap-[24px] text-gray-80 mt-[14px] mb-[10px]">
-          <div
-            className="flex items-center gap-[2px] cursor-pointer"
-            onClick={handleToggleLike}
-          >
-            <Icon
-              name={like ? "heartFilled" : "heart"}
-              className="w-[24px] h-[24px]"
-            />
-            <span>{detailInfo.like.cnt}</span>
+        <div className="flex justify-between">
+          <div className="w-[screen] flex items-center gap-[24px] text-gray-80 mt-[14px] mb-[10px]">
+            <div className="flex items-center gap-[24px]">
+              <div
+                className="flex items-center gap-[2px] cursor-pointer"
+                onClick={handleToggleLike}
+              >
+                <Icon
+                  name={like ? "heartFilled" : "heart"}
+                  className="w-[24px]"
+                />
+                <span>{detailInfo.like.cnt}</span>
+              </div>
+              <div
+                className="flex items-center gap-[2px] cursor-pointer"
+                onClick={onOpenDrawer}
+              >
+                <Icon
+                  name="comment"
+                  className="w-[24px]"
+                />
+                <span>{detailInfo.comment.cnt}</span>
+              </div>
+              <div className="flex items-center gap-[2px] cursor-pointer">
+                <Icon
+                  name="share"
+                  className="w-[24px]"
+                />
+                <span>{detailInfo.share.cnt}</span>
+              </div>
+              <div className="flex items-center gap-[2px] cursor-pointer">
+                <Icon
+                  name="moreDetail"
+                  className="w-[31px]"
+                />
+              </div>
+            </div>
           </div>
-          <div
-            className="flex items-center gap-[2px] cursor-pointer"
-            onClick={onOpenDrawer}
-          >
+          <div className="relative pr-[5.5px]">
             <Icon
-              name="comment"
-              className="w-[24px] h-[24px]"
+              name="digging"
+              className="w-[46px] h-[46px] "
             />
-            <span>{detailInfo.comment.cnt}</span>
-          </div>
-          <div className="flex items-center gap-[2px] cursor-pointer">
-            <Icon
-              name="share"
-              className="w-[24px] h-[24px]"
-            />
-            <span>{detailInfo.share.cnt}</span>
+            {/* 노란색 : 없는 색깔. */}
+            <div className="absolute w-[20px] h-[20px] bg-gray-10 left-[31px] top-[26px] border border-[#FFC107] z-50 rounded-full flex items-center justify-center">
+              <span className="text-[10px] font-bold text-[#FFC107] ">30</span>
+            </div>
           </div>
         </div>
       </div>
