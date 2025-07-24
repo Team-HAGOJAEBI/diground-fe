@@ -10,7 +10,7 @@ import Drawer from "./components/Drawer";
 import Header from "./components/Header";
 import List from "./components/List";
 
-import { getDetailPlayList, getPlayList } from "@/app/_api/playListApi";
+import { getDetailPlayList, getPlayList } from "@/app/detail/api/playListApi";
 import { DetailList, PlayList, PlayListSample } from "@/mocks/sample/Playlist";
 
 export default function Page() {

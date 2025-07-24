@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 import CommentContainer from "./CommentContainer";
 
-import { getCommentList } from "@/app/_api/playListApi";
 import Icon from "@/app/_common/icon/Icon";
+import { getCommentList } from "@/app/detail/api/playListApi";
 import { Comment, CommentList } from "@/mocks/sample/Comment";
 
 interface DrawerProps {
