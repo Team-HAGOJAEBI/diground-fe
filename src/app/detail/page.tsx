@@ -42,7 +42,7 @@ export default function Page() {
       />
       <Icon
         name="prev"
-        className="absolute top-[20px] left-[20px] cursor-pointer"
+        className="absolute top-[20px] left-[20px]"
         // onClick
       />
       <div className="p-[20px]">
