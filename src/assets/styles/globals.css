@@ -45,12 +45,15 @@
 @layer base {
   html,
   body {
-    height: 100%;
-    width: 100%;
+    @apply h-full overflow-hidden;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     background-color: var(--color-gray-5);
+  }
+  #__next, /* 또는 root element */
+  .app-container {
+    @apply min-h-screen overflow-y-auto;
   }
 }
 
