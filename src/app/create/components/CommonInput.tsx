@@ -8,7 +8,7 @@ interface CommonInputProps {
   /** 값 변경 시 호출되는 핸들러 함수 */
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   /** 에러 메시지 (required가 true일 때만 표시) */
-  error?: string;
+  errorMessage?: string;
   /** 입력 필드의 플레이스홀더 텍스트 */
   placeholder?: string;
   /** 필수 입력 여부 (에러 표시 조건) */
@@ -22,7 +22,7 @@ interface CommonInputProps {
  * @param label - 입력 필드의 라벨 텍스트
  * @param value - 입력 필드의 현재 값
  * @param onChange - 값 변경 시 호출되는 핸들러 함수
- * @param error - 에러 메시지 (required가 true일 때만 표시)
+ * @param errorMessage - 에러 메시지 (required가 true일 때만 표시)
  * @param placeholder - 입력 필드의 플레이스홀더 텍스트
  * @param required - 필수 입력 여부 (에러 표시 조건)
  * @param textarea - textarea 사용 여부 (true: textarea, false: input)
@@ -31,7 +31,7 @@ export default function CommonInput({
   label,
   value,
   onChange,
-  error,
+  errorMessage,
   placeholder = "",
   required = false,
   textarea = false,
@@ -60,12 +60,12 @@ export default function CommonInput({
             />
           )}
         </div>
-        {error && required && (
+        {errorMessage && required && (
           <p
             id="platform-link-help"
             className="font-normal text-[#ea4141] text-[13px] leading-5"
           >
-            {error}
+            {errorMessage}
           </p>
         )}
       </div>
