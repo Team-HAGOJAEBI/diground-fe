@@ -7,7 +7,7 @@ interface CommonInputProps {
   value: string;
   /** 값 변경 시 호출되는 핸들러 함수 */
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  /** 에러 메시지 (required가 true일 때만 표시) */
+  /** 에러 메시지 (값이 있거나 required이고 값이 비어있을 때 표시) */
   errorMessage?: string;
   /** 입력 필드의 플레이스홀더 텍스트 */
   placeholder?: string;
@@ -22,7 +22,7 @@ interface CommonInputProps {
  * @param label - 입력 필드의 라벨 텍스트
  * @param value - 입력 필드의 현재 값
  * @param onChange - 값 변경 시 호출되는 핸들러 함수
- * @param errorMessage - 에러 메시지 (required가 true일 때만 표시)
+ * @param errorMessage - 에러 메시지 (값이 있거나 required이고 값이 비어있을 때 표시)
  * @param placeholder - 입력 필드의 플레이스홀더 텍스트
  * @param required - 필수 입력 여부 (에러 표시 조건)
  * @param textarea - textarea 사용 여부 (true: textarea, false: input)
@@ -41,7 +41,7 @@ export default function CommonInput({
       <div className="w-full">
         <label className="font-bold text-[var(--color-gray-80)] text-sm  bg-red-200">{label}</label>
         <div
-          className={`flex w-full flex-col ${textarea ? "h-[240px]" : "h-[60px]"} border items-center justify-center my-[8px] rounded-lg overflow-hidden ${error && required ? "border-dashed border-[#923939]" : " border-[var(--color-gray-60)]"}`}
+          className={`flex w-full flex-col ${textarea ? "h-[240px]" : "h-[60px]"} border items-center justify-center my-[8px] rounded-lg overflow-hidden ${errorMessage || (required && !value) ? "border-dashed border-[#923939]" : " border-[var(--color-gray-60)]"}`}
         >
           {textarea ? (
             <textarea
@@ -60,12 +60,12 @@ export default function CommonInput({
             />
           )}
         </div>
-        {errorMessage && required && (
+        {(errorMessage || (required && !value)) && (
           <p
             id="platform-link-help"
             className="font-normal text-[#ea4141] text-[13px] leading-5"
           >
-            {errorMessage}
+            {errorMessage || (required && !value ? "필수 입력 항목입니다" : "")}
           </p>
         )}
       </div>
