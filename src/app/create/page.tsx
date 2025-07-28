@@ -19,7 +19,7 @@ export default function Page() {
     <div className="bg-gray-100 flex justify-center w-full">
       <div className="bg-gray-5 w-[360px] h-[1422px] relative">
         <div className="flex flex-col w-full h-full items-start gap-[7px] pt-[50px] px-[20px]">
-          <h1 className="relative self-stretch font-bold text-[var(--color-gray-100)] text-[28px] tracking-[0] leading-[normal] pb-[32px]">
+          <h1 className="relative self-stretch font-bold text-gray-100 text-[28px] tracking-[0] leading-[normal] pb-[32px]">
             플레이리스트 만들기
           </h1>
           <CommonInput
