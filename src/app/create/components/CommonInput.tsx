@@ -37,9 +37,9 @@ export default function CommonInput({
   textarea = false,
 }: CommonInputProps) {
   return (
-    <div className="flex flex-col w-full items-start    relative mb-[36px]">
+    <div className="flex flex-col w-full items-start relative mb-[36px]">
       <div className="w-full">
-        <label className="font-bold text-[var(--color-gray-80)] text-sm  bg-red-200">{label}</label>
+        <label className="font-bold text-gray-80 text-sm  bg-red-200">{label}</label>
         <div
           className={`flex w-full flex-col ${textarea ? "h-[240px]" : "h-[60px]"} border items-center justify-center my-[8px] rounded-lg overflow-hidden ${errorMessage || (required && !value) ? "border-dashed border-[#923939]" : " border-[var(--color-gray-60)]"}`}
         >
@@ -48,7 +48,7 @@ export default function CommonInput({
               value={value}
               onChange={onChange}
               placeholder={placeholder}
-              className="p-[20px] w-full h-[240px] font-normal text-[var(--color-gray-90)] text-base bg-transparent border-none outline-none resize-none overflow-y-auto custom-scrollbar placeholder:text-[var(--color-gray-50)]"
+              className="p-[20px] w-full h-[240px] font-normal text-gray-90 text-base bg-transparent border-none outline-none resize-none overflow-y-auto custom-scrollbar placeholder:text-gray-50"
             />
           ) : (
             <input
@@ -56,7 +56,7 @@ export default function CommonInput({
               value={value}
               onChange={onChange}
               placeholder={placeholder}
-              className="p-[20px] w-full h-[25px] font-normal text-[var(--color-gray-90)] text-base overflow-hidden text-ellipsis bg-transparent border-none outline-none placeholder:text-[var(--color-gray-50)]"
+              className="p-[20px] w-full h-[25px] font-normal text-gray-90 text-base overflow-hidden text-ellipsis bg-transparent border-none outline-none placeholder:text-gray-50"
             />
           )}
         </div>
