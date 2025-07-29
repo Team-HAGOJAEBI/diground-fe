@@ -45,7 +45,7 @@ export default function CommentDrawer({ onClose }: { onClose: () => void }) {
       title="댓글"
       onClose={onClose}
     >
-      <div className="flex-1 overflow-y-auto custom-scrollbar pt-[16px] flex flex-col gap-[24px]">
+      <div className="flex-1 overflow-y-auto custom-scrollbar pt-[16px] flex flex-col gap-[24px] mt-[6px]">
         {comments.map((comment) => (
           <CommentContainer
             key={comment.id}
