@@ -5,8 +5,9 @@ export type PlayList = {
   tags: string[];
   coverURL: string;
   like: { isLiked: boolean; cnt: number };
-  comment: { cnt: number };
-  share: { cnt: number };
+  comment: number;
+  share: number;
+  digging: number;
 };
 
 export const PlayListSample: PlayList = {
@@ -16,8 +17,9 @@ export const PlayListSample: PlayList = {
   tags: ["데이식스", "최고야", "짱이야"],
   coverURL: "https://via.placeholder.com/150",
   like: { isLiked: false, cnt: 100 },
-  comment: { cnt: 11 },
-  share: { cnt: 25 },
+  comment: 11,
+  share: 25,
+  digging: 30,
 };
 
 export type DetailList = {
