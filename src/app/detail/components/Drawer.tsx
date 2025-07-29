@@ -76,7 +76,7 @@ export default function Drawer({ onClose }: DrawerProps) {
           onChange={(e) => handleOnChange(e)}
         />
         <button
-          className="w-[40px] h-[40px] rounded-[46px] p-[8px] border border-gray-30 bg-gray-5 cursor-pointer"
+          className="w-[40px] h-[40px] rounded-[46px] p-[8px] border border-gray-30 bg-gray-5"
           onClick={handleCommentSubmit}
         >
           {/* button border 피그마에는 #525252인데 컬러 차트에 없음 */}

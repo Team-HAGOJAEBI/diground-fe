@@ -59,6 +59,10 @@
   }
 }
 
+button {
+  cursor: pointer;
+}
+
 /* 📑 댓글(Frame1432) 기준으로 (임의) 작업 */
 /* 스크롤바 전체 너비 설정 */
 .custom-scrollbar::-webkit-scrollbar {
