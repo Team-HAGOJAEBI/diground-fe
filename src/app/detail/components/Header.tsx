@@ -6,10 +6,11 @@ import { PlayList } from "@/mocks/sample/Playlist";
 
 interface HeaderProps {
   detailInfo: PlayList;
-  onOpenDrawer: () => void;
+  onOpenCommentDrawer: () => void;
+  onOpenDiggingDrawer: () => void;
 }
 
-export default function Header({ detailInfo, onOpenDrawer }: HeaderProps) {
+export default function Header({ detailInfo, onOpenCommentDrawer, onOpenDiggingDrawer }: HeaderProps) {
   const [like, setLike] = useState<boolean>(false);
 
   const handleToggleLike = () => {
@@ -64,20 +65,20 @@ export default function Header({ detailInfo, onOpenDrawer }: HeaderProps) {
               </div>
               <div
                 className="flex items-center gap-[2px] cursor-pointer"
-                onClick={onOpenDrawer}
+                onClick={onOpenCommentDrawer}
               >
                 <Icon
                   name="comment"
                   className="w-[24px]"
                 />
-                <span>{detailInfo.comment.cnt}</span>
+                <span>{detailInfo.comment}</span>
               </div>
               <div className="flex items-center gap-[2px] cursor-pointer">
                 <Icon
                   name="share"
                   className="w-[24px]"
                 />
-                <span>{detailInfo.share.cnt}</span>
+                <span>{detailInfo.share}</span>
               </div>
               <div className="flex items-center gap-[2px] cursor-pointer">
                 <Icon
@@ -87,14 +88,17 @@ export default function Header({ detailInfo, onOpenDrawer }: HeaderProps) {
               </div>
             </div>
           </div>
-          <div className="relative pr-[5.5px]">
+          <div
+            className="relative pr-[5.5px]"
+            onClick={onOpenDiggingDrawer}
+          >
             <Icon
               name="digging2"
               className="w-[46px] h-[46px] "
             />
             {/* 노란색 : 없는 색깔. */}
             <div className="absolute w-[20px] h-[20px] bg-gray-10 left-[31px] top-[26px] border border-[#FFC107] rounded-full flex items-center justify-center">
-              <span className="text-[10px] font-bold text-[#FFC107] ">30</span>
+              <span className="text-[10px] font-bold text-[#FFC107] ">{detailInfo.digging}</span>
             </div>
           </div>
         </div>
