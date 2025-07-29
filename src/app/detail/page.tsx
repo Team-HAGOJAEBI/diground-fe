@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Footer from "../_common/Footer";
 import Icon from "../_common/icon/Icon";
@@ -19,6 +19,10 @@ export default function Page() {
   const [list, setList] = useState<DetailList[]>([]);
   const [commentOpen, setCommentOpen] = useState<boolean>(false);
   const [diggingOpen, setDiggingOpen] = useState<boolean>(false);
+  const [scrolling, setScrolling] = useState<boolean>(false);
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   const fetchDetailPlayList = async () => {
     try {
       const { data: detailData } = await getDetailPlayList();
@@ -33,6 +37,22 @@ export default function Page() {
 
   useEffect(() => {
     fetchDetailPlayList();
+
+    const el = scrollRef.current;
+
+    if (!el) return;
+
+    let timeout: ReturnType<typeof setTimeout>;
+
+    const onScroll = () => {
+      setScrolling(true);
+      clearTimeout(timeout);
+      timeout = setTimeout(() => setScrolling(false), 500);
+    };
+
+    el.addEventListener("scroll", onScroll);
+
+    return () => el.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
@@ -48,7 +68,10 @@ export default function Page() {
         // onClick
       />
       <div className="p-[20px]">
-        <div className="custom-scrollbar h-[calc(55vh-120px)] overflow-y-auto">
+        <div
+          className={`custom-scrollbar h-[calc(55vh-120px)] overflow-y-auto ${scrolling ? "scrolling" : ""}`}
+          ref={scrollRef}
+        >
           {list.map((item) => (
             <List
               key={item.id}

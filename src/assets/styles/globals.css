@@ -77,6 +77,12 @@ button {
 
 /* 스크롤바 핸들(움직이는 막대) 스타일 */
 .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+/* 스크롤 중일 때만 thumb 보이게 */
+.custom-scrollbar.scrolling::-webkit-scrollbar-thumb {
   background-color: var(--color-gray-50);
   border-radius: 20px;
 }
