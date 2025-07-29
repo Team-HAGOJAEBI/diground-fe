@@ -4,9 +4,10 @@ interface DrawerProps {
   title: string;
   onClose: () => void;
   children: React.ReactNode;
+  className?: string;
 }
 
-export default function Drawer({ title, onClose, children }: DrawerProps) {
+export default function Drawer({ title, onClose, children, className }: DrawerProps) {
   return (
     <div className="absolute inset-x-0 top-0 bottom-[89px]">
       {/* Drawer Dimmer */}
@@ -15,7 +16,9 @@ export default function Drawer({ title, onClose, children }: DrawerProps) {
         onClick={onClose}
       />
       {/* Drawer */}
-      <div className="w-[inherit] h-[50vh] bg-gray-15 absolute bottom-0 left-0 right-0 max-h-[80%] bg-white rounded-t-[20px] pt-[14px] px-[20px] flex flex-col">
+      <div
+        className={`w-[inherit] h-auto bg-gray-15 absolute bottom-0 left-0 right-0 max-h-[80%] bg-white rounded-t-[20px] pt-[14px] px-[20px] flex flex-col ${className}`}
+      >
         {/* Drawer Header */}
         <div className="mb-[6px]">
           <span className="text-gray-80 text-sm font-bold ">{title}</span>
