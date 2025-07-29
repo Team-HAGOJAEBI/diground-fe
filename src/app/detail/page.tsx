@@ -6,7 +6,7 @@ import Footer from "../_common/Footer";
 import Icon from "../_common/icon/Icon";
 import Layout from "../_common/Layout";
 
-import Drawer from "./components/Drawer";
+import CommentDrawer from "./components/CommentDrawer";
 import Header from "./components/Header";
 import List from "./components/List";
 
@@ -55,12 +55,7 @@ export default function Page() {
           ))}
         </div>
       </div>
-      {drawerOpen && (
-        <Drawer
-          title="댓글"
-          onClose={() => setDrawerOpen(false)}
-        />
-      )}
+      {drawerOpen && <CommentDrawer onClose={() => setDrawerOpen(false)} />}
       <Footer selectedIndex={0} />
     </Layout>
   );
