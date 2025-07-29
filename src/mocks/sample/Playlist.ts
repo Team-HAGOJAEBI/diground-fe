@@ -12,8 +12,9 @@ export type PlayList = {
 
 export const PlayListSample: PlayList = {
   id: 150907,
-  title: "데이식스의 노래를 들어보자 데이식스의 노래를 들어보자 데이식스의 노래를 들어보자",
-  bio: `데이식스 노래는 어쩜 질리지가 않아. 데이식스 노래는 어쩜 질리지가 않아.데이식스 노래는 어쩜 질리지가 않아.데이식스 노래는 어쩜 질리지가 않아.데이식스 노래는 어쩜 질리지가 않아.데이식스 노래는 어쩜 질리지가 않아.데이식스 노래는 어쩜 질리지가 않아 데이식스 노래는 어쩜 질리지가 않아.`,
+  title:
+    "밥은 안 먹어도 데이식스는 맨날 들어야 사람 구실합니다 데이식스 노래 듣다가 눈물 흘려서 방금 방바닥 물바다 됨 신고함 얘들아 이거 보면 얼른 쉬지말고 데이식스 노래 들어라 콩츄부터 듣고 아거살도 듣도록 하여라 얼른 들어라 내가 항시 지켜보고 있다",
+  bio: "밴드의 지배자. 밴드의 권위자. 밴드의 황제. 밴드의 제왕. 밴드의 군림자. 밴드의 마스터. 밴드의 신. 밴드의 대마왕. 밴드의 대명사. 밴드의 정석. 밴드의 전설. 밴드의 표본. 밴드의 종결자. 밴드계의 끝판왕. 밴드계의 시작과 끝. 밴드의 혁명. 밴드계의 이정표. 밴드의 기준. 밴드의 척도. 밴드의 화신. 밴드계의 살아있는 역사. 밴드계에 한 획을 그은 이름. 밴드의 찬란한 교과서. 밴드의 최종 보스. 악기도 잘 하고 노래도 잘하면서 얼굴까지 잘생겼으면 나보고 뭐 어떡하라고, 어떻하라고, 우뜩하라고, 어뜩하라고, 어떠콰라고,우뜨콰라고, 어떡하라고, 어떻하라고, 엉뜨켜라고, 우뜩하라고, 어뜩하라고, 어떠콰라고, 우뜨콰라고, 어뜨콰라고, 어떻하라고, 우뜩하라고, 어뜩하라고, 어떠콰라고,우뜨콰라고, 어떡하라고, 어떻하라고, 엉뜨켜라고, 우뜩하라고, 어뜩하라고, 어떠콰라고, 우뜨콰라고, 어뜨콰라고",
   tags: ["데이식스", "최고야", "짱이야"],
   coverURL: "https://via.placeholder.com/150",
   like: { isLiked: false, cnt: 100 },
@@ -89,7 +90,7 @@ export const DetailList: DetailList[] = [
   {
     id: 8,
     title:
-      "Love me or Leave me Love me or Leave me Love me or Leave me Love me or Leave me Love me or Leave me Love me or Leave me",
+      "Love me or Leave me Love me or Leave me Love me or Leave me Love me or Leave me Love me or Leave me Love me or Leave me Love me or Leave me Love me or Leave me Love me or Leave me Love me or Leave me Love me or Leave me Love me or Leave me Love me or Leave me",
     artist: "데이식스",
     time: "3:40",
     image:
