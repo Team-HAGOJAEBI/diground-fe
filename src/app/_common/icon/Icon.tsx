@@ -14,6 +14,12 @@ import {
   arrowUp,
   close,
   digging,
+  digging2,
+  arrowRight,
+  youtubeMusicActive,
+  appleMusicActive,
+  spotifyActive,
+  melon,
 } from "@/assets/icons";
 
 interface IconProps {
@@ -39,6 +45,12 @@ export const ICON_MAP = {
   arrowUp,
   close,
   digging,
+  digging2,
+  arrowRight,
+  youtubeMusicActive,
+  appleMusicActive,
+  spotifyActive,
+  melon,
 };
 
 export default function Icon({ name, className, onClick }: IconProps) {

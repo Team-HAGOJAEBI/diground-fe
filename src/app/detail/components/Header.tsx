@@ -89,7 +89,7 @@ export default function Header({ detailInfo, onOpenDrawer }: HeaderProps) {
           </div>
           <div className="relative pr-[5.5px]">
             <Icon
-              name="digging"
+              name="digging2"
               className="w-[46px] h-[46px] "
             />
             {/* 노란색 : 없는 색깔. */}
