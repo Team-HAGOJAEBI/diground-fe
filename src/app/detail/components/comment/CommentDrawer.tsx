@@ -53,7 +53,7 @@ export default function CommentDrawer({ onClose }: { onClose: () => void }) {
           />
         ))}
       </div>
-      <div className="h-min-[78px] h-max-[145px] bg-gray-10 bottom-0 -mx-[20px] flex w-[100vw] items-center gap-[10px] px-[20px] py-[14px] opacity-100">
+      <div className="h-min-[78px] h-max-[145px] bg-gray-10 bottom-0 -mx-[20px] flex w-[inherit] items-center gap-[10px] px-[20px] py-[14px] opacity-100">
         <input
           className="w-full border border-yellow-50"
           onChange={(e) => handleOnChange(e)}
