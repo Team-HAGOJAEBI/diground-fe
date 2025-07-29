@@ -8,7 +8,7 @@ interface ListProps {
 
 export default function List({ item }: ListProps) {
   return (
-    <div className="flex items-center mb-[16px] gap-[16px] last:mb-0">
+    <div className="mb-[16px] flex items-center gap-[16px] last:mb-0">
       <Image
         src={item.image}
         alt={item.title}
@@ -17,10 +17,10 @@ export default function List({ item }: ListProps) {
         style={{ borderRadius: "16px" }}
       />
       <div className="flex-1 py-[14px]">
-        <p className="overflow-hidden text-gray-90 mb-[6px] tracking-[-2%] font-semibold text-[14px] line-clamp-2">
+        <p className="text-gray-90 mb-[6px] line-clamp-2 overflow-hidden text-[14px] font-semibold tracking-[-2%]">
           {item.title}
         </p>
-        <div className="flex text-gray-50 text-[12px] line-clamp-1">
+        <div className="line-clamp-1 flex text-[12px] text-gray-50">
           {item.artist} {item.time}
         </div>
       </div>

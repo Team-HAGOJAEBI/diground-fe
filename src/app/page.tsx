@@ -15,14 +15,14 @@ export default function Home() {
   return (
     <div>
       <main>
-        <span className="text-gray-50 w-full h-10 bg-yellow-60">tailwindcss test</span>
+        <span className="bg-yellow-60 h-10 w-full text-gray-50">tailwindcss test</span>
       </main>
       <footer>
         <input
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="w-auto h-10 mr-4 border border-gray-300 rounded-md p-2"
+          className="mr-4 h-10 w-auto rounded-md border border-gray-300 p-2"
         />
         <button onClick={() => setPlaylist(text)}>결과 보기</button>
         <span>결과: {playlist}</span>

@@ -19,7 +19,7 @@ export default function Header({ detailInfo, onOpenCommentDrawer, onOpenDiggingD
 
   return (
     <div
-      className="relative w-full h-[45vh] bg-center bg-cover"
+      className="relative h-[45vh] w-full bg-cover bg-center"
       style={{
         backgroundPosition: "center",
         backgroundSize: "cover", // 📑 contain/cover 확인 필요
@@ -31,19 +31,19 @@ export default function Header({ detailInfo, onOpenCommentDrawer, onOpenDiggingD
         ].join(","),
       }}
     >
-      <div className="absolute bottom-0 left-0 right-0 px-[20px]">
+      <div className="absolute right-0 bottom-0 left-0 px-[20px]">
         <div className="flex flex-col gap-[8px]">
-          <div className="font-bold text-gray-100 text-2xl line-clamp-2">{detailInfo.title}</div>
-          <div className="text-sm text-gray-70 line-clamp-4 whitespace-pre-line">{detailInfo.bio}</div>
+          <div className="line-clamp-2 text-2xl font-bold text-gray-100">{detailInfo.title}</div>
+          <div className="text-gray-70 line-clamp-4 text-sm whitespace-pre-line">{detailInfo.bio}</div>
           <div className="flex flex-wrap gap-[15px]">
             {detailInfo.tags.map((tag) => (
               <div
                 key={tag}
-                className="flex items-center gap-[4px] text-xs text-gray-80"
+                className="text-gray-80 flex items-center gap-[4px] text-xs"
               >
                 <Icon
                   name="tag"
-                  className="w-[12px] h-[12px] block"
+                  className="block h-[12px] w-[12px]"
                 />
                 {tag}
               </div>
@@ -51,10 +51,10 @@ export default function Header({ detailInfo, onOpenCommentDrawer, onOpenDiggingD
           </div>
         </div>
         <div className="flex justify-between">
-          <div className="w-[screen] flex items-center gap-[24px] text-gray-80 mt-[14px] mb-[10px]">
+          <div className="text-gray-80 mt-[14px] mb-[10px] flex w-[screen] items-center gap-[24px]">
             <div className="flex items-center gap-[24px]">
               <div
-                className="flex items-center gap-[2px] cursor-pointer"
+                className="flex cursor-pointer items-center gap-[2px]"
                 onClick={handleToggleLike}
               >
                 <Icon
@@ -64,7 +64,7 @@ export default function Header({ detailInfo, onOpenCommentDrawer, onOpenDiggingD
                 <span>{detailInfo.like.cnt}</span>
               </div>
               <div
-                className="flex items-center gap-[2px] cursor-pointer"
+                className="flex cursor-pointer items-center gap-[2px]"
                 onClick={onOpenCommentDrawer}
               >
                 <Icon
@@ -73,14 +73,14 @@ export default function Header({ detailInfo, onOpenCommentDrawer, onOpenDiggingD
                 />
                 <span>{detailInfo.comment}</span>
               </div>
-              <div className="flex items-center gap-[2px] cursor-pointer">
+              <div className="flex cursor-pointer items-center gap-[2px]">
                 <Icon
                   name="share"
                   className="w-[24px]"
                 />
                 <span>{detailInfo.share}</span>
               </div>
-              <div className="flex items-center gap-[2px] cursor-pointer">
+              <div className="flex cursor-pointer items-center gap-[2px]">
                 <Icon
                   name="moreDetail"
                   className="w-[31px]"
@@ -94,11 +94,11 @@ export default function Header({ detailInfo, onOpenCommentDrawer, onOpenDiggingD
           >
             <Icon
               name="digging2"
-              className="w-[46px] h-[46px] "
+              className="h-[46px] w-[46px]"
             />
             {/* 노란색 : 없는 색깔. */}
-            <div className="absolute w-[20px] h-[20px] bg-gray-10 left-[31px] top-[26px] border border-[#FFC107] rounded-full flex items-center justify-center">
-              <span className="text-[10px] font-bold text-[#FFC107] ">{detailInfo.digging}</span>
+            <div className="bg-gray-10 absolute top-[26px] left-[31px] flex h-[20px] w-[20px] items-center justify-center rounded-full border border-[#FFC107]">
+              <span className="text-[10px] font-bold text-[#FFC107]">{detailInfo.digging}</span>
             </div>
           </div>
         </div>

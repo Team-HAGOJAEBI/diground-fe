@@ -62,7 +62,7 @@ export default function DiggingContainer({ id, value, isActive, isConnected }: D
       </div>
       {/* Digging Right */}
       {isActive && (
-        <div className="flex items-center gap-[4px] cursor-pointer">
+        <div className="flex cursor-pointer items-center gap-[4px]">
           <span
             className={diggingStyle({
               color: isConnected ? "connected" : "default",

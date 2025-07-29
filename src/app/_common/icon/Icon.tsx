@@ -64,7 +64,7 @@ export default function Icon({ name, className, onClick }: IconProps) {
 
   return (
     <div
-      className={`flex items-center justify-center cursor-pointer ${className}`}
+      className={`flex cursor-pointer items-center justify-center ${className}`}
       onClick={onClick}
     >
       <IconComponent />

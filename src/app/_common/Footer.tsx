@@ -23,18 +23,18 @@ export default function Footer({ selectedIndex }: FooterProps) {
   };
 
   return (
-    <div className="flex h-[89px] w-[inherit] bg-gray-10 py-[8px_32px] px-[20px] border-t border-gray-30">
+    <div className="bg-gray-10 border-gray-30 flex h-[89px] w-[inherit] border-t px-[20px] py-[8px_32px]">
       {Object.entries(FOOTER_MENU).map(([key, menu], idx) => {
         return (
           <div
             key={key + idx}
-            className="flex flex-col gap-[4px] px-[22px] py-[6px] items-center m-auto hover:cursor-pointer"
+            className="m-auto flex flex-col items-center gap-[4px] px-[22px] py-[6px] hover:cursor-pointer"
             onClick={() => handleOnClick(idx)}
           >
             <Icon
               name={key as keyof typeof FOOTER_MENU}
               // 📑 추후 기획자에게 문의 해봐야 함. 현재는 클릭 이벤트가 다 존재한다고 생각하고 함.
-              className={`w-[30px] h-[30px] ${current === idx ? "text-[#FFE11D]" : "text-[#9F9F9F]"}`}
+              className={`h-[30px] w-[30px] ${current === idx ? "text-[#FFE11D]" : "text-[#9F9F9F]"}`}
             />
             <span className={`${current === idx ? "text-gray-100" : "text-gray-50"} text-[11px]`}>{menu}</span>
           </div>

@@ -11,8 +11,8 @@ interface CommentProps {
 export default function CommentContainer({ comment }: CommentProps) {
   return (
     <div>
-      <div className="flex justify-between items-center mb-[6px]">
-        <div className="flex gap-[8px] items-center">
+      <div className="mb-[6px] flex items-center justify-between">
+        <div className="flex items-center gap-[8px]">
           <Image
             src={comment.profileURL || defaultProfile2x}
             alt="comment profile"
@@ -20,7 +20,7 @@ export default function CommentContainer({ comment }: CommentProps) {
             height={26}
             style={{ borderRadius: "50%" }}
           />
-          <span className="py-[6px] text-xs text-gray-60">
+          <span className="text-gray-60 py-[6px] text-xs">
             {comment.writer} {comment.date}
           </span>
         </div>
@@ -29,7 +29,7 @@ export default function CommentContainer({ comment }: CommentProps) {
           className="py-[5px]"
         />
       </div>
-      <div className="text-gray-100 text-sm">{comment.comment}</div>
+      <div className="text-sm text-gray-100">{comment.comment}</div>
     </div>
   );
 }

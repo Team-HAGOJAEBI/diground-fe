@@ -19,7 +19,7 @@ export default function DiggingDrawer({ onClose }: { onClose: () => void }) {
       onClose={onClose}
       className="pb-[30px]"
     >
-      <div className="flex flex-col gap-[37px] mt-[24px]">
+      <div className="mt-[24px] flex flex-col gap-[37px]">
         {DIGGING_LIST.map((list) => (
           <DiggingContainer
             key={list.id}
@@ -27,7 +27,7 @@ export default function DiggingDrawer({ onClose }: { onClose: () => void }) {
           />
         ))}
       </div>
-      <span className="flex items-center gap-[4px] text-gray-80 justify-end mt-[37px] cursor-pointer">
+      <span className="text-gray-80 mt-[37px] flex cursor-pointer items-center justify-end gap-[4px]">
         로그인하고 플랫폼 연동 설정 유지하기
         <Icon name="arrowRight" />
       </span>
