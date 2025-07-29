@@ -93,7 +93,7 @@ export default function Header({ detailInfo, onOpenDrawer }: HeaderProps) {
               className="w-[46px] h-[46px] "
             />
             {/* 노란색 : 없는 색깔. */}
-            <div className="absolute w-[20px] h-[20px] bg-gray-10 left-[31px] top-[26px] border border-[#FFC107] z-50 rounded-full flex items-center justify-center">
+            <div className="absolute w-[20px] h-[20px] bg-gray-10 left-[31px] top-[26px] border border-[#FFC107] rounded-full flex items-center justify-center">
               <span className="text-[10px] font-bold text-[#FFC107] ">30</span>
             </div>
           </div>
