@@ -51,6 +51,7 @@
     padding: 0;
     box-sizing: border-box;
     background-color: var(--color-gray-5);
+    cursor: default;
   }
 
   #__next, /* 또는 root element */
