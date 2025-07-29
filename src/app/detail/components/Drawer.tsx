@@ -17,7 +17,7 @@ export default function Drawer({ title, onClose, children, className }: DrawerPr
       />
       {/* Drawer */}
       <div
-        className={`w-[inherit] h-auto bg-gray-15 absolute bottom-0 left-0 right-0 max-h-[80%] bg-white rounded-t-[20px] pt-[14px] px-[20px] flex flex-col ${className}`}
+        className={`w-[inherit] h-auto bg-gray-15 absolute bottom-0 left-0 right-0 max-h-[60vh] bg-white rounded-t-[20px] pt-[14px] px-[20px] flex flex-col ${className}`}
       >
         {/* Drawer Header */}
         <div>
