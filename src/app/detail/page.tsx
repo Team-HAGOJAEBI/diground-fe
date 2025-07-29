@@ -42,7 +42,7 @@ export default function Page() {
       />
       <Icon
         name="prev"
-        className="absolute top-[20px] left-[20px] cursor-pointer"
+        className="absolute top-[20px] left-[20px]"
         // onClick
       />
       <div className="p-[20px]">
@@ -55,7 +55,12 @@ export default function Page() {
           ))}
         </div>
       </div>
-      {drawerOpen && <Drawer onClose={() => setDrawerOpen(false)} />}
+      {drawerOpen && (
+        <Drawer
+          title="댓글"
+          onClose={() => setDrawerOpen(false)}
+        />
+      )}
       <Footer selectedIndex={0} />
     </Layout>
   );
