@@ -9,7 +9,7 @@ interface DrawerProps {
 
 export default function Drawer({ title, onClose, children, className }: DrawerProps) {
   return (
-    <div className="absolute inset-x-0 top-0 bottom-[89px]">
+    <div className="absolute inset-x-0 top-0 bottom-2">
       {/* Drawer Dimmer */}
       <div
         className="bg-gray-5 absolute inset-0 opacity-[60%]"
