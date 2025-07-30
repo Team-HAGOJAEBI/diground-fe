@@ -30,8 +30,7 @@ export default function Page() {
 
   const fetchDetailPlayList = async () => {
     try {
-      const { data: detailData } = await getDetailPlayList();
-      const { data: playListInfo } = await getPlayList();
+      const [{ data: detailData }, { data: playListInfo }] = await Promise.all([getDetailPlayList(), getPlayList()]);
 
       setList(detailData);
       setPlayListInfo(playListInfo);
