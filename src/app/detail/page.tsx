@@ -20,7 +20,11 @@ export default function Page() {
   const [commentOpen, setCommentOpen] = useState<boolean>(false);
   const [diggingOpen, setDiggingOpen] = useState<boolean>(false);
   const [scrolling, setScrolling] = useState<boolean>(false);
-
+  const [dynamicHeaderStyle, setDynamicHeaderStyle] = useState({
+    height: "45vh",
+    opacity: 1,
+    transform: "translateY(0px)",
+  });
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const fetchDetailPlayList = async () => {
@@ -46,6 +50,25 @@ export default function Page() {
 
     const onScroll = () => {
       setScrolling(true);
+
+      const scrollTop = el.scrollTop;
+      const scrollTrigger = 200;
+
+      const ratio = Math.min(scrollTop / scrollTrigger, 1); // 0: 스크롤 안함, 0.5: 절반 스크롤, 1: trigger 이상 스크롤
+
+      const HeaderMinHeight = 60; // prev 아이콘 height + padding-top
+      const HeaderMaxHeight = window.innerHeight * 0.45;
+
+      const newHeaderHeight = HeaderMaxHeight - (HeaderMaxHeight - HeaderMinHeight) * ratio;
+      const newOpacity = 1 - ratio;
+      const offsetY = 20 * ratio;
+
+      setDynamicHeaderStyle({
+        height: `${newHeaderHeight}px`,
+        opacity: newOpacity,
+        transform: `translateY(-${offsetY}px)`, // ⬅️ 위로 살짝 이동하는 느낌
+      });
+
       clearTimeout(timeout);
       timeout = setTimeout(() => setScrolling(false), 500);
     };
@@ -56,21 +79,24 @@ export default function Page() {
   }, []);
 
   return (
-    <Layout className="relative">
-      <Header
-        detailInfo={playListInfo}
-        onOpenCommentDrawer={() => setCommentOpen(true)}
-        onOpenDiggingDrawer={() => setDiggingOpen(true)}
-      />
+    <Layout className="relative flex flex-col">
       <Icon
         name="prev"
         className="absolute top-[20px] left-[20px]"
         // onClick
       />
+      <Header
+        detailInfo={playListInfo}
+        onOpenCommentDrawer={() => setCommentOpen(true)}
+        onOpenDiggingDrawer={() => setDiggingOpen(true)}
+        style={dynamicHeaderStyle}
+      />
+
       <div className="p-[20px]">
         <div
-          className={`custom-scrollbar h-[calc(55vh-120px)] overflow-y-auto ${scrolling ? "scrolling" : ""}`}
+          className={`custom-scrollbar overflow-y-auto ${scrolling ? "scrolling" : ""}`}
           ref={scrollRef}
+          style={{ height: `calc(100vh - ${dynamicHeaderStyle.height} - 129px)` }} // 하단 메뉴바 + pb 포함
         >
           {list.map((item) => (
             <List

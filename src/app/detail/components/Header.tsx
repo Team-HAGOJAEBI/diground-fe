@@ -8,9 +8,17 @@ interface HeaderProps {
   detailInfo: PlayList;
   onOpenCommentDrawer: () => void;
   onOpenDiggingDrawer: () => void;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
-export default function Header({ detailInfo, onOpenCommentDrawer, onOpenDiggingDrawer }: HeaderProps) {
+export default function Header({
+  detailInfo,
+  onOpenCommentDrawer,
+  onOpenDiggingDrawer,
+  className,
+  style,
+}: HeaderProps) {
   const [like, setLike] = useState<boolean>(false);
 
   const handleToggleLike = () => {
@@ -19,8 +27,9 @@ export default function Header({ detailInfo, onOpenCommentDrawer, onOpenDiggingD
 
   return (
     <div
-      className="relative h-[45vh] w-full bg-cover bg-center"
+      className={`flex items-end transition-all duration-300 ease-in-out ${className}`}
       style={{
+        ...style,
         backgroundPosition: "center",
         backgroundSize: "cover", // 📑 contain/cover 확인 필요
         backgroundRepeat: "no-repeat",
@@ -31,7 +40,7 @@ export default function Header({ detailInfo, onOpenCommentDrawer, onOpenDiggingD
         ].join(","),
       }}
     >
-      <div className="absolute right-0 bottom-0 left-0 px-[20px]">
+      <div className="px-[20px]">
         <div className="flex flex-col gap-[8px]">
           <div className="line-clamp-2 text-2xl font-bold text-gray-100">{detailInfo.title}</div>
           <div className="text-gray-70 line-clamp-4 text-sm whitespace-pre-line">{detailInfo.bio}</div>
