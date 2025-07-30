@@ -8,36 +8,48 @@ import CommentContainer from "./CommentContainer";
 import Icon from "@/app/_common/icon/Icon";
 import { Comment, CommentList } from "@/mocks/sample/Comment";
 
-export default function CommentDrawer({ onClose }: { onClose: () => void }) {
+/**
+ * 댓글 목록 API 호출
+ */
+function useCommentList() {
   const [comments, setComments] = useState<Comment[]>(CommentList);
-  const [comment, setComment] = useState<string>("");
-
-  const fetchCommentList = async () => {
-    try {
-      const { data } = await getCommentList();
-
-      setComments(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   useEffect(() => {
-    fetchCommentList();
+    let ignore = false;
+
+    (async () => {
+      try {
+        const { data } = await getCommentList();
+
+        if (!ignore) {
+          setComments(data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+
+    return () => {
+      ignore = true;
+    };
   }, []);
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.value) {
-      alert("대충 내용 입력하라는 소리~");
+  return { comments } as const;
+}
 
-      return;
-    }
-    setComment(e.target.value);
+export default function CommentDrawer({ onClose }: { onClose: () => void }) {
+  const { comments } = useCommentList();
+
+  const [commentInput, setCommentInput] = useState<string>("");
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCommentInput(e.target.value);
   };
 
   const handleCommentSubmit = () => {
+    if (!commentInput) return;
     // 임시
-    alert(`${comment} 올리기~`);
+    alert(`${commentInput} 올리기~`);
   };
 
   return (
