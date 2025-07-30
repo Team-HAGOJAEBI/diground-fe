@@ -27,7 +27,7 @@ export default function Header({
 
   return (
     <div
-      className={`flex items-end transition-all duration-300 ease-in-out ${className}`}
+      className={`flex flex-shrink-0 items-end transition-all duration-300 ease-in-out ${className}`}
       style={{
         ...style,
         backgroundPosition: "center",

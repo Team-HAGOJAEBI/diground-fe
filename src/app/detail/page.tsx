@@ -66,7 +66,7 @@ export default function Page() {
       setDynamicHeaderStyle({
         height: `${newHeaderHeight}px`,
         opacity: newOpacity,
-        transform: `translateY(-${offsetY}px)`,
+        transform: `translateY(${offsetY}px)`,
       });
 
       clearTimeout(timeout);
@@ -89,7 +89,6 @@ export default function Page() {
         detailInfo={playListInfo}
         onOpenCommentDrawer={() => setCommentOpen(true)}
         onOpenDiggingDrawer={() => setDiggingOpen(true)}
-        className="flex-shrink-0"
         style={dynamicHeaderStyle}
       />
 
