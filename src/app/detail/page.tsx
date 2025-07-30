@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 import Footer from "../_common/Footer";
 import Icon from "../_common/icon/Icon";
 import Layout from "../_common/Layout";
@@ -17,6 +19,8 @@ import { DetailList, PlayList, PlayListSample } from "@/mocks/sample/Playlist";
 type DrawerType = "comment" | "digging" | null;
 
 export default function Page() {
+  const router = useRouter();
+
   const [playListInfo, setPlayListInfo] = useState<PlayList>(PlayListSample);
   const [list, setList] = useState<DetailList[]>([]);
   const [openDrawer, setOpenDrawer] = useState<DrawerType>(null);
@@ -83,7 +87,7 @@ export default function Page() {
       <Icon
         name="prev"
         className="absolute top-[20px] left-[20px] z-5"
-        // onClick
+        onClick={() => router.back()}
       />
       <Header
         detailInfo={playListInfo}
