@@ -18,6 +18,10 @@ import { DetailList, PlayList, PlayListSample } from "@/mocks/sample/Playlist";
 
 type DrawerType = "comment" | "digging" | null;
 
+const SCROLL_TRIGGER = 200;
+const HEADER_MIN_HEIGHT = 60; // prev 아이콘 height + padding-top
+const FADE_OFFSET = 20;
+
 export default function Page() {
   const router = useRouter();
 
@@ -56,21 +60,17 @@ export default function Page() {
       setScrolling(true);
 
       const scrollTop = el.scrollTop;
-      const scrollTrigger = 200;
 
-      const ratio = Math.min(scrollTop / scrollTrigger, 1); // 0: 스크롤 안함, 0.5: 절반 스크롤, 1: trigger 이상 스크롤
+      const ratio = Math.min(scrollTop / SCROLL_TRIGGER, 1); // 0: 스크롤 안함, 0.5: 절반 스크롤, 1: SCROLL_TRIGGER 이상 스크롤
 
-      const HeaderMinHeight = 60; // prev 아이콘 height + padding-top
       const HeaderMaxHeight = window.innerHeight * 0.45;
 
-      const newHeaderHeight = HeaderMaxHeight - (HeaderMaxHeight - HeaderMinHeight) * ratio;
-      const newOpacity = 1 - ratio;
-      const offsetY = 20 * ratio;
+      const newHeaderHeight = HeaderMaxHeight - (HeaderMaxHeight - HEADER_MIN_HEIGHT) * ratio;
 
       setDynamicHeaderStyle({
         height: `${newHeaderHeight}px`,
-        opacity: newOpacity,
-        transform: `translateY(${offsetY}px)`,
+        opacity: 1 - ratio,
+        transform: `translateY(${FADE_OFFSET * ratio}px)`,
       });
 
       clearTimeout(timeout);
@@ -107,8 +107,10 @@ export default function Page() {
           />
         ))}
       </div>
+
       {openDrawer === "comment" && <CommentDrawer onClose={() => setOpenDrawer(null)} />}
       {openDrawer === "digging" && <DiggingDrawer onClose={() => setOpenDrawer(null)} />}
+
       <Footer selectedIndex={0} />
     </Layout>
   );
