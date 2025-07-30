@@ -66,7 +66,7 @@ export default function Page() {
       setDynamicHeaderStyle({
         height: `${newHeaderHeight}px`,
         opacity: newOpacity,
-        transform: `translateY(-${offsetY}px)`, // ⬅️ 위로 살짝 이동하는 느낌
+        transform: `translateY(-${offsetY}px)`,
       });
 
       clearTimeout(timeout);
@@ -82,7 +82,7 @@ export default function Page() {
     <Layout className="relative flex flex-col">
       <Icon
         name="prev"
-        className="absolute top-[20px] left-[20px]"
+        className="absolute top-[20px] left-[20px] z-5"
         // onClick
       />
       <Header
