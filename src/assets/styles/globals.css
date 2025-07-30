@@ -45,13 +45,23 @@
 @layer base {
   html,
   body {
-    height: 100%;
+    @apply h-full overflow-hidden;
     width: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     background-color: var(--color-gray-5);
+    cursor: default;
   }
+
+  #__next, /* 또는 root element */
+  .app-container {
+    @apply min-h-screen overflow-y-auto;
+  }
+}
+
+button {
+  cursor: pointer;
 }
 
 /* 📑 댓글(Frame1432) 기준으로 (임의) 작업 */
@@ -67,6 +77,12 @@
 
 /* 스크롤바 핸들(움직이는 막대) 스타일 */
 .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+/* 스크롤 중일 때만 thumb 보이게 */
+.custom-scrollbar.scrolling::-webkit-scrollbar-thumb {
   background-color: var(--color-gray-50);
   border-radius: 20px;
 }
