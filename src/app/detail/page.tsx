@@ -14,11 +14,12 @@ import List from "./components/List";
 import { getDetailPlayList, getPlayList } from "@/app/detail/api/playListApi";
 import { DetailList, PlayList, PlayListSample } from "@/mocks/sample/Playlist";
 
+type DrawerType = "comment" | "digging" | null;
+
 export default function Page() {
   const [playListInfo, setPlayListInfo] = useState<PlayList>(PlayListSample);
   const [list, setList] = useState<DetailList[]>([]);
-  const [commentOpen, setCommentOpen] = useState<boolean>(false);
-  const [diggingOpen, setDiggingOpen] = useState<boolean>(false);
+  const [openDrawer, setOpenDrawer] = useState<DrawerType>(null);
   const [scrolling, setScrolling] = useState<boolean>(false);
   const [dynamicHeaderStyle, setDynamicHeaderStyle] = useState({
     height: "45vh",
@@ -87,8 +88,8 @@ export default function Page() {
       />
       <Header
         detailInfo={playListInfo}
-        onOpenCommentDrawer={() => setCommentOpen(true)}
-        onOpenDiggingDrawer={() => setDiggingOpen(true)}
+        onOpenCommentDrawer={() => setOpenDrawer("comment")}
+        onOpenDiggingDrawer={() => setOpenDrawer("digging")}
         style={dynamicHeaderStyle}
       />
 
@@ -103,8 +104,8 @@ export default function Page() {
           />
         ))}
       </div>
-      {commentOpen && <CommentDrawer onClose={() => setCommentOpen(false)} />}
-      {diggingOpen && <DiggingDrawer onClose={() => setDiggingOpen(false)} />}
+      {openDrawer === "comment" && <CommentDrawer onClose={() => setOpenDrawer(null)} />}
+      {openDrawer === "digging" && <DiggingDrawer onClose={() => setOpenDrawer(null)} />}
       <Footer selectedIndex={0} />
     </Layout>
   );
