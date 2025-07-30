@@ -79,7 +79,7 @@ export default function Page() {
   }, []);
 
   return (
-    <Layout className="relative flex flex-col">
+    <Layout className="relative flex h-screen flex-col overflow-hidden pb-[89px]">
       <Icon
         name="prev"
         className="absolute top-[20px] left-[20px] z-5"
@@ -89,22 +89,20 @@ export default function Page() {
         detailInfo={playListInfo}
         onOpenCommentDrawer={() => setCommentOpen(true)}
         onOpenDiggingDrawer={() => setDiggingOpen(true)}
+        className="flex-shrink-0"
         style={dynamicHeaderStyle}
       />
 
-      <div className="p-[20px]">
-        <div
-          className={`custom-scrollbar overflow-y-auto ${scrolling ? "scrolling" : ""}`}
-          ref={scrollRef}
-          style={{ height: `calc(100vh - ${dynamicHeaderStyle.height} - 129px)` }} // 하단 메뉴바 + pb 포함
-        >
-          {list.map((item) => (
-            <List
-              key={item.id}
-              item={item}
-            />
-          ))}
-        </div>
+      <div
+        className={`custom-scrollbar m-[20px] flex-1 overflow-y-auto ${scrolling ? "scrolling" : ""}`}
+        ref={scrollRef}
+      >
+        {list.map((item) => (
+          <List
+            key={item.id}
+            item={item}
+          />
+        ))}
       </div>
       {commentOpen && <CommentDrawer onClose={() => setCommentOpen(false)} />}
       {diggingOpen && <DiggingDrawer onClose={() => setDiggingOpen(false)} />}
