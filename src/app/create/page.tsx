@@ -4,6 +4,8 @@ import { useState } from "react";
 
 import CommonInput from "@/app/create/components/CommonInput";
 
+import KeywordChip from "@/app/create/components/KeywordChip";
+
 export default function Page() {
   const [link, setLink] = useState("");
   const [title, setTitle] = useState("");
@@ -16,10 +18,10 @@ export default function Page() {
   };
 
   return (
-    <div className="bg-gray-100 flex justify-center w-full">
-      <div className="bg-gray-5 w-[360px] h-[1422px] relative">
-        <div className="flex flex-col w-full h-full items-start gap-[7px] pt-[50px] px-[20px]">
-          <h1 className="relative self-stretch font-bold text-gray-100 text-[28px] tracking-[0] leading-[normal] pb-[32px]">
+    <div className="flex w-full justify-center bg-gray-100">
+      <div className="bg-gray-5 relative h-[1422px] w-[360px]">
+        <div className="flex h-full w-full flex-col items-start gap-[7px] px-[20px] pt-[50px]">
+          <h1 className="relative self-stretch pb-[32px] text-[28px] leading-[normal] font-bold tracking-[0] text-gray-100">
             플레이리스트 만들기
           </h1>
           <CommonInput
@@ -42,6 +44,15 @@ export default function Page() {
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
             textarea
+          />
+          <KeywordChip
+            keyword={{
+              id: "test-1",
+              label: "테스트 키워드",
+            }}
+            isSelected={true}
+            // onClick={(keyword) =>() }
+            variant="default"
           />
         </div>
       </div>
