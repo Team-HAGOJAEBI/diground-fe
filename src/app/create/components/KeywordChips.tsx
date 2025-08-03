@@ -9,7 +9,7 @@ import KeywordChip from "./KeywordChip";
  * @interface KeywordChipsProps
  */
 interface KeywordChipsProps {
-  /** 키워드 섹션 제목 */
+  /** 섹션 제목 */
   title: string;
   /** 표시할 키워드 배열 */
   keywords: Keyword[];
@@ -27,7 +27,7 @@ interface KeywordChipsProps {
  * 키워드 칩들을 표시하고 선택 상태를 관리하는 컴포넌트
  *
  * @component
- * @param {string} title - 키워드 섹션 제목
+ * @param {string} title - 섹션 제목
  * @param {Keyword[]} keywords - 표시할 키워드 배열
  * @param {boolean} [showAddButton=false] - 추가 버튼 표시 여부 (기본값: false)
  * @param {(keyword: Keyword) => void} [onKeywordClick] - 개별 키워드 클릭 시 호출되는 콜백 함수
