@@ -111,7 +111,7 @@ export default function ImageSelector({
   };
 
   return (
-    <div className={`relative py-[8px] ${className}`}>
+    <div className={`relative mb-[24px] py-[8px] ${className}`}>
       {/* 숨겨진 파일 입력 */}
       <input
         ref={fileInputRef}
