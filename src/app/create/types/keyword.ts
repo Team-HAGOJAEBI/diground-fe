@@ -4,4 +4,4 @@ export interface Keyword {
   category?: string;
 }
 
-export type KeywordChipVariant = "default" | "add";
+export type KeywordChipType = "default" | "add";
