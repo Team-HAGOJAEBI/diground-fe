@@ -37,18 +37,18 @@ export default function CommonInput({
   textarea = false,
 }: CommonInputProps) {
   return (
-    <div className="flex flex-col w-full items-start relative mb-[36px]">
+    <div className="relative mb-[36px] flex w-full flex-col items-start">
       <div className="w-full">
-        <label className="font-bold text-gray-80 text-sm  bg-red-200">{label}</label>
+        <label className="text-gray-80 bg-red-200 text-sm font-bold">{label}</label>
         <div
-          className={`flex w-full flex-col ${textarea ? "h-[240px]" : "h-[60px]"} border items-center justify-center my-[8px] rounded-lg overflow-hidden ${errorMessage || (required && !value) ? "border-dashed border-[#923939]" : " border-[var(--color-gray-60)]"}`}
+          className={`flex w-full flex-col ${textarea ? "h-[240px]" : "h-[60px]"} my-[8px] items-center justify-center overflow-hidden rounded-lg border ${errorMessage || (required && !value) ? "border-dashed border-[#923939]" : "border-[var(--color-gray-60)]"}`}
         >
           {textarea ? (
             <textarea
               value={value}
               onChange={onChange}
               placeholder={placeholder}
-              className="p-[20px] w-full h-[240px] font-normal text-gray-90 text-base bg-transparent border-none outline-none resize-none overflow-y-auto custom-scrollbar placeholder:text-gray-50"
+              className="text-gray-90 custom-scrollbar h-[240px] w-full resize-none overflow-y-auto border-none bg-transparent p-[20px] text-base font-normal outline-none placeholder:text-gray-50"
             />
           ) : (
             <input
@@ -56,14 +56,14 @@ export default function CommonInput({
               value={value}
               onChange={onChange}
               placeholder={placeholder}
-              className="p-[20px] w-full h-[25px] font-normal text-gray-90 text-base overflow-hidden text-ellipsis bg-transparent border-none outline-none placeholder:text-gray-50"
+              className="text-gray-90 h-[25px] w-full overflow-hidden border-none bg-transparent p-[20px] text-base font-normal text-ellipsis outline-none placeholder:text-gray-50"
             />
           )}
         </div>
         {(errorMessage || (required && !value)) && (
           <p
             id="platform-link-help"
-            className="font-normal text-[#ea4141] text-[13px] leading-5"
+            className="text-[13px] leading-5 font-normal text-[#ea4141]"
           >
             {errorMessage || (required && !value ? "필수 입력 항목입니다" : "")}
           </p>
