@@ -21,7 +21,7 @@ import {
   spotifyActive,
   melon,
   img,
-  kakaoLogin,
+  plus,
 } from "@/assets/icons";
 
 interface IconProps {
@@ -54,7 +54,7 @@ export const ICON_MAP = {
   spotifyActive,
   melon,
   img,
-  kakaoLogin,
+  plus,
 };
 
 export default function Icon({ name, className, onClick }: IconProps) {
