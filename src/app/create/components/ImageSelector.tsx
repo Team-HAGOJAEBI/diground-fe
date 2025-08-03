@@ -152,9 +152,13 @@ export default function ImageSelector({
                 <button
                   onClick={triggerFileSelect}
                   disabled={disabled}
-                  className="border-gray-30 bg-gray-10 text-gray-90 inline-flex h-[28px] cursor-pointer items-center justify-center rounded-[20px] border px-[10px] whitespace-nowrap transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="border-gray-30 bg-gray-10 text-gray-90 inline-flex h-[28px] cursor-pointer items-center justify-center gap-1 rounded-[20px] border px-[10px] whitespace-nowrap transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <span className="text-[12px]">이미지 선택</span>
+                  <Icon
+                    name="plus"
+                    className={``}
+                  />
                 </button>
               </div>
             </div>
@@ -168,9 +172,13 @@ export default function ImageSelector({
               <button
                 onClick={triggerFileSelect}
                 disabled={disabled}
-                className="border-gray-30 text-gray-90 inline-flex h-[28px] cursor-pointer items-center justify-center rounded-[20px] border px-[10px] whitespace-nowrap transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50"
+                className="border-gray-30 text-gray-90 inline-flex h-[28px] cursor-pointer items-center justify-center gap-1 rounded-[20px] border px-[10px] whitespace-nowrap transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <span className="text-[12px]">이미지 선택</span>
+                <Icon
+                  name="plus"
+                  className={``}
+                />
               </button>
             </div>
           )}
