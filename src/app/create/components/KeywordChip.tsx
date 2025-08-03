@@ -63,15 +63,15 @@ export default function KeywordChip({
 
   /** 모든 키워드 칩에 공통으로 적용되는 기본 스타일 클래스 */
   const baseClasses =
-    "inline-block cursor-pointer rounded-full border px-5 py-3 text-sm font-medium whitespace-nowrap transition-all duration-200 hover:-translate-y-0.5";
+    "inline-flex items-center justify-center cursor-pointer rounded-[90px] border px-[20px] pb-[20px] pt-[20px] h-[50px] whitespace-nowrap transition-all duration-200 hover:-translate-y-0.5";
 
   /** 선택 상태에 따른 스타일 클래스 */
   const selectedClasses = isSelected
-    ? "border-[#FFE11D] bg-[#FFE11D] " // 선택된 상태: 노란색 배경과 테두리
+    ? "border-[#FFE11D] text-[#FFE11D] font-bold" // 선택된 상태: 노란색 배경과 테두리
     : "border-gray-50 text-gray-100 hover:border-[#FFE11D] hover:text-[#FFE11D]"; // 기본 상태: 회색 테두리, 호버 시 노란색
 
   /** 추가 버튼용 스타일 클래스 */
-  const addClasses = "  border-[#924B4B] bg-[#924B4B] text-gray-100";
+  const addClasses = "border-[#924B4B] bg-[#924B4B] text-gray-100 min-w-[61px] ";
 
   // 추가 버튼 타입인 경우
   if (type === "add") {
@@ -82,7 +82,7 @@ export default function KeywordChip({
         disabled={disabled}
         type="button"
       >
-        <span className="font-bold text-[16]">+</span>
+        <span className="text-[20px] font-bold"> + </span>
       </button>
     );
   }
