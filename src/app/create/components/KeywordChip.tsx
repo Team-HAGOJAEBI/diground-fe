@@ -1,19 +1,19 @@
-import { Keyword, KeywordChipVariant } from "../types/keyword";
+import { Keyword, KeywordChipType } from "../types/keyword";
 
 interface KeywordChipProps {
   keyword?: Keyword;
   isSelected?: boolean;
   onClick?: (keyword?: Keyword) => void;
   disabled?: boolean;
-  variant?: KeywordChipVariant;
+  type?: KeywordChipType;
 }
 
 export default function KeywordChip({
   keyword,
-
+  isSelected = false,
   onClick,
   disabled = false,
-  variant = "default",
+  type = "default",
 }: KeywordChipProps) {
   const handleClick = () => {
     if (!disabled && onClick) {
@@ -21,21 +21,34 @@ export default function KeywordChip({
     }
   };
 
-  return (
-    <div
-      className="relative flex w-full flex-[0_0_auto] flex-wrap items-start self-stretch"
-      role="group"
-      aria-label="키워드 선택"
-    >
+  const baseClasses =
+    "inline-block cursor-pointer rounded-full border px-5 py-3 text-sm font-medium whitespace-nowrap transition-all duration-200 hover:-translate-y-0.5";
+  const selectedClasses = isSelected
+    ? "border-[#FFE11D] bg-[#FFE11D] "
+    : "border-gray-50 text-gray-100 hover:border-[#FFE11D] hover:text-[#FFE11D]";
+  const addClasses = "  border-[#924B4B] bg-[#924B4B] text-gray-100";
+
+  if (type === "add") {
+    return (
       <button
-        className={`bg-gray-5 relative inline-flex h-[50px] flex-[0_0_auto] flex-col items-center justify-center overflow-hidden rounded-[90px] border border-solid border-gray-50 p-20`}
-        // className={`keyword-chip ${isSelected ? "selected" : ""} ${variant}`}
-        onClick={handleClick}
+        className={`${baseClasses} ${addClasses}`}
+        onClick={() => onClick?.()}
         disabled={disabled}
         type="button"
       >
-        {variant === "add" ? "+" : keyword?.label}
+        <span className="font-bold text-[16]">+</span>
       </button>
-    </div>
+    );
+  }
+
+  return (
+    <button
+      className={`${baseClasses} ${selectedClasses}`}
+      onClick={handleClick}
+      disabled={disabled}
+      type="button"
+    >
+      <span className="text-[16]">{keyword?.label || ""}</span>
+    </button>
   );
 }
