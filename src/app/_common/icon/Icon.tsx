@@ -20,6 +20,7 @@ import {
   appleMusicActive,
   spotifyActive,
   melon,
+  img,
   kakaoLogin,
 } from "@/assets/icons";
 
@@ -52,6 +53,7 @@ export const ICON_MAP = {
   appleMusicActive,
   spotifyActive,
   melon,
+  img,
   kakaoLogin,
 };
 
