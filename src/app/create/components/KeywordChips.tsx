@@ -85,7 +85,7 @@ export default function KeywordChips({
   };
 
   return (
-    <div className="flex flex-col gap-[12px]">
+    <div className="mb-[36px] flex flex-col gap-[12px]">
       {/* 키워드 섹션 제목 */}
       <h3 className="text-gray-80 text-[14px] font-bold">{title}</h3>
 
