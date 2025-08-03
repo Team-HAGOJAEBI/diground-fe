@@ -85,12 +85,12 @@ export default function KeywordChips({
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-[12px]">
       {/* 키워드 섹션 제목 */}
-      <h3 className="text-lg font-medium text-gray-100">{title}</h3>
+      <h3 className="text-gray-80 text-[14px] font-bold">{title}</h3>
 
       {/* 키워드 칩들과 추가 버튼을 감싸는 컨테이너 */}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-[8px]">
         {/* 각 키워드를 KeywordChip 컴포넌트로 렌더링 */}
         {keywords.map((keyword) => (
           <KeywordChip
