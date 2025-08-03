@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Footer from "@/app/_common/Footer";
 import Layout from "@/app/_common/Layout";
 import CommonInput from "@/app/create/components/CommonInput";
+import ImageSelector from "@/app/create/components/ImageSelector";
 import KeywordChips from "@/app/create/components/KeywordChips";
 
 const SCROLL_TRIGGER = 200;
@@ -72,7 +73,7 @@ function useHeaderAnimation(scrollRef: React.RefObject<HTMLDivElement | null>) {
 export default function Page() {
   const [link, setLink] = useState("");
   const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
+  const [desc] = useState("");
 
   const getValueError = () => {
     if (!link) return "링크를 복사하여 입력해주세요";
@@ -108,24 +109,10 @@ export default function Page() {
         />
         <CommonInput
           label="설명"
-          placeholder="선택사항입니다."
+          placeholder="내용을 입력해주세요."
+          textarea={true}
           value={desc}
-          onChange={(e) => setDesc(e.target.value)}
-          textarea
-        />
-        <CommonInput
-          label="설명"
-          placeholder="선택사항입니다."
-          value={desc}
-          onChange={(e) => setDesc(e.target.value)}
-          textarea
-        />
-        <CommonInput
-          label="설명"
-          placeholder="선택사항입니다."
-          value={desc}
-          onChange={(e) => setDesc(e.target.value)}
-          textarea
+          onChange={(e) => setTitle(e.target.value)}
         />
         <KeywordChips
           title="# 키워드 선택"
@@ -180,6 +167,7 @@ export default function Page() {
           // onKeywordClick={(keyword) => console.log(keyword)}
           // onAddClick={() => console.log("Add clicked")}
         />
+        <ImageSelector title={"이미지 추가"} />
       </div>
 
       <Footer selectedIndex={0} />
