@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { getKeywordList } from "@/app/_common/api/keywordListApi";
+import Button from "@/app/_common/components/Button";
 import Footer from "@/app/_common/Footer";
 import Layout from "@/app/_common/Layout";
 import { Keyword } from "@/app/_common/types/keyword";
@@ -152,7 +153,8 @@ export default function Page() {
           // onKeywordClick={(keyword) => console.log(keyword)}
           // onAddClick={() => console.log("Add clicked")}
         />
-        <ImageSelector title={"이미지 추가"} />
+        <ImageSelector title={"이미지 선택"} />
+        <Button type={"submit"}>만들기</Button>
       </div>
 
       <Footer selectedIndex={0} />
