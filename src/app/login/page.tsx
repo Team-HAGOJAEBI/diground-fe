@@ -8,10 +8,9 @@ import { kakaoLogin } from "@/assets/icons";
 
 export default function Login() {
   const loginWithKakao = () => {
-    window.Kakao.Auth.authorize({
-      scope: "profile_nickname, profile_image",
-      redirectUri: "http://localhost:3000/login/kakao",
-    });
+    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_RESTAPI_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`;
+
+    window.location.href = kakaoAuthUrl;
   };
 
   return (
