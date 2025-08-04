@@ -1,11 +1,11 @@
 export type User = {
   id: number;
-  name: string;
-  gender: string;
+  nickname: string;
+  profile_image_url: string;
 };
 
 export type NewUser = {
   id: number;
-  name: string;
-  gender: string;
+  nickname: string;
+  profile_image_url: string;
 };
