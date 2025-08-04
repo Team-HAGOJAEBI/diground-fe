@@ -6,10 +6,30 @@ import { DetailList, PlayListSample } from "./sample/Playlist";
 import type { NewUser, User } from "./sample/User";
 
 const members: User[] = [
-  { id: 1, name: "차현빈", gender: "m" },
-  { id: 2, name: "김혜민", gender: "f" },
-  { id: 3, name: "이규리", gender: "f" },
-  { id: 4, name: "정채은", gender: "f" },
+  {
+    id: 1,
+    nickname: "차현빈",
+    profileImageUrl:
+      "https://cdnimg.melon.co.kr/cm2/artistcrop/images/008/95/389/895389_20250502185925_500.jpg?YUV444/melon/resize/416",
+  },
+  {
+    id: 2,
+    nickname: "김혜민",
+    profileImageUrl:
+      "https://cdnimg.melon.co.kr/cm2/artistcrop/images/008/95/389/895389_20250502185925_500.jpg?YUV444/melon/resize/416",
+  },
+  {
+    id: 3,
+    nickname: "이규리",
+    profileImageUrl:
+      "https://cdnimg.melon.co.kr/cm2/artistcrop/images/008/95/389/895389_20250502185925_500.jpg?YUV444/melon/resize/416",
+  },
+  {
+    id: 4,
+    nickname: "정채은",
+    profileImageUrl:
+      "https://cdnimg.melon.co.kr/cm2/artistcrop/images/008/95/389/895389_20250502185925_500.jpg?YUV444/melon/resize/416",
+  },
 ];
 
 export const handlers = [

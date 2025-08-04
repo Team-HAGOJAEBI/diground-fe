@@ -61,9 +61,9 @@ export default function Home() {
 
     return (
       <div className="flex flex-col items-center gap-2">
-        {user.profile_image_url ? (
+        {user.profileImageUrl ? (
           <Image
-            src={user.profile_image_url}
+            src={user.profileImageUrl}
             alt="profile"
             width={100}
             height={100}
