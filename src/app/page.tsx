@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -27,6 +28,27 @@ export default function Home() {
     }
   }, []);
 
+  const logoutWithKakao = () => {
+    const { access_token } = JSON.parse(sessionStorage.getItem("tokenInfo") || "{}");
+
+    axios
+      .post(
+        "https://kapi.kakao.com/v1/user/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        }
+      )
+      .then(() => {
+        alert("로그아웃 성공!");
+        sessionStorage.removeItem("tokenInfo");
+        sessionStorage.removeItem("user");
+        router.replace("/login");
+      });
+  };
+
   const userProfile = (user: User | null) => {
     if (!user) {
       return (
@@ -48,6 +70,7 @@ export default function Home() {
           />
         ) : null}
         <p className="text-center">{user.nickname}님, 안녕하세요</p>
+        <button onClick={logoutWithKakao}>로그아웃</button>
       </div>
     );
   };

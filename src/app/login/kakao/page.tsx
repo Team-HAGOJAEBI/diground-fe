@@ -34,6 +34,8 @@ export default function KakaoLogin() {
         },
       })
       .then((res) => {
+        sessionStorage.setItem("tokenInfo", JSON.stringify(res.data));
+
         // 3. 유저 정보 조회
         axios
           .get("https://kapi.kakao.com/v2/user/me", {
