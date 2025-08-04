@@ -1,18 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-// import { useAtom } from "jotai";
+import { useEffect, useRef } from "react";
 
 import axios from "axios";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function KakaoLogin() {
-  // const router = useRouter();
-
-  const [token] = useState<string>("");
+  const router = useRouter();
+  const called = useRef(false);
 
   useEffect(() => {
+    // 0. 중복 호출 가드
+    if (called.current) return;
+    called.current = true;
+
     // 1. 인가 코드 추출
     const AuthCode = new URL(window.location.href).searchParams.get("code");
 
@@ -43,11 +44,12 @@ export default function KakaoLogin() {
           })
           .then((response) => {
             sessionStorage.setItem("user", JSON.stringify(response.data));
+            router.replace("/");
           })
           .catch((err) => console.error(err));
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [router]);
 
-  return <div className="text-3xl text-gray-100">{token}인가 완료! 이제 넘어갈거얌!</div>;
+  return <div className="text-3xl text-gray-100"> 인가 완료! 이제 넘어갈거얌!</div>;
 }
