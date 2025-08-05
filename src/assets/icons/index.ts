@@ -21,3 +21,4 @@ export { default as youtubeMusicActive } from "./ic_youtubeMusic_active.svg";
 export { default as appleMusicActive } from "./ic_appleMusic_active.svg";
 export { default as spotifyActive } from "./ic_spotify_active.svg";
 export { default as melon } from "./ic_melon.svg";
+export { default as kakaoLogin } from "./ic_kakao_login.png";

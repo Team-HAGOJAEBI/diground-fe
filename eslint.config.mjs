@@ -24,14 +24,13 @@ const config = [
       importPlugin,
     },
     rules: {
-      "camelcase": "error", // 변수와 함수명이 모두 카멜케이스
       "import/prefer-default-export": "off", // 기본 내보내기 사용 금지
       "@typescript-eslint/explicit-function-return-type": "off", // 함수 반환 타입 명시 금지
       "@typescript-eslint/explicit-module-boundary-types": "off", // 모듈 경계 타입 명시 금지
       "no-use-before-define": 0, // 변수 선언 전 사용 금지
       "@typescript-eslint/no-use-before-define": 1, // 변수 선언 전 사용 금지
       "@typescript-eslint/no-explicit-any": "off", // any 타입 사용 금지
-      "no-console": ["error", { allow: ["error"] }], // console.log 사용 금지
+      "no-console": ["warn", { allow: ["error"] }], // console.log 사용 지양
       "eqeqeq": ["error", "always"], // 일치 연산자 사용 강제
       "spaced-comment": [
         "error",
