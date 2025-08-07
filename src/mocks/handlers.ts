@@ -1,6 +1,7 @@
 import { http, HttpResponse } from "msw";
 
 import { CommentList } from "./sample/Comment";
+import { KeywordList } from "./sample/Keyword";
 import { DetailList, PlayListSample } from "./sample/Playlist";
 
 import type { NewUser, User } from "./sample/User";
@@ -92,6 +93,13 @@ export const handlers = [
     return HttpResponse.json({
       status: 200,
       data: CommentList,
+    });
+  }),
+
+  http.get("/api/getKeywordList", () => {
+    return HttpResponse.json({
+      status: 200,
+      data: KeywordList,
     });
   }),
 ];
