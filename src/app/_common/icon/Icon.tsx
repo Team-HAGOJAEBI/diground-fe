@@ -22,6 +22,7 @@ import {
   melon,
   img,
   plus,
+  dropdown,
 } from "@/assets/icons";
 
 interface IconProps {
@@ -55,6 +56,7 @@ export const ICON_MAP = {
   melon,
   img,
   plus,
+  dropdown,
 };
 
 export default function Icon({ name, className, onClick }: IconProps) {
