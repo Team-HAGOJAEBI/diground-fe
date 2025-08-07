@@ -1,6 +1,6 @@
 import Icon from "@/app/_common/icon/Icon";
 
-export default function DigCount({ count, iconName }: { count: number; iconName: string }) {
+export default function DigCount({ count, iconName }: { count: string; iconName: string }) {
   return (
     <div
       id="digcount"

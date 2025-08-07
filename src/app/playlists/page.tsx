@@ -1,35 +1,11 @@
 import Frame80 from "./components/frame80";
 import Header from "./components/header";
-import NoPlaylists from "./components/NoPlaylists";
+import MyDiggingList from "./components/MyDiggingList";
+
+import NoPlaylists from "@/app/playlists/components/NoPlaylists";
+import { Playlists, popularPlayList } from "@/mocks/sample/Playlists";
 
 export default function PlaylistsPage() {
-  const popularPlayList = [
-    {
-      id: 1,
-      url: "https://example.com/image.jpg",
-      dominantColor: "#fcc003",
-      title: "찜통 더위 날려버릴 노래, 인데 말줄임표 어떻게 되나 궁금하지?",
-      digCount: 150,
-      shareCount: 3,
-    },
-    {
-      id: 29,
-      url: "https://example.com/popular-image.jpg",
-      dominantColor: "#ff5733",
-      title: "테오의 발제는 정말 길다",
-      digCount: 200,
-      shareCount: 5,
-    },
-    {
-      id: 291,
-      url: "https://example.com/popular-image.jpg",
-      dominantColor: "#292929",
-      title: "왜 밖에서도 43인치 모니터가 쓰고싶지? 널 알기 전으로 돌아갈래",
-      digCount: 4,
-      shareCount: 5932,
-    },
-  ];
-
   return (
     <div
       id="playlistsPage"
@@ -71,7 +47,7 @@ export default function PlaylistsPage() {
         id="playlists"
         className="absolute top-[407px] w-full"
       >
-        <NoPlaylists />
+        {Playlists.length === 0 ? <NoPlaylists /> : <MyDiggingList playlists={Playlists} />}
       </div>
     </div>
   );

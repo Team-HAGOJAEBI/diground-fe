@@ -14,8 +14,8 @@ export default function Frame80({
   pliArt,
 }: {
   title: string;
-  digCount: number;
-  shareCount: number;
+  digCount: string;
+  shareCount: string;
   pliArt: { id: number; url: string; dominantColor: string };
 }) {
   const textColor = readableColor(pliArt.dominantColor); // 도미넌트 컬러에 따라 텍스트 색상 결정
