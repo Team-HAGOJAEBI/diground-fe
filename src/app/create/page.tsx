@@ -72,14 +72,28 @@ function useHeaderAnimation(scrollRef: React.RefObject<HTMLDivElement | null>) {
   return { style, scrolling } as const;
 }
 
+interface FormData {
+  link: string;
+  title: string;
+  desc: string;
+  selectedKeywords: Keyword[];
+}
+
 export default function Page() {
-  const [link, setLink] = useState("");
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
+  const [formData, setFormData] = useState<FormData>({
+    link: "",
+    title: "",
+    desc: "",
+    selectedKeywords: [],
+  });
   const [keywords, setKeywords] = useState<Keyword[]>([]);
 
+  const updateFormData = (field: keyof FormData, value: any) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
   const getValueError = () => {
-    if (!link) return "링크를 복사하여 입력해주세요";
+    if (!formData.link) return "링크를 복사하여 입력해주세요";
 
     return "";
   };
@@ -114,22 +128,22 @@ export default function Page() {
           label="플랫폼 링크"
           required
           placeholder="유튜브 링크를 한번 넣어볼까나"
-          value={link}
-          onChange={(e) => setLink(e.target.value)}
+          value={formData.link}
+          onChange={(e) => updateFormData("link", e.target.value)}
           errorMessage={getValueError()}
         />
         <CommonInput
           label="제목"
           placeholder="플레이리스트 제목을 입력해주세요."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={formData.title}
+          onChange={(e) => updateFormData("title", e.target.value)}
         />
 
         <CommonInput
           label="설명"
           placeholder="선택사항입니다."
-          value={desc}
-          onChange={(e) => setDesc(e.target.value)}
+          value={formData.desc}
+          onChange={(e) => updateFormData("desc", e.target.value)}
           textarea
         />
         <KeywordChips
