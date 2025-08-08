@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { getKeywordList } from "@/app/_common/api/keywordListApi";
 import Footer from "@/app/_common/Footer";
 import Layout from "@/app/_common/Layout";
+import { Keyword } from "@/app/_common/types/keyword";
 import CommonInput from "@/app/create/components/CommonInput";
 import ImageSelector from "@/app/create/components/ImageSelector";
 import KeywordChips from "@/app/create/components/KeywordChips";
