@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      auth:
+        specifier: link:@/auth
+        version: link:@/auth
       axios:
         specifier: ^1.11.0
         version: 1.11.0
