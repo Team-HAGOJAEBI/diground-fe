@@ -1,6 +1,8 @@
 import { tv } from "tailwind-variants";
 
-import { Keyword, KeywordChipType } from "../types/keyword";
+import { Keyword } from "../../_common/types/keyword";
+
+import { KeywordChipType } from "@/app/create/types/keywordChipType";
 
 /**
  * KeywordChip 컴포넌트 Props 인터페이스

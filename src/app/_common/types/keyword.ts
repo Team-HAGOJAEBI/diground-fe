@@ -3,5 +3,3 @@ export interface Keyword {
   label: string;
   category?: string;
 }
-
-export type KeywordChipType = "default" | "add";

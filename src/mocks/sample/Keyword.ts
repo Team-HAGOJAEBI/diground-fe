@@ -1,8 +1,4 @@
-export type Keyword = {
-  id: number | string;
-  label: string;
-  category: string;
-};
+import { Keyword } from "@/app/_common/types/keyword";
 
 export const KeywordList: Keyword[] = [
   {

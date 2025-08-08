@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Keyword } from "../types/keyword";
+import { Keyword } from "../../_common/types/keyword";
 
 import KeywordChip from "./KeywordChip";
 
