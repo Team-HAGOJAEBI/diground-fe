@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 
 import Image from "next/image";
+import { tv } from "tailwind-variants";
 
 import Icon from "@/app/_common/icon/Icon";
 
@@ -22,6 +23,29 @@ interface ImageSelectorProps {
   /** 추가 CSS 클래스명 */
   className?: string;
 }
+
+/** 버튼 스타일 변형 설정 */
+const buttonVariants = tv({
+  /** 기본 버튼 스타일 */
+  base: "inline-flex h-[28px] cursor-pointer items-center justify-center gap-1 rounded-[20px] border px-[10px] whitespace-nowrap transition-all duration-200",
+  variants: {
+    /** 버튼 테마 변형 */
+    variant: {
+      default: "border-gray-30 text-gray-90",
+      overlay: "border-gray-30 bg-gray-10 text-gray-90",
+    },
+    /** 비활성화 상태 스타일 */
+    disabled: {
+      true: "cursor-not-allowed opacity-50",
+      false: "",
+    },
+  },
+  /** 기본 변형 옵션 */
+  defaultVariants: {
+    variant: "default",
+    disabled: false,
+  },
+});
 
 /**
  * 이미지 선택 컴포넌트
@@ -61,7 +85,6 @@ export default function ImageSelector({
 
   /**
    * 이미지 선택 핸들러
-   *
    * @param {React.ChangeEvent<HTMLInputElement>} event - 파일 입력 이벤트
    */
   const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -152,13 +175,10 @@ export default function ImageSelector({
                 <button
                   onClick={triggerFileSelect}
                   disabled={disabled}
-                  className="border-gray-30 bg-gray-10 text-gray-90 inline-flex h-[28px] cursor-pointer items-center justify-center gap-1 rounded-[20px] border px-[10px] whitespace-nowrap transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50"
+                  className={buttonVariants({ variant: "overlay", disabled })}
                 >
                   <span className="text-[12px]">이미지 선택</span>
-                  <Icon
-                    name="plus"
-                    className={``}
-                  />
+                  <Icon name="plus" />
                 </button>
               </div>
             </div>
@@ -166,19 +186,16 @@ export default function ImageSelector({
             // 기본 상태 (이미지 미선택)
             <div className="my-[8px] flex h-[200px] flex-col items-center justify-center gap-[12px] text-gray-500">
               {/* 이미지 아이콘 */}
-              <Icon name={`img`} />
+              <Icon name={"img"} />
 
               {/* 이미지 선택 버튼 (아이콘 아래) */}
               <button
                 onClick={triggerFileSelect}
                 disabled={disabled}
-                className="border-gray-30 text-gray-90 inline-flex h-[28px] cursor-pointer items-center justify-center gap-1 rounded-[20px] border px-[10px] whitespace-nowrap transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50"
+                className={buttonVariants({ disabled })}
               >
                 <span className="text-[12px]">이미지 선택</span>
-                <Icon
-                  name="plus"
-                  className={``}
-                />
+                <Icon name="plus" />
               </button>
             </div>
           )}
