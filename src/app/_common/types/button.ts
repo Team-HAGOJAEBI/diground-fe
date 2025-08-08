@@ -10,7 +10,7 @@ export interface ButtonProps {
   /** 버튼 클릭 시 호출되는 콜백 함수 */
   onClick?: () => void;
   /** HTML 버튼 타입 (기본값: "button") */
-  type?: "button" | "submit" | "reset";
+  type?: "button" | "submit";
 }
 
 // 나중에 확장 가능한 타입들

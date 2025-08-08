@@ -1,4 +1,24 @@
+import { tv } from "tailwind-variants";
+
 import { ButtonProps } from "@/app/_common/types/button";
+/** 버튼 스타일 변형 설정 */
+const buttonVariants = tv({
+  /** 기본 버튼 스타일 */
+  base: "bg-[#FFE11D] text-gy-05 font-[16px] font-bold leading-[20px] disabled:cursor-not-allowed",
+  variants: {
+    /** 버튼 타입별 스타일 */
+    type: {
+      /** 일반 버튼: 둥근 모양, 높이 50px, 고정 너비 260px */
+      button: "rounded-[90px] h-[50px] w-[260px] px-[36px]",
+      /** submit 버튼: 직사각형, 높이 60px, 전체 너비 */
+      submit: "rounded-[8px] h-[60px] w-full px-[20px]",
+    },
+  },
+  /** 기본 변형 옵션 */
+  defaultVariants: {
+    type: "button",
+  },
+});
 
 /**
  * 버튼 컴포넌트
@@ -30,32 +50,10 @@ import { ButtonProps } from "@/app/_common/types/button";
  * ```
  */
 export default function Button({ children, disabled = false, onClick, type = "button" }: ButtonProps) {
-  /**
-   * 버튼 타입에 따라 다른 모양의 버튼의 스타일 적용
-   * @returns {string} 타입별 CSS 클래스 문자열
-   */
-  const getShapeClasses = (): string => {
-    switch (type) {
-      case "submit":
-        // submit 버튼: 직사각형, 높이 60px, 전체 너비
-        return "rounded-[8px] h-[60px] w-full px-[20px]";
-      case "button":
-        // 일반 버튼: 둥근 모양, 높이 50px, 고정 너비 260px
-        return "rounded-[90px] h-[50px] w-[260px] px-[36px]";
-      default:
-        // 기본값: 둥근 모양
-        return "rounded-[90px] h-[50px] w-[260px] px-[36px]";
-    }
-  };
-
-  /** 모든 버튼에 공통으로 적용되는 기본 스타일 클래스 */
-  const baseClasses = "bg-[#FFE11D] text-gy-05 font-[16px] font-bold leading-[20px]  disabled:cursor-not-allowed ";
-  const combinedClasses = `${baseClasses} ${getShapeClasses()} `.trim();
-
   return (
     <button
       type={type}
-      className={combinedClasses}
+      className={buttonVariants({ type })}
       onClick={onClick}
       disabled={disabled}
     >
