@@ -1,0 +1,321 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model comments {
+  id          String     @id(map: "pk_comments") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id     String?    @db.Uuid
+  playlist_id String?    @db.Uuid
+  content     String?
+  created_at  DateTime?  @default(now()) @db.Timestamp(6)
+  created_ip  String?    @db.VarChar(20)
+  updated_at  DateTime?  @default(now()) @db.Timestamp(6)
+  updated_ip  String?    @db.VarChar(20)
+  users       users?     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  playlists   playlists? @relation(fields: [playlist_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_comments_playlist")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model diggings {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  playlist_id String    @db.Uuid
+  user_id     String?   @db.Uuid
+  digged_at   DateTime? @default(now()) @db.Timestamp(6)
+  platform    String?   @db.VarChar(50)
+  created_ip  String?   @db.VarChar(20)
+  playlists   playlists @relation(fields: [playlist_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users       users?    @relation(fields: [user_id], references: [id], onUpdate: NoAction)
+
+  @@unique([user_id, playlist_id], map: "idx_diggings_unique_user_playlist")
+  @@index([digged_at], map: "idx_diggings_digged_at")
+  @@index([platform], map: "idx_diggings_platform")
+  @@index([playlist_id], map: "idx_diggings_playlist_id")
+  @@index([user_id], map: "idx_diggings_user_id")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model inquiries {
+  id         String    @id(map: "pk_inquiries") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id    String?   @db.Uuid
+  title      String?   @db.VarChar(100)
+  message    String?
+  status     String?   @db.VarChar(20)
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  created_id String?   @db.VarChar(100)
+  created_ip String?   @db.VarChar(20)
+  updated_at DateTime? @default(now()) @db.Timestamp(6)
+  updated_id String?   @db.VarChar(100)
+  updated_ip String?   @db.VarChar(20)
+  users      users?    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model likes {
+  user_id     String    @db.Uuid
+  playlist_id String    @db.Uuid
+  created_at  DateTime? @default(now()) @db.Timestamp(6)
+  created_ip  String?   @db.VarChar(20)
+  playlists   playlists @relation(fields: [playlist_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users       users     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([user_id, playlist_id], map: "pk_likes")
+  @@index([created_at], map: "idx_likes_created_at")
+  @@index([playlist_id], map: "idx_likes_playlist_id")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model playlist_items {
+  track_order    Int
+  playlist_id    String    @db.Uuid
+  track_title    String?   @db.VarChar(255)
+  track_artist   String?   @db.VarChar(255)
+  track_imgurl   String?
+  track_playtime String?   @db.VarChar(8)
+  created_at     DateTime? @db.Timestamp(6)
+  created_ip     String?   @db.VarChar(20)
+  playlists      playlists @relation(fields: [playlist_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_playlist_items_playlist")
+
+  @@id([track_order, playlist_id], map: "pk_playlist_items")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model playlist_tags {
+  playlist_id String    @db.Uuid
+  tag_id      Int
+  playlists   playlists @relation(fields: [playlist_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  tags        tags      @relation(fields: [tag_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([playlist_id, tag_id], map: "pk_playlist_tags")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model playlists {
+  id                   String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id              String           @db.Uuid
+  playlist_title       String           @db.VarChar(100)
+  playlist_url         String
+  playlist_description String?
+  is_public            Boolean?         @default(true)
+  created_at           DateTime?        @default(now()) @db.Timestamp(6)
+  created_ip           String           @db.VarChar(20)
+  updated_at           DateTime?        @default(now()) @db.Timestamp(6)
+  updated_id           String           @db.VarChar(100)
+  comments             comments[]
+  diggings             diggings[]
+  likes                likes[]
+  playlist_items       playlist_items[]
+  playlist_tags        playlist_tags[]
+  users                users            @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_playlists_user_id")
+  shares               shares[]
+
+  @@index([created_at], map: "idx_playlists_created_at")
+  @@index([is_public], map: "idx_playlists_is_public")
+  @@index([playlist_title], map: "idx_playlists_title")
+  @@index([user_id], map: "idx_playlists_user_id")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model playlists_history {
+  history_type         String    @db.VarChar(10)
+  history_at           DateTime? @default(now()) @db.Timestamp(6)
+  history_ip           String    @db.VarChar(20)
+  id                   String    @db.Uuid
+  user_id              String?   @db.Uuid
+  playlist_title       String    @db.VarChar(100)
+  playlist_url         String
+  playlist_discription String?
+  is_public            Boolean?  @default(true)
+  created_at           DateTime? @db.Timestamp(6)
+  created_id           String    @db.VarChar(100)
+  created_ip           String    @db.VarChar(20)
+  updated_at           DateTime? @db.Timestamp(6)
+  updated_id           String    @db.VarChar(100)
+  updated_ip           String    @db.VarChar(20)
+
+  @@ignore
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model shares {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  playlist_id String    @db.Uuid
+  user_id     String?   @db.Uuid
+  shared_at   DateTime? @default(now()) @db.Timestamp(6)
+  ip_address  String?   @db.VarChar(45)
+  user_agent  String?
+  platform    String?   @db.VarChar(50)
+  created_ip  String?   @db.VarChar(20)
+  playlists   playlists @relation(fields: [playlist_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users       users?    @relation(fields: [user_id], references: [id], onUpdate: NoAction)
+
+  @@unique([user_id, playlist_id], map: "idx_shares_unique_user_playlist")
+  @@index([platform], map: "idx_shares_platform")
+  @@index([playlist_id], map: "idx_shares_playlist_id")
+  @@index([shared_at], map: "idx_shares_shared_at")
+  @@index([user_id], map: "idx_shares_user_id")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tags {
+  id            Int             @id
+  name          String?         @db.VarChar(50)
+  created_at    DateTime?       @default(now()) @db.Timestamp(6)
+  created_ip    String?         @db.VarChar(20)
+  playlist_tags playlist_tags[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tags_history {
+  history_type String?   @db.VarChar(10)
+  history_at   DateTime? @db.Timestamp(6)
+  history_ip   String?   @db.VarChar(20)
+  id           Int?
+  name         String?   @db.VarChar(50)
+  created_at   DateTime? @db.Timestamp(6)
+  created_id   String?   @db.VarChar(100)
+  created_ip   String?   @db.VarChar(20)
+
+  @@ignore
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model users {
+  id               String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  provider         String      @db.VarChar(20)
+  provider_id      String      @db.VarChar(100)
+  profile_imageurl String?
+  nickname         String?     @unique(map: "unique_user_nickname") @db.VarChar(50)
+  email            String?     @unique(map: "unique_user_email") @db.VarChar(255)
+  password         String?
+  youtube_token    String?     @db.VarChar(500)
+  youtube_id       String?     @db.VarChar(100)
+  applemusic_token String?     @db.VarChar(500)
+  applemusic_id    String?     @db.VarChar(100)
+  spotify_token    String?     @db.VarChar(500)
+  spotify_id       String?     @db.VarChar(100)
+  melon_token      String?     @db.VarChar(500)
+  melon_id         String?     @db.VarChar(100)
+  created_at       DateTime?   @default(now()) @db.Timestamp(6)
+  created_ip       String      @db.VarChar(20)
+  updated_at       DateTime?   @default(now()) @db.Timestamp(6)
+  updated_ip       String      @db.VarChar(20)
+  comments         comments[]
+  diggings         diggings[]
+  inquiries        inquiries[]
+  likes            likes[]
+  playlists        playlists[]
+  shares           shares[]
+
+  @@unique([provider, provider_id])
+  @@index([email], map: "idx_users_email")
+  @@index([nickname], map: "idx_users_nickname")
+  @@index([provider], map: "idx_users_provider")
+  @@index([provider_id], map: "idx_users_provider_id")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model users_history {
+  history_type     String    @db.VarChar(10)
+  history_at       DateTime? @default(now()) @db.Timestamp(6)
+  history_ip       String    @db.VarChar(20)
+  id               String    @db.Uuid
+  provider         String    @db.VarChar(20)
+  provider_id      String    @db.VarChar(100)
+  profile_imageurl String?
+  nickname         String?   @db.VarChar(50)
+  youtube_token    String?   @db.VarChar(500)
+  youtube_id       String?   @db.VarChar(100)
+  applemusic_token String?   @db.VarChar(500)
+  applemusic_id    String?   @db.VarChar(100)
+  spotify_token    String?   @db.VarChar(500)
+  spotify_id       String?   @db.VarChar(100)
+  melon_token      String?   @db.VarChar(500)
+  melon_id         String?   @db.VarChar(100)
+  created_at       DateTime? @db.Timestamp(6)
+  created_ip       String    @db.VarChar(20)
+  updated_at       DateTime? @db.Timestamp(6)
+  updated_ip       String    @db.VarChar(20)
+
+  @@ignore
+}
+
+model User {
+  id            String          @id @default(cuid())
+  name          String?
+  email         String          @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  // Optional for WebAuthn support
+  Authenticator Authenticator[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+// Optional for WebAuthn support
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, credentialID])
+}
