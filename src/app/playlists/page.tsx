@@ -1,53 +1,50 @@
-import Frame80 from "./components/frame80";
+"use client";
+import { useRef } from "react";
+
 import Header from "./components/header";
 import MyDiggingList from "./components/MyDiggingList";
+import PopularPlaylists from "./components/PopularPlaylists";
 
 import NoPlaylists from "@/app/playlists/components/NoPlaylists";
-import { Playlists, popularPlayList } from "@/mocks/sample/Playlists";
+import useHeaderAnimation from "@/hooks/useHeaderAnimation";
+import { Playlists } from "@/mocks/sample/Playlists";
 
 export default function PlaylistsPage() {
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const { style: headerStyle, scrolling } = useHeaderAnimation(scrollRef, {
+    headerMaxHeight: 326,
+    headerMinHeight: 60,
+  });
+
   return (
     <div
-      id="playlistsPage"
-      className="bg-gray-20 flex w-screen flex-col justify-center overflow-hidden"
+      id="playlists"
+      className="relative h-screen overflow-hidden"
     >
       <Header />
-
-      <div
-        id="지금_인기있는_플레이리스트"
-        className="absolute top-[72px] flex h-[47px] w-full flex-col gap-[7px] pl-[20px]"
-      >
-        <div className="h-[24px] text-[20px] leading-[100%] font-bold tracking-[0%] text-gray-100">
-          지금 인기있는 플레이리스트
-        </div>
-        <div className="text-gray-70 text-[13px] font-[400]">DIGROUND 유저들이 많이 듣고 있는 플레이리스트에요.</div>
-      </div>
-
-      <div
-        id="poularPlayListContainer"
-        className="absolute top-[141px] h-[226px] w-full overflow-hidden"
-      >
+      <div className="mt-[68px]">
         <div
-          id="popularPlayListDiv1"
-          className="scrollbar-none absolute inline-flex h-full w-full gap-[16px] overflow-x-auto p-[0_20px]"
+          id="playlists_no_scroll_Y"
+          style={{ ...headerStyle, position: "fixed", top: 0, left: 0 }}
+          className="z-10 w-full transition-all duration-200"
         >
-          {popularPlayList.map((playlist) => (
-            <Frame80
-              key={playlist.id}
-              title={playlist.title}
-              digCount={playlist.digCount}
-              shareCount={playlist.shareCount}
-              pliArt={{ id: playlist.id, url: playlist.url, dominantColor: playlist.dominantColor }}
-            />
-          ))}
+          <PopularPlaylists className="absolute fixed top-[78px]" />
         </div>
-      </div>
 
-      <div
-        id="playlists"
-        className="absolute top-[407px] w-full"
-      >
-        {Playlists.length === 0 ? <NoPlaylists /> : <MyDiggingList playlists={Playlists} />}
+        <div
+          ref={scrollRef}
+          id="poularPlayListContainer"
+          className={`custom-scrollbar overflow-y-auto pb-[89px] ${scrolling ? "scrolling" : ""}`}
+          style={{ paddingTop: headerStyle.height, height: "100vh" }}
+        >
+          <div
+            id="playlists"
+            className="w-full"
+            style={{ minHeight: "calc(100vh - 89px)", zIndex: 50, position: "relative" }}
+          >
+            {Playlists.length === 0 ? <NoPlaylists /> : <MyDiggingList playlists={Playlists} />}
+          </div>
+        </div>
       </div>
     </div>
   );

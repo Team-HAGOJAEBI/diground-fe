@@ -52,10 +52,6 @@ export default function MyDiggingList({ playlists }: { playlists: pli[] }) {
           />
         ))}
       </div>
-      <div
-        id="digging-list-content"
-        className="p-4"
-      ></div>
     </div>
   );
 }

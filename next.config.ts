@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
         pathname: "/**", // 서브 경로 전체 허용 (필터링이 필요하면 세부 경로로 좁혀도 됨)
       },
     ],
+    domains: ["image.bugsm.co.kr"],
   },
 
   turbopack: {

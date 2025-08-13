@@ -25,6 +25,14 @@ export const Playlists: pli[] = [
     digCount: "105",
     shareCount: "262",
   },
+  {
+    id: 290,
+    title: "CALL ME X, 조금 별나게도 breaking up your heart!",
+    pliCoverUrl: "https://image.bugsm.co.kr/album/images/500/41220/4122087.jpg",
+    nickName: "1US",
+    digCount: "9.9만",
+    shareCount: "1.2만",
+  },
 ];
 
 export const popularPlayList = [

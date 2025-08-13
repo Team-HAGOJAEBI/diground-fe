@@ -8,7 +8,7 @@ import { playArt } from "@/assets/images";
 
 export default function DiggingPli(playlist: pli) {
   return (
-    <div className="flex-low flex h-[70px] w-full gap-[16px] last:mb-[20px]">
+    <div className="flex-low mb-[20px] flex h-[70px] w-full gap-[16px] last:mb-[0px]">
       {/* 앨범아트 */}
       <div className="r-16px h-[70px] w-[70px]">
         <Image
