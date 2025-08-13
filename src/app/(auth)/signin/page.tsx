@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { signIn } from "next-auth/react";
 
+import GoogleSignInButton from "./components/GoogleSiginInButton";
+
 import Layout from "@/app/_common/Layout";
 import { kakaoLogin } from "@/assets/icons";
 
@@ -26,7 +28,7 @@ export default function Login() {
             alt="카카오 로그인"
             onClick={() => signIn("kakao", { redirectTo: "/detail" })}
           />
-          <div>구글로 로그인</div>
+          <GoogleSignInButton onClick={() => signIn("google", { redirectTo: "/detail" })} />
         </div>
         <span>로그인 없이 둘러보기</span>
       </div>
