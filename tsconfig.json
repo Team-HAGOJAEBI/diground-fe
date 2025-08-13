@@ -30,7 +30,8 @@
     "postcss.config.js",
     "svgr.d.ts",
     "next-env.d.ts",
-    "src/**/*.d.ts"
+    "src/**/*.d.ts",
+    "src/types/*.d.ts"
   ],
   "exclude": ["node_modules"]
 }

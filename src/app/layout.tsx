@@ -4,6 +4,8 @@ import localFont from "next/font/local";
 
 import { MSWProvider } from "./providers";
 
+import AuthContext from "@/context/AuthContext";
+
 const Pretendard = localFont({
   src: "../assets/fonts/PretendardVariable.woff2",
   display: "swap",
@@ -23,7 +25,9 @@ export default function RootLayout({
       className={Pretendard.className}
     >
       <body>
-        <MSWProvider>{children}</MSWProvider>
+        <AuthContext>
+          <MSWProvider>{children}</MSWProvider>
+        </AuthContext>
       </body>
     </html>
   );
