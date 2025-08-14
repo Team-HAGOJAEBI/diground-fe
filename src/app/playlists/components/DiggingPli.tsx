@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import pli from "../types/pli";
 
@@ -7,8 +8,17 @@ import DigCount from "./Digcount";
 import { playArt } from "@/assets/images";
 
 export default function DiggingPli(playlist: pli) {
+  const router = useRouter();
+
+  function handleClick(playlistId: number) {
+    router.push(`/detail?${playlistId}`); // 해당 플레이리스트로 이동
+  }
+
   return (
-    <div className="flex-low mb-[20px] flex h-[70px] w-full gap-[16px] last:mb-[0px]">
+    <button
+      className="flex-low mb-[20px] flex h-[70px] w-full gap-[16px] last:mb-[0px]"
+      onClick={() => handleClick(playlist.id)}
+    >
       {/* 앨범아트 */}
       <div className="r-16px h-[70px] w-[70px]">
         <Image
@@ -21,7 +31,7 @@ export default function DiggingPli(playlist: pli) {
       </div>
 
       <div className="flex h-[69px] flex-1 flex-col gap-[4px]">
-        <div className="text-gray-80 font-pretendard line-clamp-2 h-[47px] w-full text-[14px] leading-[22px] font-semibold tracking-[-0.02em]">
+        <div className="text-gray-80 font-pretendard line-clamp-2 h-[47px] w-full text-left text-[14px] leading-[22px] font-semibold tracking-[-0.02em]">
           {playlist.title}
         </div>
         <div className="flex h-[18px] w-full flex-row justify-between">
@@ -38,6 +48,6 @@ export default function DiggingPli(playlist: pli) {
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 }
