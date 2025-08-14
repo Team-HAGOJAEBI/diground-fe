@@ -30,15 +30,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   pages: {},
   callbacks: {
-    // async signIn({ user, account, profile }) {
-    //   if (account?.provider === "kakao" && profile) {
-    //     // 카카오에서 email을 제공하지 않는 경우 기본값 설정
-    //     if (!user.email) {
-    //       user.email = `kakao_${profile.id}@diground.local`;
-    //     }
-    //   }
-    //
-    //   return true;
-    // },
+    async signIn({ user, account, profile }) {
+      if (account?.provider === "kakao" && profile) {
+        // 카카오에서 email을 제공하지 않는 경우 기본값 설정
+        if (!user.email) {
+          user.email = `kakao_${profile.id}@diground.local`;
+        }
+      }
+
+      return true;
+    },
   },
 });
