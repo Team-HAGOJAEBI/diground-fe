@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import pli from "../types/pli";
 
-import DigCount from "./digcount";
+import DigCount from "./Digcount_temp";
 
 import { playArt } from "@/assets/images";
 

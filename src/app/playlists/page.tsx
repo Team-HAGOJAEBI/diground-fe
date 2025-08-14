@@ -1,7 +1,7 @@
 "use client";
 import { useRef } from "react";
 
-import Header from "./components/header";
+import Header from "./components/Header_temp";
 import MyDiggingList from "./components/MyDiggingList";
 import PopularPlaylists from "./components/PopularPlaylists";
 

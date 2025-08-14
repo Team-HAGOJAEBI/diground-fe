@@ -1,4 +1,4 @@
-import Frame80 from "./frame80";
+import Frame80 from "./frame80_temp";
 
 import { popularPlayList } from "@/mocks/sample/Playlists";
 
