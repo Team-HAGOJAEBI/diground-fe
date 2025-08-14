@@ -31,7 +31,7 @@ export default function DiggingPli(playlist: pli) {
       </div>
 
       <div className="flex h-[69px] flex-1 flex-col gap-[4px]">
-        <div className="text-gray-80 font-pretendard line-clamp-2 h-[47px] w-full text-left text-[14px] leading-[22px] font-semibold tracking-[-0.02em]">
+        <div className="text-gray-80 font-pretendard line-clamp-2 flex h-[47px] w-full items-center text-left text-[14px] leading-[22px] font-semibold tracking-[-0.02em]">
           {playlist.title}
         </div>
         <div className="flex h-[18px] w-full flex-row justify-between">

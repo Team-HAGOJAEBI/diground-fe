@@ -12,7 +12,7 @@ import { Playlists } from "@/mocks/sample/Playlists";
 export default function PlaylistsPage() {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const { style: headerStyle, scrolling } = useHeaderAnimation(scrollRef, {
-    headerMaxHeight: 326,
+    headerMaxHeight: 367,
     headerMinHeight: 60,
   });
 
@@ -22,13 +22,15 @@ export default function PlaylistsPage() {
       className="relative h-screen overflow-hidden"
     >
       <Header />
-      <div className="mt-[68px]">
+      <div className="w-inherit mt-[68px]">
         <div
           id="playlists_no_scroll_Y"
-          style={{ ...headerStyle, position: "fixed", top: 0, left: 0 }}
-          className="z-10 w-full transition-all duration-200"
+          style={{ ...headerStyle, position: "fixed", top: 0, width: "100%" }}
+          className="z-10 max-w-[1024px] transition-all duration-200"
         >
-          <PopularPlaylists className="absolute fixed top-[78px]" />
+          <div className="w-inherit">
+            <PopularPlaylists className="absolute fixed top-[78px] w-full" />
+          </div>
         </div>
 
         <div
