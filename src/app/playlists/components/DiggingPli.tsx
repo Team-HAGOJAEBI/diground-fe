@@ -16,7 +16,7 @@ export default function DiggingPli(playlist: pli) {
 
   return (
     <button
-      className="flex-low mb-[20px] flex h-[70px] w-full gap-[16px] last:mb-[0px]"
+      className="mb-[20px] flex h-[70px] w-full gap-[16px] last:mb-[0px]"
       onClick={() => handleClick(playlist.id)}
     >
       {/* 앨범아트 */}
@@ -36,7 +36,7 @@ export default function DiggingPli(playlist: pli) {
         </div>
         <div className="flex h-[18px] w-full flex-row justify-between">
           <div className="font-pretendard h-full text-[12px] leading-[100%] text-gray-50">{playlist.nickName}</div>
-          <div className="radious-[4px] flex h-full flex-row gap-[2px]">
+          <div className="flex h-full flex-row gap-[2px]">
             <DigCount
               count={playlist.shareCount}
               iconName="share"
