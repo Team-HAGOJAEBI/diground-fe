@@ -1,4 +1,11 @@
+"use client";
+import { useRouter } from "next/navigation";
+
+import Button from "@/app/_common/components/Button";
+
 export default function NoPlaylists() {
+  const router = useRouter();
+
   return (
     <div className="flex h-[154px] w-full items-center justify-center p-[20px_0px]">
       <div className="p-[16px 20px] flex h-[142px] w-[320px] flex-col gap-[18px]">
@@ -10,9 +17,14 @@ export default function NoPlaylists() {
         </div>
 
         <div className="flex h-[50px] w-full items-center justify-center">
-          <button className="bg-yellow-80 text-gray-5 h-[50px] w-[260px] rounded-[90px] pr-[36px] pl-[36px] text-[16px] leading-[20px] font-[700]">
+          <Button
+            type="button"
+            onClick={() => {
+              router.push("/create");
+            }}
+          >
             플레이리스트 만들기
-          </button>
+          </Button>
         </div>
       </div>
     </div>
