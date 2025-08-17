@@ -1,4 +1,4 @@
-import Frame80 from "./Frame80";
+import HotPliCard from "./HotPliCard";
 
 import { popularPlayList } from "@/mocks/sample/Playlists";
 
@@ -24,7 +24,7 @@ export default function PopularPlaylists({ className }: { className?: string }) 
           className="scrollbar-none inline-flex h-full w-full gap-[16px] overflow-x-auto p-[0_20px]"
         >
           {popularPlayList.map((playlist) => (
-            <Frame80
+            <HotPliCard
               key={playlist.id}
               title={playlist.title}
               digCount={playlist.digCount}

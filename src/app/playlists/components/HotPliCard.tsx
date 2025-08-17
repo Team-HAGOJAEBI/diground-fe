@@ -8,17 +8,14 @@ import DigCount from "./Digcount";
 
 import { playArt } from "@/assets/images";
 
-export default function Frame80({
-  title,
-  digCount,
-  shareCount,
-  pliArt,
-}: {
+type HotPliCardProps = {
   title: string;
   digCount: string;
   shareCount: string;
   pliArt: { id: number; url: string; dominantColor: string };
-}) {
+};
+
+export default function HotPliCard({ title, digCount, shareCount, pliArt }: HotPliCardProps) {
   const router = useRouter();
   const textColor = readableColor(pliArt.dominantColor); // 도미넌트 컬러에 따라 텍스트 색상 결정
 
