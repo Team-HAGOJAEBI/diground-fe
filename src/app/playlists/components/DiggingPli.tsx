@@ -11,7 +11,7 @@ export default function DiggingPli(playlist: pli) {
   const router = useRouter();
 
   function handleClick(playlistId: number) {
-    router.push(`/detail?${playlistId}`); // 해당 플레이리스트로 이동
+    router.push(`/detail?id=${playlistId}`); // 해당 플레이리스트로 이동
   }
 
   return (
