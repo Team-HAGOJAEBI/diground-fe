@@ -7,7 +7,10 @@ export default function NoPlaylists() {
   const router = useRouter();
 
   return (
-    <div className="flex h-[154px] w-full items-center justify-center p-[20px_0px]">
+    <div
+      id="playlists_no_playlists"
+      className="flex h-[calc(100%-388px)] w-full items-center justify-center p-[20px_0px]"
+    >
       <div className="p-[16px 20px] flex h-[142px] w-[320px] flex-col gap-[18px]">
         <div className="flex h-[48px] flex-col gap-[12px]">
           <div className="text-gray-80 text-center text-[14px] leading-[15px] font-[400]">

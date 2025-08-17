@@ -16,7 +16,7 @@ export default function DiggingPli(playlist: pli) {
 
   return (
     <button
-      className="mb-[20px] flex h-[70px] w-full gap-[16px] last:mb-[0px]"
+      className="flex h-[70px] w-full gap-[16px] last:mb-[0px]"
       onClick={() => handleClick(playlist.id)}
     >
       {/* 앨범아트 */}

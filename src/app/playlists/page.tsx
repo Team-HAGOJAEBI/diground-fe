@@ -11,42 +11,34 @@ import { Playlists } from "@/mocks/sample/Playlists";
 
 export default function PlaylistsPage() {
   const scrollRef = useRef<HTMLDivElement | null>(null);
-  const { style: headerStyle, scrolling } = useHeaderAnimation(scrollRef, {
-    headerMaxHeight: 367,
-    headerMinHeight: 60,
-  });
+  const { scrolling } = useHeaderAnimation(scrollRef);
 
   return (
     <div
+      ref={scrollRef}
       id="playlists"
-      className="relative h-screen overflow-hidden"
+      className={`custom-scrollbar h-screen overflow-y-auto ${scrolling ? "scrolling" : "scrollbar-none"}`}
     >
-      <Header />
-      <div className="w-inherit mt-[68px]">
-        <div
-          id="playlists_no_scroll_Y"
-          style={{ ...headerStyle, position: "fixed", top: 0, width: "100%" }}
-          className="z-10 max-w-[1024px] transition-all duration-200"
-        >
-          <div className="w-inherit">
-            <PopularPlaylists className="absolute fixed top-[78px] w-full" />
-          </div>
-        </div>
+      <div
+        id="playlists_header"
+        className="relative mb-[23px] h-[55px] pt-[20px] pl-[20px]"
+      >
+        <Header />
+      </div>
 
-        <div
-          ref={scrollRef}
-          id="poularPlayListContainer"
-          className={`custom-scrollbar overflow-y-auto pb-[89px] ${scrolling ? "scrolling" : ""}`}
-          style={{ paddingTop: headerStyle.height, height: "100vh" }}
-        >
-          <div
-            id="playlists"
-            className="w-full"
-            style={{ minHeight: "calc(100vh - 89px)", zIndex: 50, position: "relative" }}
-          >
-            {Playlists.length === 0 ? <NoPlaylists /> : <MyDiggingList playlists={Playlists} />}
-          </div>
-        </div>
+      <div
+        id="playlists_hotpli"
+        className="mb-[23px] h-[289px] overflow-hidden pl-[20px]"
+        style={{ zIndex: 100 }}
+      >
+        <PopularPlaylists className="w-full" />
+      </div>
+
+      <div
+        id="playlists_mypli"
+        className={`flex-1 ${scrolling ? "scrolling pr-[12px] pl-[20px]" : "scrollbar-none px-[20px]"}`}
+      >
+        {Playlists.length === 0 ? <NoPlaylists /> : <MyDiggingList playlists={Playlists} />}
       </div>
     </div>
   );

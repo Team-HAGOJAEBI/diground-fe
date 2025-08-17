@@ -14,11 +14,11 @@ export default function MyDiggingList({ playlists }: { playlists: pli[] }) {
   return (
     <div
       id="digging-list"
-      className="flex w-full flex-col gap-[12px]"
+      className="flex w-full flex-col"
     >
       <div
         id="digging-list-header"
-        className="flex h-[30px] w-full justify-between px-[20px]"
+        className="bg-gray-5 sticky top-0 z-20 flex h-[62px] w-full justify-between pt-[17px] pb-[12px]"
       >
         <div className="flex items-center text-[20px] leading-[100%] font-bold tracking-[0%] text-gray-100">
           내가 디깅한 플레이리스트
@@ -43,7 +43,7 @@ export default function MyDiggingList({ playlists }: { playlists: pli[] }) {
 
       <div
         id="digging-list-body"
-        className={`custom-scrollbar x-0 flex w-full flex-col gap-[20px] overflow-y-auto p-[0_20px_20px_20px]`}
+        className="flex w-full flex-col gap-[20px] pb-[20px]"
       >
         {playlists.map((playlist: pli) => (
           <DiggingPli
