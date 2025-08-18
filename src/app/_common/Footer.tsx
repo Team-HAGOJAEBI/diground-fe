@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 import Icon from "./icon/Icon";
 
 interface FooterProps {
@@ -9,17 +11,22 @@ interface FooterProps {
 }
 
 const FOOTER_MENU = {
-  home: "홈",
-  create: "생성",
-  search: "탐색",
-  more: "더보기",
+  home: { label: "홈", url: "/playlists" },
+  create: { label: "생성", url: "/create" },
+  search: { label: "탐색", url: "/search" },
+  more: { label: "더보기", url: "/more" },
 };
 
 export default function Footer({ selectedIndex }: FooterProps) {
+  const router = useRouter();
   const [current, setCurrent] = useState(selectedIndex);
 
   const handleOnClick = (currentIndex: number) => {
     setCurrent(currentIndex);
+    const menuKey = Object.keys(FOOTER_MENU)[currentIndex];
+    const targetUrl = FOOTER_MENU[menuKey as keyof typeof FOOTER_MENU].url;
+
+    router.push(targetUrl); // 각 메뉴의 url로 이동
   };
 
   return (
@@ -33,10 +40,9 @@ export default function Footer({ selectedIndex }: FooterProps) {
           >
             <Icon
               name={key as keyof typeof FOOTER_MENU}
-              // 📑 추후 기획자에게 문의 해봐야 함. 현재는 클릭 이벤트가 다 존재한다고 생각하고 함.
               className={`h-[30px] w-[30px] ${current === idx ? "text-[#FFE11D]" : "text-[#9F9F9F]"}`}
             />
-            <span className={`${current === idx ? "text-gray-100" : "text-gray-50"} text-[11px]`}>{menu}</span>
+            <span className={`${current === idx ? "text-gray-100" : "text-gray-50"} text-[11px]`}>{menu.label}</span>
           </div>
         );
       })}

@@ -24,3 +24,4 @@ export { default as melon } from "./ic_melon.svg";
 export { default as img } from "./ic_img.svg";
 export { default as plus } from "./ic_plus.svg";
 export { default as kakaoLogin } from "./ic_kakao_login.png";
+export { default as dropdown } from "./ic_dropdown.svg";
