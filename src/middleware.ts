@@ -23,7 +23,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // 인증이 필요없는 경로들
-  const publicPaths = ["/signin", "/api/auth", "/_next", "/favicon.ico", "/images", "/static"];
+  const publicPaths = ["/signin", "/api/auth", "/_next", "/favicon.ico", "/images", "/static", "/mockServiceWorker.js"];
 
   // 공개 경로는 통과
   if (publicPaths.some((path) => pathname.startsWith(path))) {

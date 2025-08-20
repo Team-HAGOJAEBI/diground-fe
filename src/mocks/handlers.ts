@@ -34,22 +34,6 @@ const members: User[] = [
 ];
 
 export const handlers = [
-  http.post("/api/login/kakao/:code", ({}) => {
-    return HttpResponse.json({
-      status: 200,
-      data: {
-        accessToken: "mockAccessToken123",
-        refreshToken: "mockRefreshToken456",
-        user: {
-          id: 931219,
-          name: "강영현",
-          profileImageUrl:
-            "https://cdnimg.melon.co.kr/cm2/artistcrop/images/008/95/389/895389_20250502185925_500.jpg?YUV444/melon/resize/416",
-        },
-      },
-    });
-  }),
-
   // 사용자 목록을 가져오는 API
   http.get("/api/getuserlist", () => {
     return HttpResponse.json({
