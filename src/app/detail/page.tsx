@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import Footer from "../_common/Footer";
 import Icon from "../_common/icon/Icon";
@@ -13,8 +13,7 @@ import DiggingDrawer from "./components/digging/DiggingDrawer";
 import Header from "./components/Header";
 import List from "./components/List";
 
-import { getDetailPlayList, getPlayList } from "@/app/detail/api/playListApi";
-import { DetailList, PlayList, PlayListSample } from "@/mocks/sample/Playlist";
+import { DetailList, PlayList } from "@/mocks/sample/Playlist";
 
 const SCROLL_TRIGGER = 200;
 const HEADER_MIN_HEIGHT = 60; // prev 아이콘 height + padding-top
@@ -33,19 +32,35 @@ type HeaderStyle = {
  * 플레이리스트 + 상세 목록 API 호출
  */
 function usePlaylistData() {
-  const [info, setInfo] = useState<PlayList>(PlayListSample);
+  const searchParams = useSearchParams();
+  const [info, setInfo] = useState<PlayList>({
+    id: 0,
+    title: "",
+    bio: "",
+    tags: [],
+    coverURL: "",
+    like: { isLiked: false, cnt: 0 },
+    comment: 0,
+    share: 0,
+    digging: 0,
+  });
   const [tracks, setTracks] = useState<DetailList[]>([]);
 
   useEffect(() => {
     let ignore = false;
+    const id = searchParams.get("id");
 
     (async () => {
       try {
-        const [{ data: detailData }, { data: playListInfo }] = await Promise.all([getDetailPlayList(), getPlayList()]);
+        const [{ data: detailData }, { data: playListInfo }] = await Promise.all([
+          fetch(`/api/getDetailList${id ? `?id=${id}` : ""}`).then((res) => res.json()),
+          fetch(`/api/getPlayList${id ? `?id=${id}` : ""}`).then((res) => res.json()),
+        ]);
 
         if (!ignore) {
           setTracks(detailData);
-          setInfo(playListInfo);
+          // playListInfo는 배열이므로 첫 번째 요소를 사용
+          setInfo(playListInfo[0]);
         }
       } catch (error) {
         console.error(error);
@@ -55,7 +70,7 @@ function usePlaylistData() {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [searchParams]);
 
   return { info, tracks } as const;
 }
@@ -142,9 +157,9 @@ export default function Page() {
         className={`custom-scrollbar m-[20px] flex-1 overflow-y-auto ${scrolling ? "scrolling" : ""}`}
         ref={scrollRef}
       >
-        {tracks.map((track) => (
+        {tracks.map((track, index) => (
           <List
-            key={track.id}
+            key={`${track.playlistId}-${track.id}-${index}`}
             item={track}
           />
         ))}
