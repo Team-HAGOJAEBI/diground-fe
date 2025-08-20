@@ -57,8 +57,28 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             email: mockUser.email,
           } as JWT;
         }
+        // try {
+        // const parts = token.split(".");
+
+        // if (parts.length === 3 && parts[0] === "mock") {
+        //   const base64String = parts[1];
+        //   const binaryString = atob(base64String);
+        //   const bytes = new Uint8Array(binaryString.length);
+        //
+        //   for (let i = 0; i < binaryString.length; i++) {
+        //     bytes[i] = binaryString.charCodeAt(i);
+        //   }
+        //   const jsonString = new TextDecoder().decode(bytes);
+        //
+        //   return JSON.parse(jsonString) as JWT;
+        // }
+
+        //   return { sub: mockUser.id, email: mockUser.email } as JWT;
+        // } catch (error) {
+        //   console.error("Token decoding failed:", error);
 
         return { sub: mockUser.id, email: mockUser.email } as JWT;
+        // }
       }
 
       return jwt.verify(token as string, secret as string) as JWT;
@@ -122,6 +142,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!user.email) {
           user.email = `kakao_${profile.id}@diground.local`;
         }
+      }
+      // Mock 모드일 때 실제 카카오 정보로 Mock 데이터 업데이트
+      if (process.env.NEXT_PUBLIC_MSW_MODE === "true") {
+        const mockName = `${user.name}_${account?.provider}_모킹유저`;
+
+        updateMockUser({
+          id: `${user.name}_mock_user_${Date.now()}`,
+          name: mockName,
+          email: user.email || "kakao_mock@diground.local",
+          image:
+            // user.image || 목데이터와 구분을 위한 사진
+            "https://cdnimg.melon.co.kr/cm2/photo/images/000/802/83/025/80283025_20241216144433_org.jpg/melon/quality/80/optimize",
+        });
       }
 
       return true;

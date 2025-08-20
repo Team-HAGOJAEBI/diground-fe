@@ -15,9 +15,14 @@ export function MSWProvider({ children }: { children: React.ReactNode }) {
         try {
           const { worker } = await import("../mocks/browser");
 
-          await worker.start({
-            onUnhandledRequest: "bypass",
-          });
+        await worker.start({
+          onUnhandledRequest: (req) => {
+            // auth API는 MSW가 가로채지 않도록 함
+            if (req.url.includes("/api/auth")) {
+              return;
+            }
+          },
+        });
 
           setIsInitialized(true);
         } catch (error) {

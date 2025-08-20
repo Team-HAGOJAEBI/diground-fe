@@ -1,31 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-// 모킹용 타입 정의 (실제 DB 스키마에 맞게 수정)
-type MockAccount = {
-  user_id: string;
-  type: string;
-  provider: string;
-  provider_account_id: string;
-  access_token?: string;
-  refresh_token?: string | null;
-  expires_at?: number;
-  token_type?: string;
-  scope?: string;
-  id_token?: string;
-  session_state?: string;
-  created_at: Date;
-  updated_at: Date;
-};
-
-type MockSession = {
-  session_token: string;
-  user_id: string;
-  expires: Date;
-  created_at: Date;
-  updated_at: Date;
-};
-
-// 동적으로 업데이트 가능한 Mock 데이터 (user 모델용 - NextAuth)
+// 동적으로 업데이트 가능한 Mock 데이터
 let mockUser = {
   id: "하고젭 모킹 유저",
   name: "테스트 사용자",
@@ -33,8 +8,8 @@ let mockUser = {
   emailVerified: null,
   image:
     "https://cdnimg.melon.co.kr/cm2/photo/images/000/802/83/025/80283025_20241216144433_org.jpg/melon/quality/80/optimize",
-  created_at: new Date(),
-  updated_at: new Date(),
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 // mockUser를 동적으로 업데이트하는 함수
@@ -42,41 +17,41 @@ export const updateMockUser = (userData: { id?: string; name?: string; email?: s
   mockUser = {
     ...mockUser,
     ...userData,
-    updated_at: new Date(),
+    updatedAt: new Date(),
   };
 };
 
 // 현재 mockUser 데이터를 가져오는 함수
 export const getMockUser = () => mockUser;
 
-// Account와 Session도 동적으로 업데이트 (DB 스키마에 맞게 수정)
+// Account와 Session도 동적으로 업데이트
 let mockAccount_kakao = {
-  user_id: mockUser.id,
+  userId: mockUser.id,
   type: "oauth",
   provider: "kakao",
-  provider_account_id: "12345",
+  providerAccountId: "12345",
   access_token: "mock-access-token",
   expires_at: Math.floor(Date.now() / 1000) + 3600,
   token_type: "Bearer",
   scope: "profile_nickname profile_image account_email",
-  created_at: new Date(),
-  updated_at: new Date(),
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 let mockSession = {
-  session_token: "mock-session-token",
-  user_id: mockUser.id,
+  sessionToken: "mock-session-token",
+  userId: mockUser.id,
   expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-  created_at: new Date(),
-  updated_at: new Date(),
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
-export const updateMockAccount = (accountData: MockAccount) => {
-  mockAccount_kakao = { ...mockAccount_kakao, ...accountData, updated_at: new Date() };
+export const updateMockAccount = (accountData: any) => {
+  mockAccount_kakao = { ...mockAccount_kakao, ...accountData, updatedAt: new Date() };
 };
 
-export const updateMockSession = (sessionData: MockSession) => {
-  mockSession = { ...mockSession, ...sessionData, updated_at: new Date() };
+export const updateMockSession = (sessionData: any) => {
+  mockSession = { ...mockSession, ...sessionData, updatedAt: new Date() };
 };
 
 export const getMockAccount = () => mockAccount_kakao;
