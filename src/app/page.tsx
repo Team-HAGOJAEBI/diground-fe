@@ -9,18 +9,15 @@ import "../assets/styles/globals.css";
 
 export default function Home() {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   useEffect(() => {
     // 로딩이 완료된 후에만 리다이렉트
     if (status !== "loading") {
-      if (session) {
-        router.replace("/playlists");
-      } else {
-        router.replace("/signin");
-      }
+      // 로그인 여부와 상관없이 /playlists로 리디렉트
+      router.replace("/playlists");
     }
-  }, [session, status, router]);
+  }, [status, router]);
 
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center text-center text-gray-100">
