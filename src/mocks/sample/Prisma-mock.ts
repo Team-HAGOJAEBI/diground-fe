@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 
-// 모킹용 타입 정의
+// 모킹용 타입 정의 (실제 DB 스키마에 맞게 수정)
 type MockAccount = {
-  userId: string;
-  type: "oauth" | "oidc" | "email" | string;
+  user_id: string;
+  type: string;
   provider: string;
-  providerAccountId: string;
+  provider_account_id: string;
   access_token?: string;
   refresh_token?: string | null;
   expires_at?: number;
@@ -13,19 +13,19 @@ type MockAccount = {
   scope?: string;
   id_token?: string;
   session_state?: string;
-  createdAt: Date;
-  updatedAt: Date;
+  created_at: Date;
+  updated_at: Date;
 };
 
 type MockSession = {
-  sessionToken: string;
-  userId: string;
+  session_token: string;
+  user_id: string;
   expires: Date;
-  createdAt: Date;
-  updatedAt: Date;
+  created_at: Date;
+  updated_at: Date;
 };
 
-// 동적으로 업데이트 가능한 Mock 데이터
+// 동적으로 업데이트 가능한 Mock 데이터 (user 모델용 - NextAuth)
 let mockUser = {
   id: "하고젭 모킹 유저",
   name: "테스트 사용자",
@@ -33,8 +33,8 @@ let mockUser = {
   emailVerified: null,
   image:
     "https://cdnimg.melon.co.kr/cm2/photo/images/000/802/83/025/80283025_20241216144433_org.jpg/melon/quality/80/optimize",
-  createdAt: new Date(),
-  updatedAt: new Date(),
+  created_at: new Date(),
+  updated_at: new Date(),
 };
 
 // mockUser를 동적으로 업데이트하는 함수
@@ -42,41 +42,41 @@ export const updateMockUser = (userData: { id?: string; name?: string; email?: s
   mockUser = {
     ...mockUser,
     ...userData,
-    updatedAt: new Date(),
+    updated_at: new Date(),
   };
 };
 
 // 현재 mockUser 데이터를 가져오는 함수
 export const getMockUser = () => mockUser;
 
-// Account와 Session도 동적으로 업데이트
+// Account와 Session도 동적으로 업데이트 (DB 스키마에 맞게 수정)
 let mockAccount_kakao = {
-  userId: mockUser.id,
+  user_id: mockUser.id,
   type: "oauth",
   provider: "kakao",
-  providerAccountId: "12345",
+  provider_account_id: "12345",
   access_token: "mock-access-token",
   expires_at: Math.floor(Date.now() / 1000) + 3600,
   token_type: "Bearer",
   scope: "profile_nickname profile_image account_email",
-  createdAt: new Date(),
-  updatedAt: new Date(),
+  created_at: new Date(),
+  updated_at: new Date(),
 };
 
 let mockSession = {
-  sessionToken: "mock-session-token",
-  userId: mockUser.id,
+  session_token: "mock-session-token",
+  user_id: mockUser.id,
   expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-  createdAt: new Date(),
-  updatedAt: new Date(),
+  created_at: new Date(),
+  updated_at: new Date(),
 };
 
 export const updateMockAccount = (accountData: MockAccount) => {
-  mockAccount_kakao = { ...mockAccount_kakao, ...accountData, updatedAt: new Date() };
+  mockAccount_kakao = { ...mockAccount_kakao, ...accountData, updated_at: new Date() };
 };
 
 export const updateMockSession = (sessionData: MockSession) => {
-  mockSession = { ...mockSession, ...sessionData, updatedAt: new Date() };
+  mockSession = { ...mockSession, ...sessionData, updated_at: new Date() };
 };
 
 export const getMockAccount = () => mockAccount_kakao;
@@ -100,14 +100,14 @@ export class PrismaMock {
       ...mockUser,
       ...data,
       id: "mock-user-" + Date.now(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      created_at: new Date(),
+      updated_at: new Date(),
     }),
 
     update: async ({ data }: any) => ({
       ...mockUser,
       ...data,
-      updatedAt: new Date(),
+      updated_at: new Date(),
     }),
 
     delete: async () => mockUser,
@@ -116,7 +116,7 @@ export class PrismaMock {
       ...mockUser,
       ...create,
       ...update,
-      updatedAt: new Date(),
+      updated_at: new Date(),
     }),
   };
 
@@ -134,14 +134,14 @@ export class PrismaMock {
     create: async ({ data }: any) => ({
       ...mockAccount_kakao,
       ...data,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      created_at: new Date(),
+      updated_at: new Date(),
     }),
 
     update: async ({ data }: any) => ({
       ...mockAccount_kakao,
       ...data,
-      updatedAt: new Date(),
+      updated_at: new Date(),
     }),
 
     delete: async () => mockAccount_kakao,
@@ -151,7 +151,7 @@ export class PrismaMock {
 
   session = {
     findUnique: async ({ where }: any) => {
-      if (where.sessionToken === mockSession.sessionToken) {
+      if (where.session_token === mockSession.session_token) {
         return mockSession;
       }
 
@@ -163,14 +163,14 @@ export class PrismaMock {
     create: async ({ data }: any) => ({
       ...mockSession,
       ...data,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      created_at: new Date(),
+      updated_at: new Date(),
     }),
 
     update: async ({ data }: any) => ({
       ...mockSession,
       ...data,
-      updatedAt: new Date(),
+      updated_at: new Date(),
     }),
 
     delete: async () => mockSession,
@@ -178,7 +178,7 @@ export class PrismaMock {
     deleteMany: async () => ({ count: 1 }),
   };
 
-  verificationToken = {
+  verification_token = {
     findUnique: async () => null,
 
     create: async ({ data }: any) => ({
@@ -253,6 +253,32 @@ export class PrismaMock {
     create: async ({ data }: any) => data,
   };
 
+  playlist_items = {
+    findMany: async () => [],
+    create: async ({ data }: any) => ({ ...data }),
+  };
+
+  playlist_tags = {
+    findMany: async () => [],
+    create: async ({ data }: any) => ({ ...data }),
+  };
+
+  shares = {
+    findMany: async () => [],
+    create: async ({ data }: any) => ({ id: "new-share", ...data }),
+  };
+
+  tags = {
+    findMany: async () => [],
+    findUnique: async () => null,
+    create: async ({ data }: any) => ({ id: 1, ...data }),
+  };
+
+  inquiries = {
+    findMany: async () => [],
+    create: async ({ data }: any) => ({ id: "new-inquiry", ...data }),
+  };
+
   // 트랜잭션 모킹
   $transaction = async (queries: any[]) => {
     // 각 쿼리를 순차적으로 실행하는 척
@@ -292,7 +318,7 @@ export function createPrismaClient(): PrismaClient {
     // eslint-disable-next-line no-console
     console.log("🔧 Prisma Mock 모드 활성화: DB 연결 없이 동작합니다.");
 
-    return new PrismaMock() as any;
+    return new PrismaMock() as unknown as PrismaClient;
   }
 
   return new PrismaClient();
