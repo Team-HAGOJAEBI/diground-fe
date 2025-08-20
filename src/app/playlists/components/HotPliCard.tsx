@@ -20,7 +20,7 @@ export default function HotPliCard({ title, digCount, shareCount, pliArt }: HotP
   const textColor = readableColor(pliArt.dominantColor); // 도미넌트 컬러에 따라 텍스트 색상 결정
 
   function handleClick(pliArtId: number) {
-    router.push(`/detail?${pliArtId}`); // 해당 플레이리스트로 이동
+    router.push(`/detail?id=${pliArtId}`); // 해당 플레이리스트로 이동
   }
 
   return (
