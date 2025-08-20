@@ -52,25 +52,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             email: mockUser.email,
           } as JWT;
         }
-        // try {
-        // const parts = token.split(".");
-
-        // if (parts.length === 3 && parts[0] === "mock") {
-        //   const base64String = parts[1];
-        //   const binaryString = atob(base64String);
-        //   const bytes = new Uint8Array(binaryString.length);
-        //
-        //   for (let i = 0; i < binaryString.length; i++) {
-        //     bytes[i] = binaryString.charCodeAt(i);
-        //   }
-        //   const jsonString = new TextDecoder().decode(bytes);
-        //
-        //   return JSON.parse(jsonString) as JWT;
-        // }
-
-        //   return { sub: mockUser.id, email: mockUser.email } as JWT;
-        // } catch (error) {
-        //   console.error("Token decoding failed:", error);
 
         return { sub: mockUser.id, email: mockUser.email } as JWT;
         // }
