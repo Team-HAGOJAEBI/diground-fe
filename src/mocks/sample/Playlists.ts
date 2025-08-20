@@ -45,7 +45,7 @@ export const popularPlayList = [
     shareCount: "3.1만",
   },
   {
-    id: 29,
+    id: 3,
     url: "https://example.com/popular-image.jpg",
     dominantColor: "#ff5733",
     title: "테오의 발제는 정말 길다",
