@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "http",
+        hostname: "k.kakaocdn.net",
+        port: "",
+        pathname: "/**", // 서브 경로 전체 허용 (필터링이 필요하면 세부 경로로 좁혀도 됨)
+      },
+      {
+        protocol: "http",
         hostname: "img1.kakaocdn.net",
         port: "", // 사용하지 않으면 빈 문자열
         pathname: "/**", // 서브 경로 전체 허용 (필터링이 필요하면 세부 경로로 좁혀도 됨)
