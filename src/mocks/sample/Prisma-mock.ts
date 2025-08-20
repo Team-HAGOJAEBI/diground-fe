@@ -1,5 +1,30 @@
 import { PrismaClient } from "@prisma/client";
 
+// 모킹용 타입 정의
+type MockAccount = {
+  userId: string;
+  type: "oauth" | "oidc" | "email" | string;
+  provider: string;
+  providerAccountId: string;
+  access_token?: string;
+  refresh_token?: string | null;
+  expires_at?: number;
+  token_type?: string;
+  scope?: string;
+  id_token?: string;
+  session_state?: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+type MockSession = {
+  sessionToken: string;
+  userId: string;
+  expires: Date;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 // 동적으로 업데이트 가능한 Mock 데이터
 let mockUser = {
   id: "하고젭 모킹 유저",
@@ -46,11 +71,11 @@ let mockSession = {
   updatedAt: new Date(),
 };
 
-export const updateMockAccount = (accountData: any) => {
+export const updateMockAccount = (accountData: MockAccount) => {
   mockAccount_kakao = { ...mockAccount_kakao, ...accountData, updatedAt: new Date() };
 };
 
-export const updateMockSession = (sessionData: any) => {
+export const updateMockSession = (sessionData: MockSession) => {
   mockSession = { ...mockSession, ...sessionData, updatedAt: new Date() };
 };
 
