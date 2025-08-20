@@ -35,8 +35,8 @@ export default function Header({
         backgroundRepeat: "no-repeat",
         backgroundImage: [
           "linear-gradient(180deg, rgba(29,29,29,0) 0%, rgba(29,29,29, 0.93) 68%, #121212 100%)",
-          // 📑 테스트용 cover import 사용
-          `url(${cover.src})`,
+          // 📑 coverURL이 없을 경우 테스트용 cover import 사용
+          `url(${detailInfo.coverURL || cover.src})`,
         ].join(","),
       }}
     >

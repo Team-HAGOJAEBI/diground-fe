@@ -59,14 +59,54 @@ export const handlers = [
     });
   }),
 
-  http.get("/api/getPlayList", () => {
+  http.get("/api/getPlayList", ({ request }) => {
+    const url = new URL(request.url);
+    const id = url.searchParams.get("id");
+
+    if (id) {
+      const targetId = parseInt(id);
+      // id가 있으면 해당 플레이리스트만 반환
+      let filteredData = PlayListSample.filter((playlist) => playlist.id === targetId);
+
+      // 해당 ID가 없으면 id=1인 데이터를 반환(테스트용 실제데이터 사용하면 지워야함)
+      if (filteredData.length === 0) {
+        filteredData = PlayListSample.filter((playlist) => playlist.id === 1);
+      }
+
+      return HttpResponse.json({
+        status: 200,
+        data: filteredData,
+      });
+    }
+
+    // id가 없으면 전체 반환
     return HttpResponse.json({
       status: 200,
       data: PlayListSample,
     });
   }),
 
-  http.get("/api/getDetailList", () => {
+  http.get("/api/getDetailList", ({ request }) => {
+    const url = new URL(request.url);
+    const playlistId = url.searchParams.get("playlistId") || url.searchParams.get("id");
+
+    if (playlistId) {
+      const targetPlaylistId = parseInt(playlistId);
+      // playlistId가 있으면 해당 플레이리스트의 상세 목록만 반환
+      let filteredData = DetailList.filter((detail) => detail.playlistId === targetPlaylistId);
+
+      // 해당 playlistId가 없으면 playlistId=1인 데이터를 반환
+      if (filteredData.length === 0) {
+        filteredData = DetailList.filter((detail) => detail.playlistId === 1);
+      }
+
+      return HttpResponse.json({
+        status: 200,
+        data: filteredData,
+      });
+    }
+
+    // playlistId가 없으면 전체 반환
     return HttpResponse.json({
       status: 200,
       data: DetailList,
