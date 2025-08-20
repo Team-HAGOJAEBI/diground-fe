@@ -2,6 +2,10 @@
 
 import { useEffect, useState } from "react";
 
+import { SessionProvider } from "next-auth/react";
+
+import { AuthProvider } from "./context/AuthContext";
+
 export function MSWProvider({ children }: { children: React.ReactNode }) {
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -11,7 +15,12 @@ export function MSWProvider({ children }: { children: React.ReactNode }) {
         const { worker } = await import("../mocks/browser");
 
         await worker.start({
-          onUnhandledRequest: "warn",
+          onUnhandledRequest: (req) => {
+            // auth API는 MSW가 가로채지 않도록 함
+            if (req.url.includes("/api/auth")) {
+              return;
+            }
+          },
         });
 
         setIsInitialized(true);
@@ -27,5 +36,9 @@ export function MSWProvider({ children }: { children: React.ReactNode }) {
     return null;
   }
 
-  return <>{children}</>;
+  return (
+    <SessionProvider>
+      <AuthProvider>{children}</AuthProvider>
+    </SessionProvider>
+  );
 }

@@ -1,40 +1,61 @@
 import { PrismaClient } from "@prisma/client";
 
-// NextAuth용 기본 모킹 데이터
-const mockUser = {
+// 동적으로 업데이트 가능한 Mock 데이터
+let mockUser = {
   id: "하고젭 모킹 유저",
   name: "테스트 사용자",
   email: "test@diground.local",
   emailVerified: null,
   image:
-    "https://cdnimg.melon.co.khttps://cdnimg.melon.co.kr/cm2/photo/images/000/802/83/025/80283025_20241216144433_org.jpg/",
+    "https://cdnimg.melon.co.kr/cm2/photo/images/000/802/83/025/80283025_20241216144433_org.jpg/melon/quality/80/optimize",
   createdAt: new Date(),
   updatedAt: new Date(),
 };
 
-const mockAccount_kakao = {
+// mockUser를 동적으로 업데이트하는 함수
+export const updateMockUser = (userData: { id?: string; name?: string; email?: string; image?: string }) => {
+  mockUser = {
+    ...mockUser,
+    ...userData,
+    updatedAt: new Date(),
+  };
+};
+
+// 현재 mockUser 데이터를 가져오는 함수
+export const getMockUser = () => mockUser;
+
+// Account와 Session도 동적으로 업데이트
+let mockAccount_kakao = {
   userId: mockUser.id,
   type: "oauth",
   provider: "kakao",
   providerAccountId: "12345",
-  refresh_token: "mock-refresh-token",
   access_token: "mock-access-token",
   expires_at: Math.floor(Date.now() / 1000) + 3600,
   token_type: "Bearer",
   scope: "profile_nickname profile_image account_email",
-  id_token: "mock-id-token",
-  session_state: null,
   createdAt: new Date(),
   updatedAt: new Date(),
 };
 
-const mockSession = {
+let mockSession = {
   sessionToken: "mock-session-token",
   userId: mockUser.id,
-  expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24시간 후
+  expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
   createdAt: new Date(),
   updatedAt: new Date(),
 };
+
+export const updateMockAccount = (accountData: any) => {
+  mockAccount_kakao = { ...mockAccount_kakao, ...accountData, updatedAt: new Date() };
+};
+
+export const updateMockSession = (sessionData: any) => {
+  mockSession = { ...mockSession, ...sessionData, updatedAt: new Date() };
+};
+
+export const getMockAccount = () => mockAccount_kakao;
+export const getMockSession = () => mockSession;
 
 // Prisma Mock 클래스
 export class PrismaMock {
