@@ -11,7 +11,7 @@ import { getMockUser, updateMockUser } from "@/mocks/sample/Prisma-mock";
 export const { handlers, auth, signIn, signOut } = NextAuth({
   useSecureCookies: process.env.NODE_ENV === "production",
   trustHost: true,
-  adapter: PrismaAdapter(prisma),
+  adapter: process.env.NEXT_PUBLIC_MSW_MODE === "true" ? undefined : PrismaAdapter(prisma),
   secret: process.env.AUTH_SECRET,
   providers: [
     KakaoProvider({
@@ -117,23 +117,26 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
 
     async signIn({ user, account, profile }) {
+      // Mock 모드일 때는 별도 처리 없이 바로 로그인 허용
+      if (process.env.NEXT_PUBLIC_MSW_MODE === "true") {
+        const mockName = user?.name ? `${user.name}_${account?.provider}_모킹유저` : "모킹유저";
+
+        updateMockUser({
+          id: `mock_user_${Date.now()}`,
+          name: mockName,
+          email: user?.email || "mock@diground.local",
+          image:
+            "https://cdnimg.melon.co.kr/cm2/photo/images/000/802/83/025/80283025_20241216144433_org.jpg/melon/quality/80/optimize",
+        });
+
+        return true;
+      }
+
+      // 실제 모드에서만 OAuth 처리
       if (account?.provider === "kakao" && profile) {
         if (!user.email) {
           user.email = `kakao_${profile.id}@diground.local`;
         }
-      }
-      // Mock 모드일 때 실제 카카오 정보로 Mock 데이터 업데이트
-      if (process.env.NEXT_PUBLIC_MSW_MODE === "true") {
-        const mockName = `${user.name}_${account?.provider}_모킹유저`;
-
-        updateMockUser({
-          id: `${user.name}_mock_user_${Date.now()}`,
-          name: mockName,
-          email: user.email || "kakao_mock@diground.local",
-          image:
-            // user.image || 목데이터와 구분을 위한 사진
-            "https://cdnimg.melon.co.kr/cm2/photo/images/000/802/83/025/80283025_20241216144433_org.jpg/melon/quality/80/optimize",
-        });
       }
 
       return true;
