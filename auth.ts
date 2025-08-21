@@ -2,7 +2,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import * as jwt from "jsonwebtoken";
 import NextAuth from "next-auth";
 import { JWT } from "next-auth/jwt";
-import Google from "next-auth/providers/google";
+import GoogleProvider from "next-auth/providers/google";
 import KakaoProvider from "next-auth/providers/kakao";
 
 import { prisma } from "./prisma";
@@ -19,7 +19,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       clientId: process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID,
       clientSecret: process.env.NEXT_PUBLIC_KAKAO_CLIENT_SECRET,
     }),
-    Google({
+    GoogleProvider({
       clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
       clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_PW,
     }),
@@ -130,14 +130,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           name: mockName,
           email: user?.email || "mock@diground.local",
           image:
-            "https://cdnimg.melon.co.kr/cm2/photo/images/000/802/83/025/80283025_20241216144433_org.jpg/melon/quality/80/optimize",
+            "https://cdnimg.melon.co.kr/cm2/photo/images/000/802/69/380/80269380_20240902183521_org.jpg/melon/quality/80/optimize",
         });
 
         return true;
       }
 
       // 실제 모드에서만 OAuth 처리
-      if (account?.provider === "kakao" && profile) {
+      if ((account?.provider === "kakao" || account?.provider === "Google") && profile) {
         if (!user.email) {
           user.email = `kakao_${profile.id}@diground.local`;
         }
@@ -152,7 +152,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           email: user.email || "kakao_mock@diground.local",
           image:
             // user.image || 목데이터와 구분을 위한 사진
-            "https://cdnimg.melon.co.kr/cm2/photo/images/000/802/83/025/80283025_20241216144433_org.jpg/melon/quality/80/optimize",
+            "https://cdnimg.melon.co.kr/cm2/photo/images/000/802/69/380/80269380_20240902183521_org.jpg/melon/quality/80/optimize",
         });
       }
 

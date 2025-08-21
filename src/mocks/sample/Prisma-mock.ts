@@ -7,7 +7,7 @@ let mockUser = {
   email: "test@diground.local",
   emailVerified: null,
   image:
-    "https://cdnimg.melon.co.kr/cm2/photo/images/000/802/83/025/80283025_20241216144433_org.jpg/melon/quality/80/optimize",
+    "https://cdnimg.melon.co.kr/cm2/photo/images/000/802/69/380/80269380_20240902183521_org.jpg/melon/quality/80/optimize",
   createdAt: new Date(),
   updatedAt: new Date(),
 };
@@ -38,6 +38,19 @@ let mockAccount_kakao = {
   updatedAt: new Date(),
 };
 
+let mockAccount_google = {
+  userId: mockUser.id,
+  type: "oauth",
+  provider: "google",
+  providerAccountId: "931219",
+  access_token: "mock-access-token",
+  expires_at: Math.floor(Date.now() / 1000) + 3600,
+  token_type: "Bearer",
+  scope: "userinfo.email userinfo.profile",
+  createdAt: new Date(),
+  updatedAt: new Date(),
+};
+
 let mockSession = {
   sessionToken: "mock-session-token",
   userId: mockUser.id,
@@ -48,13 +61,14 @@ let mockSession = {
 
 export const updateMockAccount = (accountData: any) => {
   mockAccount_kakao = { ...mockAccount_kakao, ...accountData, updatedAt: new Date() };
+  mockAccount_google = { ...mockAccount_google, ...accountData, updatedAt: new Date() };
 };
 
 export const updateMockSession = (sessionData: any) => {
   mockSession = { ...mockSession, ...sessionData, updatedAt: new Date() };
 };
 
-export const getMockAccount = () => mockAccount_kakao;
+export const getMockAccount = () => (mockAccount_kakao.provider === "kakao" ? mockAccount_kakao : mockAccount_google);
 export const getMockSession = () => mockSession;
 
 // Prisma Mock 클래스
@@ -99,34 +113,36 @@ export class PrismaMock {
     findUnique: async ({ where }: any) => {
       if (where.provider_providerAccountId?.provider === "kakao") {
         return mockAccount_kakao;
+      } else if (where.provider_providerAccountId?.provider === "google") {
+        return mockAccount_google;
       }
 
       return null;
     },
 
-    findMany: async () => [mockAccount_kakao],
+    findMany: async () => [mockAccount_kakao, mockAccount_google],
 
     create: async ({ data }: any) => ({
-      ...mockAccount_kakao,
+      ...(data.provider === "kakao" ? mockAccount_kakao : mockAccount_google),
       ...data,
       created_at: new Date(),
       updated_at: new Date(),
     }),
 
     update: async ({ data }: any) => ({
-      ...mockAccount_kakao,
+      ...(data.provider === "kakao" ? mockAccount_kakao : mockAccount_google),
       ...data,
       updated_at: new Date(),
     }),
 
-    delete: async () => mockAccount_kakao,
+    delete: async () => (mockAccount_kakao.provider === "kakao" ? mockAccount_kakao : mockAccount_google),
 
     deleteMany: async () => ({ count: 1 }),
   };
 
   session = {
     findUnique: async ({ where }: any) => {
-      if (where.session_token === mockSession.session_token) {
+      if (where.session_token === mockSession.sessionToken) {
         return mockSession;
       }
 
@@ -191,7 +207,7 @@ export class PrismaMock {
     findUnique: async () => {
       return {
         id: "app-user-1",
-        provider: "kakao",
+        provider: mockAccount_kakao.provider,
         provider_id: "12345",
         profile_imageurl: mockUser.image,
         nickname: mockUser.name,
