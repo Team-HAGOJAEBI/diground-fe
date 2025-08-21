@@ -1,22 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// Context7 패턴: Edge Runtime에서 안전한 세션 확인
+// Edge Runtime 제약상 토큰의 유효성 자체를 확인할 수 없어서 세션 쿠키가 존재하면 세션이 있다고 간주.
 function hasValidSession(request: NextRequest): boolean {
-  // 모든 가능한 NextAuth 토큰 확인
   const sessionToken =
     request.cookies.get("next-auth.session-token") ||
     request.cookies.get("__Secure-next-auth.session-token") ||
     request.cookies.get("authjs.session-token");
 
-  if (sessionToken) {
-    if (sessionToken.value.startsWith("mock.")) {
-      return true;
-    }
-
-    return true;
-  }
-
-  return false;
+  return !!sessionToken;
 }
 
 export function middleware(request: NextRequest) {
