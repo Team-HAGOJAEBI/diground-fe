@@ -54,7 +54,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
 
         return { sub: mockUser.id, email: mockUser.email } as JWT;
-        // }
       }
 
       return jwt.verify(token as string, secret as string) as JWT;
