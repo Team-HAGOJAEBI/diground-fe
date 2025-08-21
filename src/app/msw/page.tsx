@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+
 import type { User, NewUser } from "./type";
 
 export default function ExamplePage() {
@@ -14,10 +15,12 @@ export default function ExamplePage() {
         const response = await fetch("/api/getuserlist", {
           method: "GET",
         });
+
         if (!response.ok) {
           throw new Error(`서버 오류: ${response.status}`);
         }
         const result = await response.json();
+
         if (result.status === 200 && result.data) {
           setUsers(result.data);
         } else {
@@ -27,6 +30,7 @@ export default function ExamplePage() {
         alert("사용자 목록을 불러오는 중 오류가 발생했습니다.");
       }
     };
+
     fetchUsers();
   }, []);
 
@@ -50,6 +54,7 @@ export default function ExamplePage() {
       }
 
       const result = await response.json();
+
       if (result.status === 201 && result.data) {
         setUsers((prev) => [...prev, result.data]);
         setNewUser({ name: "", gender: "" });
@@ -66,10 +71,12 @@ export default function ExamplePage() {
       const response = await fetch("/api/getuserlist", {
         method: "GET",
       });
+
       if (!response.ok) {
         throw new Error(`서버 오류: ${response.status}`);
       }
       const result = await response.json();
+
       if (result.status === 200 && result.data) {
         setUsers(result.data);
       } else {
@@ -82,11 +89,11 @@ export default function ExamplePage() {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">MSW 테스트 페이지</h1>
+      <h1 className="mb-4 text-2xl font-bold">MSW 테스트 페이지</h1>
 
       <button onClick={getUserList}>유저 목록 조회</button>
 
-      <h4 className="text-2xl font-bold mb-4">유저 추가 테스트</h4>
+      <h4 className="mb-4 text-2xl font-bold">유저 추가 테스트</h4>
       {/* 사용자 추가 폼 */}
       <form
         onSubmit={handleSubmit}
@@ -97,12 +104,12 @@ export default function ExamplePage() {
           value={newUser.name}
           onChange={(e) => setNewUser((prev) => ({ ...prev, name: e.target.value }))}
           placeholder="이름"
-          className="border p-2 mr-2"
+          className="mr-2 border p-2"
         />
         <select
           value={newUser.gender}
           onChange={(e) => setNewUser((prev) => ({ ...prev, gender: e.target.value }))}
-          className="border p-2 mr-2"
+          className="mr-2 border p-2"
         >
           <option value="">성별 선택</option>
           <option value="m">남성</option>
@@ -110,7 +117,7 @@ export default function ExamplePage() {
         </select>
         <button
           type="submit"
-          className="bg-blue-500 text-white p-2 rounded"
+          className="rounded bg-blue-500 p-2 text-white"
         >
           추가
         </button>

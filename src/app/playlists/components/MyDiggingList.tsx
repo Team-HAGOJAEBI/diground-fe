@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import pli from "../types/pli";
 
 import DiggingPli from "./DiggingPli";
@@ -11,6 +13,13 @@ const dropboxList = [
 ];
 
 export default function MyDiggingList({ playlists }: { playlists: pli[] }) {
+  const [sortOption, setSortOption] = useState(1); // Start with "인기순" (popular)
+
+  const handleSortChange = (selectedIndex: number) => {
+    setSortOption(selectedIndex);
+    // Here you could implement actual sorting logic based on the selected index
+  };
+
   return (
     <div
       id="digging-list"
@@ -30,7 +39,8 @@ export default function MyDiggingList({ playlists }: { playlists: pli[] }) {
           <Dropbox
             className="h-[30px] w-[66px]"
             droplist={dropboxList}
-            selected={1}
+            selected={sortOption}
+            onSelectionChange={handleSortChange}
           />
           <div className="flex h-[30px] w-[30px] items-center justify-center">
             <Icon
