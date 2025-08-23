@@ -1,10 +1,10 @@
-import pli from "@/app/playlists/types/pli";
+import playlist from "@/app/playlists/types/playlist";
 
-export const Playlists: pli[] = [
+export const Playlists: playlist[] = [
   {
     id: 1,
     title: "i hate myself, Cause I'm tired. 오늘도 스스로와 싸우고 있는 당신에게 위로가 되는 니브의 플리",
-    pliCoverUrl: "https://image.bugsm.co.kr/album/images/120/207346/20734664.jpg",
+    coverImageUrl: "https://image.bugsm.co.kr/album/images/120/207346/20734664.jpg",
     nickName: "zenna9",
     digCount: "10",
     shareCount: "26",
@@ -12,7 +12,7 @@ export const Playlists: pli[] = [
   {
     id: 2,
     title: "세상을 사랑하는 당신에게, 음악으로 보내는 편지",
-    pliCoverUrl: "https://image.bugsm.co.kr/album/images/500/40784/4078430.jpg",
+    coverImageUrl: "https://image.bugsm.co.kr/album/images/500/40784/4078430.jpg",
     nickName: "memmimm",
     digCount: "9.9만",
     shareCount: "1.2만",
@@ -20,7 +20,7 @@ export const Playlists: pli[] = [
   {
     id: 105,
     title: "[🎵Playlist🎵] 🏃‍♂️진격의 거인 OST🏃‍♀️",
-    pliCoverUrl: undefined,
+    coverImageUrl: undefined,
     nickName: "someone",
     digCount: "105",
     shareCount: "262",
@@ -28,7 +28,7 @@ export const Playlists: pli[] = [
   {
     id: 290,
     title: "CALL ME X, 조금 별나게도 breaking up your heart!",
-    pliCoverUrl: "https://image.bugsm.co.kr/album/images/500/41220/4122087.jpg",
+    coverImageUrl: "https://image.bugsm.co.kr/album/images/500/41220/4122087.jpg",
     nickName: "1US",
     digCount: "9.9만",
     shareCount: "1.2만",
