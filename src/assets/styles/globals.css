@@ -36,7 +36,7 @@
   --color-yellow-30: #6f3400;
   --color-yellow-40: #8c4b02;
   --color-yellow-50: #a86403;
-  --color-yellow-60: #ca8501;
+  --color-yellow-60: #FFE11D;
   --color-yellow-70: #e4a201;
   --color-yellow-80: #fcc003;
   --color-yellow-90: #f9e3b6;
@@ -70,6 +70,7 @@ button {
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
 }
+
 
 /* 스크롤바 트랙(배경) 색상 */
 .custom-scrollbar::-webkit-scrollbar-track {
