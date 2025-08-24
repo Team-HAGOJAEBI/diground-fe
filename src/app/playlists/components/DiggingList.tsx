@@ -7,7 +7,7 @@ import DigCount from "./Digcount";
 
 import { playArt } from "@/assets/images";
 
-export default function DiggingPli(playlist: playlist) {
+export default function DiggingList(playlist: playlist) {
   const router = useRouter();
 
   function handleClick(playlistId: number) {

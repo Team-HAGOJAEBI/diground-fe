@@ -8,14 +8,13 @@ import DigCount from "./Digcount";
 
 import { playArt } from "@/assets/images";
 
-type HotPliCardProps = {
+type HotPlaylistCardProps = {
   title: string;
   digCount: string;
   shareCount: string;
-  coverArt: { id: number; url: string; dominantColor: string };
+  coverArt: { id: number; url?: string; dominantColor: string };
 };
-
-export default function HotPliCard({ title, digCount, shareCount, coverArt }: HotPliCardProps) {
+export default function HotPlaylistCard({ title, digCount, shareCount, coverArt }: HotPlaylistCardProps) {
   const router = useRouter();
   const textColor = readableColor(coverArt.dominantColor); // 도미넌트 컬러에 따라 텍스트 색상 결정
 
@@ -31,11 +30,12 @@ export default function HotPliCard({ title, digCount, shareCount, coverArt }: Ho
       <div className="h-[226px] w-[190px]">
         <div className="relative h-[190px] w-[190px]">
           <Image
-            src={playArt}
+            src={coverArt.url ?? playArt}
             alt={`${title}의 썸네일`}
             layout="fill"
             objectFit="cover"
             className="rounded-t-[16px]"
+            unoptimized
           />
         </div>
         <div
