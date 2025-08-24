@@ -1,6 +1,6 @@
 import playlist from "../types/playlist";
 
-import DiggingPli from "./DiggingPli";
+import DiggingList from "./DiggingList";
 
 import Dropbox from "@/app/_common/Dropbox";
 import Icon from "@/app/_common/icon/Icon";
@@ -46,7 +46,7 @@ export default function MyDiggingList({ playlists }: { playlists: playlist[] }) 
         className="flex w-full flex-col gap-[20px] pb-[20px]"
       >
         {playlists.map((playlist: playlist) => (
-          <DiggingPli
+          <DiggingList
             key={playlist.id}
             {...playlist}
           />
