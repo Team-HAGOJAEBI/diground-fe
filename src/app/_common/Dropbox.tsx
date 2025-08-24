@@ -81,7 +81,7 @@ export default function Dropbox({ className, selected, droplist, onSelectionChan
         </div>
       </div>
       {isOpen && (
-        <div className="absolute top-full left-0 mt-[4px] flex w-full flex-col gap-[10px] rounded-[7px] border border-gray-50 bg-white py-[11px] shadow-md">
+        <div className="bg-gray-5 absolute top-full left-0 mt-[4px] flex w-full flex-col gap-[10px] rounded-[7px] border border-gray-50 bg-white py-[11px] shadow-md">
           {droplist.map((item, index) => (
             <div
               key={item.value}
