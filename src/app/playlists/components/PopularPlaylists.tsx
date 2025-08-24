@@ -30,7 +30,7 @@ export default function PopularPlaylists({ className }: { className?: string }) 
               title={playlist.title}
               digCount={playlist.digCount}
               shareCount={playlist.shareCount}
-              pliArt={{ id: playlist.id, url: playlist.url, dominantColor: playlist.dominantColor }}
+              coverArt={{ id: playlist.id, url: playlist.url, dominantColor: playlist.dominantColor }}
             />
           ))}
         </div>

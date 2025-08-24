@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import pli from "../types/pli";
+import playlist from "../types/playlist";
 
 import DigCount from "./Digcount";
 
 import { playArt } from "@/assets/images";
 
-export default function DiggingPli(playlist: pli) {
+export default function DiggingPli(playlist: playlist) {
   const router = useRouter();
 
   function handleClick(playlistId: number) {
@@ -22,7 +22,7 @@ export default function DiggingPli(playlist: pli) {
       {/* 앨범아트 */}
       <div className="r-16px h-[70px] w-[70px]">
         <Image
-          src={playlist.pliCoverUrl || playArt}
+          src={playlist.coverImageUrl || playArt}
           alt={playlist.title}
           width={70}
           height={70}

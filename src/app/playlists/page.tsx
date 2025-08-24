@@ -27,7 +27,7 @@ export default function PlaylistsPage() {
       </div>
 
       <div
-        id="playlists_hotpli"
+        id="playlists_hotPlaylist"
         className="mb-[23px] h-[289px] overflow-hidden pl-[20px]"
         style={{ zIndex: 100 }}
       >
@@ -35,7 +35,7 @@ export default function PlaylistsPage() {
       </div>
 
       <div
-        id="playlists_mypli"
+        id="playlists_myplaylists"
         className={`flex-1 ${scrolling ? "scrolling pr-[12px] pl-[20px]" : "scrollbar-none px-[20px]"}`}
       >
         {Playlists.length === 0 ? <NoPlaylists /> : <MyDiggingList playlists={Playlists} />}

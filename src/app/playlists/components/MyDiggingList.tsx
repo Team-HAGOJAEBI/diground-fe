@@ -1,4 +1,4 @@
-import pli from "../types/pli";
+import playlist from "../types/playlist";
 
 import DiggingPli from "./DiggingPli";
 
@@ -10,7 +10,7 @@ const dropboxList = [
   { text: "인기순", value: "popular" },
 ];
 
-export default function MyDiggingList({ playlists }: { playlists: pli[] }) {
+export default function MyDiggingList({ playlists }: { playlists: playlist[] }) {
   return (
     <div
       id="digging-list"
@@ -45,7 +45,7 @@ export default function MyDiggingList({ playlists }: { playlists: pli[] }) {
         id="digging-list-body"
         className="flex w-full flex-col gap-[20px] pb-[20px]"
       >
-        {playlists.map((playlist: pli) => (
+        {playlists.map((playlist: playlist) => (
           <DiggingPli
             key={playlist.id}
             {...playlist}
