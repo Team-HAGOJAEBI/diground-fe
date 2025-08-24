@@ -25,10 +25,10 @@ export default function MyDiggingList({ playlists }: { playlists: playlist[] }) 
         </div>
         <div
           id="digging-list-filter"
-          className="flex h-[30px] w-[104px] items-center gap-[8px]"
+          className="flex h-[30px] w-[116px] items-center gap-[8px]"
         >
           <Dropbox
-            className="h-[30px] w-[66px]"
+            className="h-[30px] w-[78px]"
             droplist={dropboxList}
             selected={1}
           />
