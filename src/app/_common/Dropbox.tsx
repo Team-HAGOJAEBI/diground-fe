@@ -5,27 +5,42 @@ import Icon from "@/app/_common/icon/Icon";
 interface DropboxProps {
   className?: string;
   droplist: dataObj[];
-  selected?: number;
+  selected?: string;
+  onSelectionChange?: (id: string) => void;
 }
 /**
- * 드롭박스에 표시될 각 항목의 타입을 정의
+ * 드롭박스 props
  * @property {string} text - 드롭박스에 보여질 텍스트
- * @property {string} value - 해당 항목의 실제 값
+ * @property {string} value - 해당 항목의 실제 값(id)
  */
 interface dataObj {
   text: string;
   value: string;
 }
 
-export default function Dropbox({ className, selected = 0, droplist }: DropboxProps) {
+/**
+ * 드롭박스 컴포넌트
+ * @property {string} className - 추가적인 CSS 클래스
+ * @property {dataObj[]} droplist - 드롭박스에 표시할 항목 목록
+ * @property {string} selected - 현재 선택된 항목의 값
+ * @property {(value: string) => void} onSelectionChange - 선택 변경 시 호출되는 콜백 함수
+ */
+export default function Dropbox({ className, selected, droplist, onSelectionChange }: DropboxProps) {
+  // 선택된 값
+  const [selectedValue, setSelectedValue] = useState(selected ?? droplist[0].value);
+
   const [isOpen, setIsOpen] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(selected);
+  const [currentIndex, setCurrentIndex] = useState(droplist.findIndex((item) => item.value === selectedValue));
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
   const selectItem = (index: number) => {
     setCurrentIndex(index);
+    setSelectedValue(droplist[index].value);
     setIsOpen(false);
+    if (onSelectionChange) {
+      onSelectionChange(droplist[index].value);
+    }
   };
 
   // 해당 컴포넌트 외의 구역을 클릭하면 드롭박스 닫음

@@ -1,3 +1,5 @@
+import React from "react";
+
 import playlist from "../types/playlist";
 
 import DiggingList from "./DiggingList";
@@ -11,6 +13,12 @@ const dropboxList = [
 ];
 
 export default function MyDiggingList({ playlists }: { playlists: playlist[] }) {
+  const [orderBy, setOrderBy] = React.useState("latest");
+
+  const handleDropdownChange = (value: string) => {
+    setOrderBy(value);
+  };
+
   return (
     <div
       id="digging-list"
@@ -30,7 +38,8 @@ export default function MyDiggingList({ playlists }: { playlists: playlist[] }) 
           <Dropbox
             className="h-[30px] w-[78px]"
             droplist={dropboxList}
-            selected={1}
+            selected={orderBy}
+            onSelectionChange={handleDropdownChange}
           />
           <div className="flex h-[30px] w-[30px] items-center justify-center">
             <Icon
