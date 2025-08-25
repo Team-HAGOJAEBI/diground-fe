@@ -4,10 +4,10 @@ import playlist from "../types/playlist";
 
 import DiggingList from "./DiggingList";
 
-import Dropbox from "@/app/_common/Dropbox";
 import Icon from "@/app/_common/icon/Icon";
+import Dropdown from "@/app/_common/Dropdown";
 
-const dropboxList = [
+const dropdownList = [
   { text: "최신순", value: "latest" },
   { text: "인기순", value: "popular" },
 ];
@@ -35,9 +35,9 @@ export default function MyDiggingList({ playlists }: { playlists: playlist[] }) 
           id="digging-list-filter"
           className="flex h-[30px] w-[116px] items-center gap-[8px]"
         >
-          <Dropbox
+          <Dropdown
             className="h-[30px] w-[78px]"
-            droplist={dropboxList}
+            droplist={dropdownList}
             selected={orderBy}
             onSelectionChange={handleDropdownChange}
           />
