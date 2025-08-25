@@ -2,15 +2,15 @@ import { useState, useEffect, useRef } from "react";
 
 import Icon from "@/app/_common/icon/Icon";
 
-interface DropboxProps {
+interface DropdownProps {
   className?: string;
   droplist: dataObj[];
   selected?: string;
   onSelectionChange?: (id: string) => void;
 }
 /**
- * 드롭박스 props
- * @property {string} text - 드롭박스에 보여질 텍스트
+ * 드롭다운 props
+ * @property {string} text - 드롭다운에 보여질 텍스트
  * @property {string} value - 해당 항목의 실제 값(id)
  */
 interface dataObj {
@@ -19,13 +19,13 @@ interface dataObj {
 }
 
 /**
- * 드롭박스 컴포넌트
+ * 드롭다운 컴포넌트
  * @property {string} className - 추가적인 CSS 클래스
- * @property {dataObj[]} droplist - 드롭박스에 표시할 항목 목록
+ * @property {dataObj[]} droplist - 드롭다운에 표시할 항목 목록
  * @property {string} selected - 현재 선택된 항목의 값
  * @property {(value: string) => void} onSelectionChange - 선택 변경 시 호출되는 콜백 함수
  */
-export default function Dropbox({ className, selected, droplist, onSelectionChange }: DropboxProps) {
+export default function Dropdown({ className, selected, droplist, onSelectionChange }: DropdownProps) {
   // 선택된 값
   const [selectedValue, setSelectedValue] = useState(selected ?? droplist[0].value);
 
@@ -43,7 +43,7 @@ export default function Dropbox({ className, selected, droplist, onSelectionChan
     }
   };
 
-  // 해당 컴포넌트 외의 구역을 클릭하면 드롭박스 닫음
+  // 해당 컴포넌트 외의 구역을 클릭하면 드롭다운 닫음
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -85,9 +85,8 @@ export default function Dropbox({ className, selected, droplist, onSelectionChan
           {droplist.map((item, index) => (
             <div
               key={item.value}
-              className={`cursor-pointer px-[10px] text-[12px] ${
-                index === currentIndex ? "text-yellow-60" : "text-gray-100"
-              }`}
+              className={`cursor-pointer px-[10px] text-[12px] ${index === currentIndex ? "text-yellow-60" : "text-gray-100"
+                }`}
               onClick={() => selectItem(index)}
             >
               {item.text}
