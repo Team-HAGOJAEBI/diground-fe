@@ -3,6 +3,7 @@ import { http, HttpResponse } from "msw";
 import { CommentList } from "./sample/Comment";
 import { KeywordList } from "./sample/Keyword";
 import { DetailList, PlayListSample } from "./sample/Playlist";
+import { Playlists, popularPlayList } from "./sample/Playlists";
 
 import type { NewUser, User } from "./sample/User";
 
@@ -124,6 +125,20 @@ export const handlers = [
     return HttpResponse.json({
       status: 200,
       data: KeywordList,
+    });
+  }),
+
+  http.get("/api/getPopularPlaylists", () => {
+    return HttpResponse.json({
+      status: 200,
+      data: popularPlayList,
+    });
+  }),
+
+  http.get("/api/getMyPlaylists", () => {
+    return HttpResponse.json({
+      status: 200,
+      data: Playlists,
     });
   }),
 ];
