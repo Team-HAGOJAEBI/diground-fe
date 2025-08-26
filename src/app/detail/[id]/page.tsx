@@ -4,15 +4,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-import Footer from "../_common/Footer";
-import Icon from "../_common/icon/Icon";
-import Layout from "../_common/Layout";
-
 import CommentDrawer from "./components/comment/CommentDrawer";
 import DiggingDrawer from "./components/digging/DiggingDrawer";
 import Header from "./components/Header";
 import List from "./components/List";
 
+import Footer from "@/app/_common/Footer";
+import Icon from "@/app/_common/icon/Icon";
+import Layout from "@/app/_common/Layout";
 import { DetailList, PlayList } from "@/mocks/sample/Playlist";
 
 const SCROLL_TRIGGER = 200;
@@ -31,7 +30,7 @@ type HeaderStyle = {
 /**
  * 플레이리스트 + 상세 목록 API 호출
  */
-function usePlaylistData() {
+function usePlaylistData(id: string) {
   const searchParams = useSearchParams();
   const [info, setInfo] = useState<PlayList>({
     id: 0,
@@ -48,7 +47,7 @@ function usePlaylistData() {
 
   useEffect(() => {
     let ignore = false;
-    const id = searchParams.get("id");
+    // const id = searchParams.get("id");
 
     (async () => {
       try {
@@ -70,7 +69,7 @@ function usePlaylistData() {
     return () => {
       ignore = true;
     };
-  }, [searchParams]);
+  }, [searchParams, id]);
 
   return { info, tracks } as const;
 }
@@ -126,11 +125,11 @@ function useHeaderAnimation(scrollRef: React.RefObject<HTMLDivElement | null>) {
   return { style, scrolling } as const;
 }
 
-export default function Page() {
+export default function Page({ params }: { params: { id: string } }) {
   const router = useRouter();
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
-  const { info, tracks } = usePlaylistData();
+  const { info, tracks } = usePlaylistData(params.id);
   const { style: headerStyle, scrolling } = useHeaderAnimation(scrollRef);
 
   const [drawer, setDrawer] = useState<DrawerType>(null);
