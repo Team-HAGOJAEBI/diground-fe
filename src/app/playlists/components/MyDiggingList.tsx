@@ -1,6 +1,6 @@
-import pli from "../types/pli";
+import playlist from "../types/playlist";
 
-import DiggingPli from "./DiggingPli";
+import DiggingList from "./DiggingList";
 
 import Dropbox from "@/app/_common/Dropbox";
 import Icon from "@/app/_common/icon/Icon";
@@ -10,7 +10,7 @@ const dropboxList = [
   { text: "인기순", value: "popular" },
 ];
 
-export default function MyDiggingList({ playlists }: { playlists: pli[] }) {
+export default function MyDiggingList({ playlists }: { playlists: playlist[] }) {
   return (
     <div
       id="digging-list"
@@ -45,8 +45,8 @@ export default function MyDiggingList({ playlists }: { playlists: pli[] }) {
         id="digging-list-body"
         className="flex w-full flex-col gap-[20px] pb-[20px]"
       >
-        {playlists.map((playlist: pli) => (
-          <DiggingPli
+        {playlists.map((playlist: playlist) => (
+          <DiggingList
             key={playlist.id}
             {...playlist}
           />

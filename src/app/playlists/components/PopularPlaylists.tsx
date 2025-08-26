@@ -1,4 +1,4 @@
-import HotPliCard from "./HotPliCard";
+import HotPlaylistCard from "./HotPlaylistCard";
 
 import { popularPlayList } from "@/mocks/sample/Playlists";
 
@@ -25,12 +25,12 @@ export default function PopularPlaylists({ className }: { className?: string }) 
           className="scrollbar-none inline-flex h-full w-full gap-[16px] overflow-x-auto"
         >
           {popularPlayList.map((playlist) => (
-            <HotPliCard
+            <HotPlaylistCard
               key={playlist.id}
               title={playlist.title}
               digCount={playlist.digCount}
               shareCount={playlist.shareCount}
-              pliArt={{ id: playlist.id, url: playlist.url, dominantColor: playlist.dominantColor }}
+              coverArt={{ id: playlist.id, url: playlist.url, dominantColor: playlist.dominantColor }}
             />
           ))}
         </div>

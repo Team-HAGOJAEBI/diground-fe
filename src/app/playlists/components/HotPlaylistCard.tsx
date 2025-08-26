@@ -8,40 +8,40 @@ import DigCount from "./Digcount";
 
 import { playArt } from "@/assets/images";
 
-type HotPliCardProps = {
+type HotPlaylistCardProps = {
   title: string;
   digCount: string;
   shareCount: string;
-  pliArt: { id: number; url: string; dominantColor: string };
+  coverArt: { id: number; url?: string; dominantColor: string };
 };
-
-export default function HotPliCard({ title, digCount, shareCount, pliArt }: HotPliCardProps) {
+export default function HotPlaylistCard({ title, digCount, shareCount, coverArt }: HotPlaylistCardProps) {
   const router = useRouter();
-  const textColor = readableColor(pliArt.dominantColor); // 도미넌트 컬러에 따라 텍스트 색상 결정
+  const textColor = readableColor(coverArt.dominantColor); // 도미넌트 컬러에 따라 텍스트 색상 결정
 
-  function handleClick(pliArtId: number) {
-    router.push(`/detail?id=${pliArtId}`); // 해당 플레이리스트로 이동
+  function handleClick(coverArtId: number) {
+    router.push(`/detail?id=${coverArtId}`); // 해당 플레이리스트로 이동
   }
 
   return (
     <button
       className="relative h-[226px] w-[190px]"
-      onClick={() => handleClick(pliArt.id)}
+      onClick={() => handleClick(coverArt.id)}
     >
       <div className="h-[226px] w-[190px]">
         <div className="relative h-[190px] w-[190px]">
           <Image
-            src={playArt}
+            src={coverArt.url ?? playArt}
             alt={`${title}의 썸네일`}
             layout="fill"
             objectFit="cover"
             className="rounded-t-[16px]"
+            unoptimized
           />
         </div>
         <div
           className={`absolute top-[120px] h-[106px] w-[190px] rounded-b-[16px]`}
           style={{
-            background: `linear-gradient(to top, ${pliArt.dominantColor} 70%, transparent 100%)`,
+            background: `linear-gradient(to top, ${coverArt.dominantColor} 70%, transparent 100%)`,
           }}
         >
           <div className="absolute top-[24px] left-[10px] flex h-[72px] w-[170px] flex-col gap-[6px]">
