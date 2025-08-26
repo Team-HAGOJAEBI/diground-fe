@@ -85,8 +85,9 @@ export default function Dropdown({ className, selected, droplist, onSelectionCha
           {droplist.map((item, index) => (
             <div
               key={item.value}
-              className={`cursor-pointer px-[10px] text-[12px] ${index === currentIndex ? "text-yellow-60" : "text-gray-100"
-                }`}
+              className={`cursor-pointer px-[10px] text-[12px] ${
+                index === currentIndex ? "text-yellow-60" : "text-gray-100"
+              }`}
               onClick={() => selectItem(index)}
             >
               {item.text}

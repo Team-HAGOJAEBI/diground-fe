@@ -19,7 +19,7 @@ export default function HotPlaylistCard({ title, digCount, shareCount, coverArt 
   const textColor = readableColor(coverArt.dominantColor); // 도미넌트 컬러에 따라 텍스트 색상 결정
 
   function handleClick(coverArtId: number) {
-    router.push(`/detail?id=${coverArtId}`); // 해당 플레이리스트로 이동
+    router.push(`/detail/${coverArtId}`); // 해당 플레이리스트로 이동
   }
 
   return (
