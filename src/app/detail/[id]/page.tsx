@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import CommentDrawer from "./components/comment/CommentDrawer";
 import DiggingDrawer from "./components/digging/DiggingDrawer";
@@ -31,7 +31,6 @@ type HeaderStyle = {
  * 플레이리스트 + 상세 목록 API 호출
  */
 function usePlaylistData(id: string) {
-  const searchParams = useSearchParams();
   const [info, setInfo] = useState<PlayList>({
     id: 0,
     title: "",
@@ -47,7 +46,6 @@ function usePlaylistData(id: string) {
 
   useEffect(() => {
     let ignore = false;
-    // const id = searchParams.get("id");
 
     (async () => {
       try {
@@ -69,7 +67,7 @@ function usePlaylistData(id: string) {
     return () => {
       ignore = true;
     };
-  }, [searchParams, id]);
+  }, [id]);
 
   return { info, tracks } as const;
 }
