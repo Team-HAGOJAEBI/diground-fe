@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -125,11 +125,12 @@ function useHeaderAnimation(scrollRef: React.RefObject<HTMLDivElement | null>) {
   return { style, scrolling } as const;
 }
 
-export default function Page({ params }: { params: { id: string } }) {
+export default function Page({ params }: { params: Promise<{ id: string }> }) {
+  const promisedParams = React.use(params);
   const router = useRouter();
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
-  const { info, tracks } = usePlaylistData(params.id);
+  const { info, tracks } = usePlaylistData(promisedParams.id);
   const { style: headerStyle, scrolling } = useHeaderAnimation(scrollRef);
 
   const [drawer, setDrawer] = useState<DrawerType>(null);
