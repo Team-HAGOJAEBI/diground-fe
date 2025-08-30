@@ -6,6 +6,8 @@ import { DetailList, PlayListSample } from "./sample/Playlist";
 import { Playlists, popularPlayList } from "./sample/Playlists";
 
 import type { NewUser, User } from "./sample/User";
+import type { FormData } from "@/app/create/page";
+import type playlist from "@/app/playlists/types/playlist";
 
 const members: User[] = [
   {
@@ -33,6 +35,8 @@ const members: User[] = [
       "https://cdnimg.melon.co.kr/cm2/artistcrop/images/008/95/389/895389_20250502185925_500.jpg?YUV444/melon/resize/416",
   },
 ];
+
+const mockPlaylists: playlist[] = [...Playlists];
 
 export const handlers = [
   // 사용자 목록을 가져오는 API
@@ -138,7 +142,28 @@ export const handlers = [
   http.get("/api/getMyPlaylists", () => {
     return HttpResponse.json({
       status: 200,
-      data: Playlists,
+      data: mockPlaylists,
+    });
+  }),
+
+  // 플레이리스트 생성 API 추가 - detail 제외
+  http.post("/api/createPlaylist", async ({ request }) => {
+    const newPlaylist = (await request.json()) as FormData;
+
+    // id 자동 증가 및 createdAt 추가
+    const createdPlaylist = {
+      id: Math.floor(Math.random() * 1000), // 1000미만의 임의의 숫자
+      title: newPlaylist.title,
+      nickName: "mock채은",
+      digCount: "0",
+      shareCount: "0",
+    };
+
+    mockPlaylists.push(createdPlaylist);
+
+    return HttpResponse.json({
+      status: 201,
+      data: newPlaylist,
     });
   }),
 ];

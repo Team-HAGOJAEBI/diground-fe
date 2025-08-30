@@ -73,7 +73,7 @@ function useHeaderAnimation(scrollRef: React.RefObject<HTMLDivElement | null>) {
   return { style, scrolling } as const;
 }
 
-interface FormData {
+export interface FormData {
   link: string;
   title: string;
   desc: string;
@@ -115,6 +115,33 @@ export default function Page() {
 
     fetchKeywords();
   }, []);
+  const handleSubmit = async () => {
+    // 필수값 체크
+    if (!formData.link) {
+      alert("링크를 입력해주세요.");
+
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/createPlaylist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert("플레이리스트가 저장되었습니다!");
+        // 필요하다면 페이지 이동 또는 form 초기화
+      } else {
+        alert("저장에 실패했습니다.");
+      }
+    } catch (error) {
+      alert(`네트워크 오류가 발생했습니다. ${error}`);
+    }
+  };
 
   return (
     <Layout className="relative flex h-screen flex-col overflow-hidden px-[56px] pt-[50px] pb-[89px]">
@@ -154,7 +181,12 @@ export default function Page() {
           // onAddClick={() => console.log("Add clicked")}
         />
         <ImageSelector title={"이미지 선택"} />
-        <Button type={"submit"}>만들기</Button>
+        <Button
+          type={"submit"}
+          onClick={handleSubmit}
+        >
+          만들기
+        </Button>
       </div>
 
       <Footer selectedIndex={0} />
