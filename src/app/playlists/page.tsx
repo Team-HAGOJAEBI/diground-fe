@@ -1,36 +1,15 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
-import { getMyPlaylists } from "./api/playListsApi";
 import Header from "./components/Header";
 import MyDiggingList from "./components/MyDiggingList";
 import PopularPlaylists from "./components/PopularPlaylists";
-import pli from "./types/pli";
 
-import NoPlaylists from "@/app/playlists/components/NoPlaylists";
 import useHeaderAnimation from "@/hooks/useHeaderAnimation";
-
-function usePlaylistsData() {
-  const [playlists, setPlaylists] = useState<pli[]>([]);
-
-  useEffect(() => {
-    const fetchPlaylists = async () => {
-      const { data } = await getMyPlaylists();
-
-      setPlaylists(data);
-    };
-
-    fetchPlaylists();
-  }, []);
-
-  return { playlists } as const;
-}
 
 export default function PlaylistsPage() {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const { scrolling } = useHeaderAnimation(scrollRef);
-
-  const { playlists } = usePlaylistsData();
 
   return (
     <div
@@ -55,9 +34,9 @@ export default function PlaylistsPage() {
 
       <div
         id="playlists_myplaylists"
-        className={`flex-1 ${scrolling ? "scrolling pr-[12px] pl-[20px]" : "scrollbar-none px-[20px]"}`}
+        className={`${scrolling ? "scrolling pr-[12px] pl-[20px]" : "scrollbar-none px-[20px]"}`}
       >
-        {playlists.length === 0 ? <NoPlaylists /> : <MyDiggingList playlists={playlists} />}
+        <MyDiggingList />
       </div>
     </div>
   );

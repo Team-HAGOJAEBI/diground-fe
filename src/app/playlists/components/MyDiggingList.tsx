@@ -1,23 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
+import { getMyPlaylists } from "../api/playListsApi";
 import playlist from "../types/playlist";
 
 import DiggingList from "./DiggingList";
+import NoPlaylists from "./NoPlaylists";
 
-import Icon from "@/app/_common/icon/Icon";
 import Dropdown from "@/app/_common/Dropdown";
+import Icon from "@/app/_common/icon/Icon";
 
 const dropdownList = [
   { text: "최신순", value: "latest" },
   { text: "인기순", value: "popular" },
 ];
 
-export default function MyDiggingList({ playlists }: { playlists: playlist[] }) {
+function usePlaylistsData() {
+  const [playlists, setPlaylists] = useState<playlist[]>([]);
+
+  useEffect(() => {
+    const fetchPlaylists = async () => {
+      const { data } = await getMyPlaylists();
+
+      setPlaylists(data);
+    };
+
+    fetchPlaylists();
+  }, []);
+
+  return { playlists } as const;
+}
+
+export default function MyDiggingList() {
   const [orderBy, setOrderBy] = React.useState("latest");
+  const { playlists } = usePlaylistsData();
 
   const handleDropdownChange = (value: string) => {
     setOrderBy(value);
   };
+
+  if (playlists.length === 0) {
+    return <NoPlaylists />;
+  }
 
   return (
     <div

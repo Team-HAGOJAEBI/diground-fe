@@ -9,7 +9,7 @@ export default function NoPlaylists() {
   return (
     <div
       id="playlists_no_playlists"
-      className="flex h-[calc(100%-388px)] w-full items-center justify-center p-[20px_0px]"
+      className="flex h-[calc(100vh-480px)] w-full items-center justify-center p-[20px_0px]"
     >
       <div className="p-[16px 20px] flex h-[142px] w-[320px] flex-col gap-[18px]">
         <div className="flex h-[48px] flex-col gap-[12px]">
