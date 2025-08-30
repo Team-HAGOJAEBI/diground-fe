@@ -5,13 +5,13 @@ import { getMyPlaylists } from "./api/playListsApi";
 import Header from "./components/Header";
 import MyDiggingList from "./components/MyDiggingList";
 import PopularPlaylists from "./components/PopularPlaylists";
-import pli from "./types/pli";
+import playlist from "./types/playlist";
 
 import NoPlaylists from "@/app/playlists/components/NoPlaylists";
 import useHeaderAnimation from "@/hooks/useHeaderAnimation";
 
 function usePlaylistsData() {
-  const [playlists, setPlaylists] = useState<pli[]>([]);
+  const [playlists, setPlaylists] = useState<playlist[]>([]);
 
   useEffect(() => {
     const fetchPlaylists = async () => {
