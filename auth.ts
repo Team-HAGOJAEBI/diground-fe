@@ -1,9 +1,9 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
 import * as jwt from "jsonwebtoken";
 import NextAuth from "next-auth";
 import { JWT } from "next-auth/jwt";
 import KakaoProvider from "next-auth/providers/kakao";
 
+import { CustomPrismaAdapter } from "./lib/custom-prisma-adapter";
 import { prisma } from "./prisma";
 
 import { getMockUser, updateMockUser } from "@/mocks/sample/Prisma-mock";
@@ -11,8 +11,11 @@ import { getMockUser, updateMockUser } from "@/mocks/sample/Prisma-mock";
 export const { handlers, auth, signIn, signOut } = NextAuth({
   useSecureCookies: process.env.NODE_ENV === "production",
   trustHost: true,
-  adapter: process.env.NEXT_PUBLIC_MSW_MODE === "true" ? undefined : PrismaAdapter(prisma),
+  adapter: process.env.NEXT_PUBLIC_MSW_MODE === "true" ? undefined : CustomPrismaAdapter(prisma),
   secret: process.env.AUTH_SECRET,
+  experimental: {
+    enableWebAuthn: false,
+  },
   providers: [
     KakaoProvider({
       clientId: process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID,
