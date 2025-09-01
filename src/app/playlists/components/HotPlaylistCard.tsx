@@ -2,21 +2,23 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { readableColor } from "polished";
+
+import PopularPlaylist from "../types/popularPlaylist";
 
 import DigCount from "./Digcount";
 
 import { playArt } from "@/assets/images";
 
-type HotPlaylistCardProps = {
-  title: string;
-  digCount: string;
-  shareCount: string;
-  coverArt: { id: number; url?: string; dominantColor: string };
-};
-export default function HotPlaylistCard({ title, digCount, shareCount, coverArt }: HotPlaylistCardProps) {
+export default function HotPlaylistCard({
+  id,
+  title,
+  digCount,
+  shareCount,
+  coverImageUrl,
+  dominantColor,
+  textColor,
+}: PopularPlaylist) {
   const router = useRouter();
-  const textColor = readableColor(coverArt.dominantColor); // 도미넌트 컬러에 따라 텍스트 색상 결정
 
   function handleClick(coverArtId: number) {
     router.push(`/detail/${coverArtId}`); // 해당 플레이리스트로 이동
@@ -25,12 +27,12 @@ export default function HotPlaylistCard({ title, digCount, shareCount, coverArt 
   return (
     <button
       className="relative h-[226px] w-[190px]"
-      onClick={() => handleClick(coverArt.id)}
+      onClick={() => handleClick(id)}
     >
       <div className="h-[226px] w-[190px]">
         <div className="relative h-[190px] w-[190px]">
           <Image
-            src={coverArt.url ?? playArt}
+            src={coverImageUrl ?? playArt}
             alt={`${title}의 썸네일`}
             layout="fill"
             objectFit="cover"
@@ -41,15 +43,15 @@ export default function HotPlaylistCard({ title, digCount, shareCount, coverArt 
         <div
           className={`absolute top-[120px] h-[106px] w-[190px] rounded-b-[16px]`}
           style={{
-            background: `linear-gradient(to top, ${coverArt.dominantColor} 70%, transparent 100%)`,
+            background: `linear-gradient(to top, ${dominantColor ?? "#fcc003"} 70%, transparent 100%)`,
           }}
         >
           <div className="absolute top-[24px] left-[10px] flex h-[72px] w-[170px] flex-col gap-[6px]">
             <div
-              className={`line-clamp-2 h-[40px] w-[170px] text-[16px] leading-[20px] font-[700] ${
+              className={`line-clamp-2 h-[40px] w-[170px] text-left text-[16px] leading-[20px] font-[700] ${
                 title.length <= 20 ? "flex items-center" : ""
               }`}
-              style={{ color: textColor }}
+              style={{ color: textColor ?? "#000000" }}
             >
               {title}
             </div>

@@ -1,4 +1,5 @@
 import playlist from "@/app/playlists/types/playlist";
+import PopularPlaylist from "@/app/playlists/types/popularPlaylist";
 
 export const Playlists: playlist[] = [
   {
@@ -11,7 +12,7 @@ export const Playlists: playlist[] = [
   },
   {
     id: 2,
-    title: "세상을 사랑하는 당신에게, 음악으로 보내는 편지",
+    title: "세상의 많은 것들을 사랑하는 당신이 음악으로 보내는 편지",
     coverImageUrl: "https://image.bugsm.co.kr/album/images/500/40784/4078430.jpg",
     nickName: "memmimm",
     digCount: "9.9만",
@@ -81,7 +82,7 @@ export const Playlists: playlist[] = [
   },
 ];
 
-export const popularPlayList = [
+export const popularPlayList: PopularPlaylist[] = [
   {
     id: 1,
     dominantColor: "#fcc003",
@@ -91,29 +92,30 @@ export const popularPlayList = [
   },
   {
     id: 3,
-    dominantColor: "#ff5733",
-    title: "테오의 발제는 정말 길다",
+    coverImageUrl: "https://image.bugsm.co.kr/album/images/500/40441/4044167.jpg",
+    dominantColor: "#0133a7",
+    textColor: "#ffffff",
+    title: "다 알고 있어도 막을 수 없는 다음: 우리는 닫힌 엔딩",
     digCount: "20",
     shareCount: "5",
   },
   {
     id: 291,
-    url: "https://image.bugsm.co.kr/album/images/500/41220/4122087.jpg",
-    dominantColor: "#292929",
+    coverImageUrl: "https://image.bugsm.co.kr/album/images/500/41220/4122087.jpg",
     title: "왜 밖에서도 43인치 모니터가 쓰고싶지? 널 알기 전으로 돌아갈래",
     digCount: "9.9만",
     shareCount: "1.2억",
+    dominantColor: "#292929",
+    textColor: "#ffffff",
   },
   {
     id: 292,
-    dominantColor: "#292929",
     title: "왜 밖에서도 43인치 모니터가 쓰고싶지? 널 알기 전으로 돌아갈래",
     digCount: "9.9만",
     shareCount: "1.2억",
   },
   {
     id: 293,
-    dominantColor: "#292929",
     title: "왜 밖에서도 43인치 모니터가 쓰고싶지? 널 알기 전으로 돌아갈래",
     digCount: "9.9만",
     shareCount: "1.2억",
@@ -127,7 +129,6 @@ export const popularPlayList = [
   },
   {
     id: 295,
-    dominantColor: "#292929",
     title: "왜 밖에서도 43인치 모니터가 쓰고싶지? 널 알기 전으로 돌아갈래",
     digCount: "9.9만",
     shareCount: "1.2억",
