@@ -1,8 +1,33 @@
+import { useEffect, useState } from "react";
+
+import { getPopularPlaylists } from "../api/playListsApi";
+import PopularPlaylist from "../types/popularPlaylist";
+
 import HotPlaylistCard from "./HotPlaylistCard";
 
-import { popularPlayList } from "@/mocks/sample/Playlists";
+function usePopularPlaylists() {
+  const [popularPlayList, setPopularPlayList] = useState<PopularPlaylist[]>([]);
+
+  useEffect(() => {
+    const fetchPopularPlaylists = async () => {
+      try {
+        const { data } = await getPopularPlaylists();
+
+        setPopularPlayList(data);
+      } catch (error) {
+        console.error("리스트를 불러오는 중 문제가 발생했습니다:", error);
+      }
+    };
+
+    fetchPopularPlaylists();
+  }, []);
+
+  return { popularPlayList } as const;
+}
 
 export default function PopularPlaylists({ className }: { className?: string }) {
+  const { popularPlayList } = usePopularPlaylists();
+
   return (
     <div>
       <div
@@ -27,10 +52,13 @@ export default function PopularPlaylists({ className }: { className?: string }) 
           {popularPlayList.map((playlist) => (
             <HotPlaylistCard
               key={playlist.id}
+              id={playlist.id}
               title={playlist.title}
               digCount={playlist.digCount}
               shareCount={playlist.shareCount}
-              coverArt={{ id: playlist.id, url: playlist.url, dominantColor: playlist.dominantColor }}
+              coverImageUrl={playlist.coverImageUrl}
+              textColor={playlist.textColor}
+              dominantColor={playlist.dominantColor}
             />
           ))}
         </div>
