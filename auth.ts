@@ -1,6 +1,7 @@
 import * as jwt from "jsonwebtoken";
 import NextAuth from "next-auth";
 import { JWT } from "next-auth/jwt";
+import Google from "next-auth/providers/google";
 import KakaoProvider from "next-auth/providers/kakao";
 
 import { CustomPrismaAdapter } from "./lib/custom-prisma-adapter";
@@ -20,6 +21,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     KakaoProvider({
       clientId: process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID,
       clientSecret: process.env.NEXT_PUBLIC_KAKAO_CLIENT_SECRET,
+    }),
+    Google({
+      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_PW,
     }),
   ],
   session: {
