@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { signIn } from "next-auth/react";
 
-import GoogleSignInButton from "../components/GoogleSiginInButton";
+import GoogleSignInButton from "../components/GoogleSignInButton";
 
 import Layout from "@/app/_common/Layout";
 import { kakaoLogin } from "@/assets/icons";
