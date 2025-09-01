@@ -18,7 +18,7 @@ export default function GoogleSignInButton({ onClick, disabled = false, classNam
       className={[
         // 레이아웃/크기
         "group relative inline-flex items-center justify-center",
-        "h-10 w-auto max-w-[400px] min-w-min px-3",
+        "h-12 w-auto max-w-[400px] min-w-min px-3",
         // 모양/테두리
         "rounded border border-[#747775]",
         // 색/폰트
