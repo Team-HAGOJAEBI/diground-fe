@@ -23,6 +23,7 @@ import {
   img,
   plus,
   dropdown,
+  googleIcon,
 } from "@/assets/icons";
 
 interface IconProps {
@@ -57,6 +58,7 @@ export const ICON_MAP = {
   img,
   plus,
   dropdown,
+  googleIcon,
 };
 
 export default function Icon({ name, className, onClick }: IconProps) {
