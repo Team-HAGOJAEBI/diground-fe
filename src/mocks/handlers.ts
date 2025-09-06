@@ -5,9 +5,12 @@ import { KeywordList } from "./sample/Keyword";
 import { DetailList, PlayListSample } from "./sample/Playlist";
 import { Playlists, popularPlayList } from "./sample/Playlists";
 
+import { Keyword } from "@/app/_common/types/keyword";
+
 import type { NewUser, User } from "./sample/User";
 import type { FormData } from "@/app/create/page";
 import type playlist from "@/app/playlists/types/playlist";
+import type { PlayList as PlaylistDetailType } from "@/mocks/sample/Playlist";
 
 const members: User[] = [
   {
@@ -37,6 +40,8 @@ const members: User[] = [
 ];
 
 const mockPlaylists: playlist[] = [...Playlists];
+
+const mockPlaylistsDescription: PlaylistDetailType[] = [...PlayListSample];
 
 export const handlers = [
   // 사용자 목록을 가져오는 API
@@ -71,11 +76,11 @@ export const handlers = [
     if (id) {
       const targetId = parseInt(id);
       // id가 있으면 해당 플레이리스트만 반환
-      let filteredData = PlayListSample.filter((playlist) => playlist.id === targetId);
+      let filteredData = mockPlaylistsDescription.filter((playlist) => playlist.id === targetId);
 
       // 해당 ID가 없으면 id=1인 데이터를 반환(테스트용 실제데이터 사용하면 지워야함)
       if (filteredData.length === 0) {
-        filteredData = PlayListSample.filter((playlist) => playlist.id === 1);
+        filteredData = mockPlaylistsDescription.filter((playlist) => playlist.id === 1);
       }
 
       return HttpResponse.json({
@@ -87,7 +92,7 @@ export const handlers = [
     // id가 없으면 전체 반환
     return HttpResponse.json({
       status: 200,
-      data: PlayListSample,
+      data: mockPlaylistsDescription,
     });
   }),
 
@@ -150,20 +155,37 @@ export const handlers = [
   http.post("/api/createPlaylist", async ({ request }) => {
     const newPlaylist = (await request.json()) as FormData;
 
+    const newId = mockPlaylists.length + 1;
+
     // id 자동 증가 및 createdAt 추가
     const createdPlaylist = {
-      id: Math.floor(Math.random() * 1000), // 1000미만의 임의의 숫자
+      id: newId, // 새로운 ID 할당
       title: newPlaylist.title,
       nickName: "mock채은",
       digCount: "0",
       shareCount: "0",
+      coverImageUrl: "https://image.bugsm.co.kr/album/images/500/40441/4044167.jpg",
     };
 
     mockPlaylists.push(createdPlaylist);
 
+    const createdPlaylistDescription = {
+      id: newId,
+      title: newPlaylist.title,
+      bio: newPlaylist.desc,
+      tags: newPlaylist.selectedKeywords.map((keyword: Keyword) => keyword.label),
+      coverURL: "https://image.bugsm.co.kr/album/images/500/40441/4044167.jpg",
+      like: { isLiked: false, cnt: 0 },
+      comment: 0,
+      share: 0,
+      digging: 0,
+    };
+
+    mockPlaylistsDescription.push(createdPlaylistDescription);
+
     return HttpResponse.json({
       status: 201,
-      data: newPlaylist,
+      data: newId,
     });
   }),
 ];

@@ -25,10 +25,9 @@ export const PlayListSample: PlayList[] = [
   },
   {
     id: 2,
-    title:
-      "규리누나는 이게 바뀌었다는걸 알고 있을까? 아 깃을 보면 알겠구나 알면 어쩔건데 ㅋ 개의치 않고 나는 올릴것이다 그래도 1번은 양보했다",
-    bio: "이것은 규리누나를 약올리기 위한 에스파 플리다",
-    tags: ["데이식스", "보단", "에스파"],
+    title: "don't you know I'm a savage? 걸그룹은 쇠맛이지!",
+    bio: "I'm a rich man, I'm a rich man!",
+    tags: ["쇠맛", "hot", "에스파"],
     coverURL: "https://i.ytimg.com/vi/jWQx2f-CErU/hq720.jpg",
     like: { isLiked: false, cnt: 100 },
     comment: 44,

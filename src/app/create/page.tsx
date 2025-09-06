@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 import { getKeywordList } from "@/app/_common/api/keywordListApi";
 import Button from "@/app/_common/components/Button";
 import Footer from "@/app/_common/Footer";
@@ -81,6 +83,7 @@ export interface FormData {
 }
 
 export default function Page() {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     link: "",
     title: "",
@@ -115,6 +118,7 @@ export default function Page() {
 
     fetchKeywords();
   }, []);
+
   const handleSubmit = async () => {
     // 필수값 체크
     if (!formData.link) {
@@ -133,8 +137,10 @@ export default function Page() {
       });
 
       if (response.ok) {
-        alert("플레이리스트가 저장되었습니다!");
-        // 필요하다면 페이지 이동 또는 form 초기화
+        // /detail/id 로 이동
+        const { data: newId } = await response.json();
+
+        router.push(`/detail/${newId}`);
       } else {
         alert("저장에 실패했습니다.");
       }
@@ -177,6 +183,7 @@ export default function Page() {
           title="# 키워드 선택"
           keywords={keywords}
           showAddButton={true}
+          onSelectionChange={(selected) => updateFormData("selectedKeywords", selected)}
           // onKeywordClick={(keyword) => console.log(keyword)}
           // onAddClick={() => console.log("Add clicked")}
         />
