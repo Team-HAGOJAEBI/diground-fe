@@ -26,9 +26,9 @@ export default function Login() {
           <Image
             src={kakaoLogin}
             alt="카카오 로그인"
-            onClick={() => signIn("kakao", { redirectTo: "/detail" })}
+            onClick={() => signIn("kakao")}
           />
-          <GoogleSignInButton onClick={() => signIn("google", { redirectTo: "/detail" })} />
+          <GoogleSignInButton onClick={() => signIn("google")} />
         </div>
         <span>로그인 없이 둘러보기</span>
       </div>
