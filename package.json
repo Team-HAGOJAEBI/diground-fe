@@ -7,7 +7,7 @@
     "open-browser": "npx wait-on tcp:3000 && open http://localhost:3000",
     "dev": "pnpm prisma generate && pnpm run dev:only",
     "dev:auto": "pnpm prisma generate & pnpm run dev:only & pnpm run open-browser",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint \"src/**/*.+(ts|tsx)\"",
     "test": "vitest",
