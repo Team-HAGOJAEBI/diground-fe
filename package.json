@@ -17,7 +17,7 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "prepare": "husky install",
-    "postbuild": "next-sitemap --config next-sitemap.config.js"
+    "postbuild": ""
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
