@@ -16,7 +16,8 @@
     "lint:fix": "eslint \"src/**/*.+(ts|tsx)\" --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postbuild": "next-sitemap --config next-sitemap.config.js"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
