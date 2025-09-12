@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { SessionProvider } from "next-auth/react";
 
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from "./_context/AuthContext";
 
 export function MSWProvider({ children }: { children: React.ReactNode }) {
   const [isInitialized, setIsInitialized] = useState(false);
